@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const mysql = require('mysql');
+const {categoriaGetById} = require('./routes/categoria')
 
 const connection = mysql.createConnection({
  host:'localhost',
@@ -14,7 +15,7 @@ connection.connect();
 //se pueda usar en los requests de cada categoria
 exports.connection = connection;
 
-const {categoriaGetById} = require('./routes/categoria')
+
 
 app.use(express.urlencoded);
 
@@ -25,7 +26,7 @@ app.use(express.urlencoded);
 
 //Requests de Libro
 
-//fin de requests delibro
+//fin de requests de libro
 
 
 //Requests de Categoria
