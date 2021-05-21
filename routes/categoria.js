@@ -2,7 +2,7 @@
 /*toda la implementacion de los requests aca luego se agregan en index js*/
 
 //conexion a base de datos importada de index
-const {connection} = require('../index');
+const {connection} = require('../app');
 
 const categoriaPost =function(req,res){
 

@@ -7,7 +7,7 @@ const connection = mysql.createConnection({
  host:'localhost',
  user:'root',
  password:'',
- database:''
+ database:'libreria'
 })
 
 connection.connect();
