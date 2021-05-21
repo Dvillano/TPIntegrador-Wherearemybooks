@@ -1,8 +1,11 @@
 const express = require('express');
 const app = express();
 const mysql = require('mysql');
-const {categoriaGetById} = require('./routes/categoria')
 
+
+app.use(express.json());
+
+// Conexion a DB
 const connection = mysql.createConnection({
  host:'localhost',
  user:'root',
@@ -10,16 +13,28 @@ const connection = mysql.createConnection({
  database:'libreria'
 })
 
-connection.connect();
+// Verificar conexion a DB
+connection.connect( (error) => {
+    if (error){
+        throw error;
+    }
+    console.log('Conexion con la base de datos establecida');
+});
+
+
 //se exporta la conexion a la base de datos para que sea una sola en todo el backend y 
 //se pueda usar en los requests de cada categoria
 exports.connection = connection;
 
 
+//Rutas importadas 
+const {categoriaGetById} = require('./routes/categoria')
+const {categoriaPostPersona} = require('./routes/persona')
 
-app.use(express.urlencoded);
 
-//Requests de persona
+//Requests de persona:
+//POST 
+app.post('/persona', categoriaPostPersona);
 
 //fin de requests Persona
 
@@ -30,7 +45,8 @@ app.use(express.urlencoded);
 
 
 //Requests de Categoria
-app.get('/categoria/:id',categoriaGetById);
+//app.get('/categoria/:id',categoriaGetById);
 //fin de requests de categoria
 
 app.listen(3000,()=>console.log('listening on port 3000'));
+
