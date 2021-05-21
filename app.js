@@ -29,13 +29,12 @@ exports.connection = connection;
 
 //Rutas importadas 
 const {categoriaGetById} = require('./routes/categoria')
-const {categoriaPostPersona} = require('./routes/persona')
+const {categoriaPostPersona, categoriaGetPersona} = require('./routes/persona')
 
 
 //Requests de persona:
-//POST 
 app.post('/persona', categoriaPostPersona);
-
+app.get('/persona', categoriaGetPersona);
 //fin de requests Persona
 
 

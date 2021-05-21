@@ -43,7 +43,7 @@ const categoriaPostPersona = async (req,res) => {
         respuesta = await qy(query, [nombre, alias, apellido, email]);
 
         console.log(respuesta);
-        res.status(200).send({'respuesta': affectedRows});
+        res.status(200).send({'Respuesta': respuesta}); 
 
     } catch (error) {
         console.error(error.message);
@@ -51,6 +51,22 @@ const categoriaPostPersona = async (req,res) => {
     }
 }
 
+//GET 
+const categoriaGetPersona = async (req,res) => {
+    try {
+
+        let query = 'SELECT * FROM persona'
+        let respuesta = await qy(query);
+
+        console.log(respuesta);
+        res.status(200).send({'respuesta': respuesta});
+
+    } catch (error) {
+        console.error(error.message);
+        res.status(413).send({"Error": error.message}, 'Error inesperado'); 
+    }
+}
+
 module.exports={
-    categoriaPostPersona
+    categoriaPostPersona, categoriaGetPersona
 }
