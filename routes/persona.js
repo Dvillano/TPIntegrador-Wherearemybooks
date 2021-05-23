@@ -58,7 +58,6 @@ const categoriaGetPersona = async (req,res) => {
         let query = 'SELECT * FROM persona'
         let respuesta = await qy(query);
 
-        console.log(respuesta);
         res.status(200).send({'respuesta': respuesta});
 
     } catch (error) {
