@@ -30,7 +30,7 @@ exports.connection = connection;
 
 //Rutas importadas 
 const {categoriaGetById} = require('./routes/categoria')
-const {categoriaPostPersona, categoriaGetPersona} = require('./routes/persona')
+const {categoriaPostPersona, categoriaGetPersona, categoriaGetPersonaById} = require('./routes/persona')
 
 const {libroGetId,libroPost,libroPutDevolver, libroPutId} = require('./routes/libro');
 
@@ -38,6 +38,7 @@ const {libroGetId,libroPost,libroPutDevolver, libroPutId} = require('./routes/li
 //Requests de persona:
 app.post('/persona', categoriaPostPersona);
 app.get('/persona', categoriaGetPersona);
+app.get('/persona/:id', categoriaGetPersonaById);
 //fin de requests Persona
 
 
