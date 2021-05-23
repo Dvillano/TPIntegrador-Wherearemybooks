@@ -4,6 +4,7 @@ const mysql = require('mysql');
 
 
 app.use(express.json());
+app.use(express.urlencoded());
 
 // Conexion a DB
 const connection = mysql.createConnection({
@@ -31,6 +32,8 @@ exports.connection = connection;
 const {categoriaGetById} = require('./routes/categoria')
 const {categoriaPostPersona, categoriaGetPersona} = require('./routes/persona')
 
+const {libroGetId,libroPost,libroPutDevolver, libroPutId} = require('./routes/libro');
+
 
 //Requests de persona:
 app.post('/persona', categoriaPostPersona);
@@ -39,7 +42,10 @@ app.get('/persona', categoriaGetPersona);
 
 
 //Requests de Libro
-
+app.post('/libro',libroPost);
+app.get('/libro/:id',libroGetId);
+app.put('/libro/devolver/:id',libroPutDevolver);
+app.put('/libro/:id',libroPutId);
 //fin de requests de libro
 
 
