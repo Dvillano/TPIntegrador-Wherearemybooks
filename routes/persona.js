@@ -67,6 +67,24 @@ const categoriaGetPersona = async (req,res) => {
     }
 }
 
+//GET by ID
+const categoriaGetPersonaById = async (req,res) => {
+    try {
+
+        let query = 'SELECT * FROM persona WHERE id = ?'
+        let respuesta = await qy(query, [req.params.id]);
+        
+        if (respuesta == 0){
+            res.status(413).send('No se encuentra esta persona');
+        }
+        res.status(200).send({'respuesta': respuesta});
+
+    } catch (error) {
+        console.error(error.message);
+        res.status(413).send({"Error": error.message}); 
+    }
+}
+
 module.exports={
-    categoriaPostPersona, categoriaGetPersona
+    categoriaPostPersona, categoriaGetPersona, categoriaGetPersonaById
 }
