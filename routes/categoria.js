@@ -12,6 +12,7 @@ const qyCreatCategoria = 'INSERT INTO categoria VALUES (?, ?)';
 const qyDeleteCategoria = 'DELET FROM categoria WHERE id = ?';
 
 //conexion a base de datos importada de index
+const {connection} = require('../app');
 
 
 //crear una categoría
