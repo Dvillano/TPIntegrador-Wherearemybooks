@@ -22,9 +22,9 @@ const categoriaPost = async (req, res) => {
 //buscar todas las categorias
 const categoriaGet = async (req, res) => {
     try{
-        let query = 'SELECT * FROM categoria';
+        const query = 'SELECT * FROM categoria';
         
-        let respuesta =  await qy(query);
+        const respuesta =  await qy(query);
         console.log(respuesta);
         res.send({"Respuesta": respuesta});
 
@@ -39,7 +39,7 @@ const categoriaGet = async (req, res) => {
 //buscar las categorías por ID
 const categoriaGetById = async (req, res) => {
     try{
-        let query = 'SELECT * FROM categoria WHERE id = ?';
+        const query = 'SELECT * FROM categoria WHERE id = ?';
         
         const respuesta =  await qy(query, [req.params.id]);
         
