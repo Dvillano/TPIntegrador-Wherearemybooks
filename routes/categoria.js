@@ -1,4 +1,4 @@
-const {connection} = require('../index');
+const {connection} = require('../app');
 const util = require('util');
 
 
@@ -12,27 +12,50 @@ const qyCreatCategoria = 'INSERT INTO categoria VALUES (?, ?)';
 const qyDeleteCategoria = 'DELET FROM categoria WHERE id = ?';
 
 //conexion a base de datos importada de index
-const {connection} = require('../app');
+
 
 
 //crear una categoría
 const categoriaPost = async (req, res) => {
+    try{
+        if (!req.body.genero) {
+            throw new Error ('Falta enviar el genero');
+        }
 
-}
+        let query = 'SELECT id FROM categoria WHERE genero = ?';
+
+        let respuesta = await  qy(query, [req.body.genero.toUpperCase()]);
+
+        if (respuesta.length > 0 ) {
+            throw new Error ('¡Esa categoria ya existe!');
+        };
+
+        query = 'INSERT INTO categoria (genero) VALUE (?)';
+
+        respuesta = await qy(query, [req.body.genero.toUpperCase()]);
+
+        res.send({'respuesta': respuesta.insertId});
+        
+    }
+    catch(e){
+        console.error(e.message);
+        res.status(413).send({'Error': e.message});
+    }
+};
 
 //buscar todas las categorias
 const categoriaGet = async (req, res) => {
     try{
         const query = 'SELECT * FROM categoria';
-        
+
         const respuesta =  await qy(query);
-        console.log(respuesta);
+        
         res.send({"Respuesta": respuesta});
 
     }
     catch(e){
         console.error(e.message);
-        res.status(413).send({"Error": e.message});
+        res.status(413).send({'Error': e.message});
     }
 };
 
@@ -40,16 +63,20 @@ const categoriaGet = async (req, res) => {
 //buscar las categorías por ID
 const categoriaGetById = async (req, res) => {
     try{
-        const query = 'SELECT * FROM categoria WHERE id = ?';
+        let query = 'SELECT * FROM categoria WHERE id = ?';
         
-        const respuesta =  await qy(query, [req.params.id]);
+        let respuesta =  await qy(query, [req.params.id]);
+
+        if (respuesta.length == 0 ) {
+            throw new Error ('Esa categoría no existe');
+        };
         
         res.send({"Respuesta": respuesta});
 
     }
     catch(e){
         console.error(e.message);
-        res.status(413).send({"Error": e.message});
+        res.status(413).send({'Error': e.message});
     }
 };
 
