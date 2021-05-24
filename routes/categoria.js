@@ -116,5 +116,5 @@ const categoriaDeleteById = async (req, res) => {
 
 
 module.exports={
-    categoriaPost,categoriaGet,categoriaGetById,categoriaDeleteById
+    categoriaPost,categoriaGet,categoriaGetById,categoriaUpdate, categoriaDeleteById
 }
