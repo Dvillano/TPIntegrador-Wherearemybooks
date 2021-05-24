@@ -110,8 +110,22 @@ const categoriaUpdate = async (req, res) => {
 
 //eliminar una categoria
 const categoriaDeleteById = async (req, res) => {
-    
-});   
+    try {
+        let query = 'SELECT * FROM libro WHERE categoria_id = ?';
+        let respuesta = await qy (query, [req.params.id]);
+
+        if (respuesta.length > 0 ) {
+        throw new Error ('Esta categoría tiene productos asociados, no se puede borrar');
+    }
+        query =  'DELETE FROM categoria WHERE id = ?'; 
+        respuesta = await qy (query [req.params.id]) ;
+        res.send({'respuesta': respuesta});
+    }
+    catch(e) {
+        console.error(e.message);
+        res.status(413).send({"Error": e.message});
+    }
+});  
     
 
 
