@@ -81,31 +81,6 @@ const categoriaGetById = async (req, res) => {
 
 
 
-//actualizar categoria
-const categoriaUpdate = async (req, res) => {
-    try {
-        if (!req.body.genero) {
-            throw new Error ('Falta enviar el genero');
-        }
-
-        let query = 'SELECT * FROM categoría WHERE genero = ? AND ID = ?';
-        
-        let respuesta = await qy (query, [req.body.genero, req.params.id])
-    
-        if (respuesta.length > 0 ){
-            throw new Error ('El nombre de la categoria que queres poner ahora ya existe')
-    }
-    query = 'UPDATE categoria SET genero = ? WHERE id = ?';
-
-    respuesta = await qy (query, [req.body.genero, rec.params.id]);
-    res.send({'respuesta': respuesta}); 
-    
-    }
-    catch(e) {
-    console.error(e.message);
-    res.status(413).send({"Error": e.message});
-    }
-};
 
 
 
@@ -131,5 +106,5 @@ const categoriaDeleteById = async (req, res) => {
 
 
 module.exports={
-    categoriaPost,categoriaGet,categoriaGetById,categoriaUpdate, categoriaDeleteById
+    categoriaPost,categoriaGet,categoriaGetById, categoriaDeleteById
 }

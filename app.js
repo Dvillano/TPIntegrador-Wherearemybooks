@@ -28,7 +28,7 @@ exports.connection = connection;
 
 
 //Rutas importadas 
-const {categoriaPost,categoriaGet,categoriaGetById,categoriaUpdate, categoriaDeleteById} = require('./routes/categoria')
+const {categoriaPost,categoriaGet,categoriaGetById, categoriaDeleteById} = require('./routes/categoria')
 const {categoriaPostPersona, categoriaGetPersona} = require('./routes/persona')
 
 
@@ -47,7 +47,6 @@ app.get('/persona', categoriaGetPersona);
 app.post('/categoria',categoriaPost);
 app.get('/categoria',categoriaGet);
 app.get('/categoria/:id',categoriaGetById);
-app.put('/categoria',categoriaUpdate);
 app.delete('/categoria/:id', categoriaDeleteById);
 //fin de requests de categoria
 
