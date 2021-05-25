@@ -28,7 +28,7 @@ exports.connection = connection;
 
 
 //Rutas importadas 
-const {categoriaGetById} = require('./routes/categoria')
+const {categoriaPost,categoriaGet,categoriaGetById,categoriaUpdate, categoriaDeleteById} = require('./routes/categoria')
 const {categoriaPostPersona, categoriaGetPersona} = require('./routes/persona')
 
 
@@ -44,7 +44,11 @@ app.get('/persona', categoriaGetPersona);
 
 
 //Requests de Categoria
-//app.get('/categoria/:id',categoriaGetById);
+app.post('/categoria',categoriaPost);
+app.get('/categoria',categoriaGet);
+app.get('/categoria/:id',categoriaGetById);
+app.put('/categoria',categoriaUpdate);
+app.delete('/categoria/:id', categoriaDeleteById);
 //fin de requests de categoria
 
 app.listen(3000,()=>console.log('listening on port 3000'));
