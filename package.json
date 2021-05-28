@@ -2,7 +2,7 @@
   "name": "tpintegrador-wherearemybooks",
   "version": "1.0.0",
   "description": "TP Integrador de las unidades 3 y 4 de la Diplomatura en programación web full stack con React JS UTN",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
