@@ -45,6 +45,9 @@ const {
   libroPost,
   libroPutDevolver,
   libroPutId,
+  DeleteLibroId,
+  libroPutPrestarId,
+  libroGet,
 } = require("./routes/libro");
 
 //Requests de persona:
@@ -61,6 +64,10 @@ app.post("/libro", libroPost);
 app.get("/libro/:id", libroGetId);
 app.put("/libro/devolver/:id", libroPutDevolver);
 app.put("/libro/:id", libroPutId);
+app.get("/libro", libroGet);
+app.put("/libro/prestar/:id", libroPutPrestarId);
+app.delete("/libro/:id", DeleteLibroId)
+
 //fin de requests de libro
 
 //Requests de Categoria
