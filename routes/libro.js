@@ -141,10 +141,79 @@ const libroPutDevolver = async function (req, res) {
 
 }
 
+ 
+ const libroGet = async function (req, res) {
+     try{
+         let queryLibro = 'SELECT * FROM libro'
+         let response = await query(queryLibro);
+ 
+         res.status(200).send({response});    
+ 
+     } catch (error){
+         console.error(error.message);
+         res.status(413).send({mensaje: 'Error inesperado'});}
+ }
+ 
+ const libroPutPrestarId = async function (req, res) {
+     const id = req.params.id;
+     const persona_id = req.body.persona_id;
+ 
+     try{
+         const libro = `SELECT ID FROM libro WHERE ID='${id}'`;
+         var response = await query(libro);
+         if (response.length ==0) {
+             res.status(413).send({mensaje: "No se encontro el libro"});
+         }
+ 
+         const persona = `SELECT ID FROM persona WHERE ID='${persona_id}'`;
+         response = await query(persona);
+         if (response.length ==0){
+             res.status(413).send({mensaje: "No se encontro la persona a la que se quiere prestar el libro"});
+         }
+         else {
+             const prestar = `UPDATE libro SET PERSONA_ID ='${persona_id}' WHERE ID='${id}'`;
+             response = await query(prestar);
+             res.status(200).send({mensaje: "Se presto correctamente"});
+         }
+     } catch (error){
+         console.error(error.message);
+         res.status(413).send({message: 'Error inesperado'});}
+ 
+     }
+ 
+ 
+ const DeleteLibroId = async function (req, res){
+  
+    const id = req.params.id;
+    
+    try{
+        const libro = `SELECT ID FROM libro WHERE ID='${id}'`;
+         var response = await query(libro);
+         if (response.length ==0) {
+             res.status(413).send({mensaje: "No se encontro el libro"});
+         }
+         else {
+            const idQuery = `DELETE FROM libro WHERE ID='${id}'`;
+            response = await query(idQuery);
+            res.status(200).send({mensaje: "Se borro correctamente"});
+         }
+
+        
+    }catch (error){
+        console.error(error.message);
+             res.status(413).send({mensaje: "Error inesperado"});
+         }
+    }
+ 
+
 
 module.exports = {
     libroPost,
     libroGetId,
     libroPutId,
-    libroPutDevolver
+    libroPutDevolver,
+    DeleteLibroId,
+    libroPutPrestarId,
+    libroGet
+
 }
