@@ -181,22 +181,16 @@ const libroPutDevolver = async function (req, res) {
          if (response.length ==0) {
              res.status(413).send({mensaje: "No se encontro el libro"});
          }
-    
-     } catch (error){
-         console.error(error.message);
-         res.status(413).send({mensaje: 'Error inesperado'});}
  
-     
-     
-     
-     try{
-         const libro = `SELECT PERSONA_ID FROM libro WHERE PERSONA_ID='${persona_id}'`;
-         var response = await query(libro);
+         const persona = `SELECT PERSONA_ID FROM libro WHERE PERSONA_ID='${persona_id}'`;
+         response = await query(persona);
          if (response.length ==0){
              res.status(413).send({mensaje: "No se encontro la persona a la que se quiere prestar el libro"});
          }
          else {
-             
+             const prestar = `UPDATE libro SET PERSONA_ID ='${persona_id}' WHERE ID='${id}'`;
+             response = await query(prestar);
+             res.status(200).send({mensaje: "Se presto correctamente"});
          }
      } catch (error){
          console.error(error.message);
@@ -217,18 +211,17 @@ const libroPutDevolver = async function (req, res) {
          }
          else {
             const idQuery = `DELETE FROM libro WHERE ID='${id}'`;
-            var response = await query(idQuery);
+            response = await query(idQuery);
             res.status(200).send({mensaje: "Se borro correctamente"});
          }
 
         
-    }catch{
-         var response = await query(libro);
-         if (response.length ==0){
-             res.status(413).send({mensaje: "No se encuentra ese libro"});
+    }catch (error){
+        console.error(error.message);
+             res.status(413).send({mensaje: "Error inesperado"});
          }
     }
- }
+ 
 
 
 module.exports = {
