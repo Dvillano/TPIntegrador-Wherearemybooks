@@ -173,16 +173,16 @@ const libroPutDevolver = async function (req, res) {
  
  const libroPutPrestarId = async function (req, res) {
      const id = req.params.id;
-     const persona_id = req.params.persona_id;
+     const persona_id = req.body.persona_id;
  
      try{
-         const libro = `SELECT ID FROM libro WHERE ID='{id}'`;
+         const libro = `SELECT ID FROM libro WHERE ID='${id}'`;
          var response = await query(libro);
          if (response.length ==0) {
              res.status(413).send({mensaje: "No se encontro el libro"});
          }
  
-         const persona = `SELECT PERSONA_ID FROM libro WHERE PERSONA_ID='${persona_id}'`;
+         const persona = `SELECT ID FROM persona WHERE ID='${persona_id}'`;
          response = await query(persona);
          if (response.length ==0){
              res.status(413).send({mensaje: "No se encontro la persona a la que se quiere prestar el libro"});
@@ -204,7 +204,7 @@ const libroPutDevolver = async function (req, res) {
     const id = req.params.id;
     
     try{
-        const libro = `SELECT ID FROM libro WHERE ID='{id}'`;
+        const libro = `SELECT ID FROM libro WHERE ID='${id}'`;
          var response = await query(libro);
          if (response.length ==0) {
              res.status(413).send({mensaje: "No se encontro el libro"});
