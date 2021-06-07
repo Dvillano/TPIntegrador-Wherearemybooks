@@ -179,11 +179,10 @@ const libroPutDevolver = async function (req, res) {
      try{
          const libro = `SELECT persona_id FROM libro WHERE ID='${id}'`;
          var response = await query(libro);
-         console.log (response)
          if (response.length ==0) {
              res.status(413).send({mensaje: "No se encontro el libro"});
          }
-         else if (response[0].persona_id!=='NULL') {
+         else if (response[0].persona_id!==null) {
              res.status(413).send({mensaje: "El libro ya se encuentra prestado, no se puede prestar hasta que no se devuelva"});
          }
  
@@ -214,7 +213,7 @@ const libroPutDevolver = async function (req, res) {
          if (response.length ==0) {
              res.status(413).send({mensaje: "No se encuentra ese libro"});
          }
-         else if (response[0].persona_id !=='NULL') {
+         else if (response[0].persona_id !==null) {
              res.status(413).send({mensaje: "Ese libro esta prestado no se puede borrar"});
          }
          else {
