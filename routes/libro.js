@@ -1,5 +1,6 @@
 const {connection} = require('../app');
 const util = require('util');
+const { Console } = require('console');
 const query = util.promisify(connection.query).bind(connection);
 
 
@@ -176,10 +177,14 @@ const libroPutDevolver = async function (req, res) {
      const persona_id = req.body.persona_id;
  
      try{
-         const libro = `SELECT ID FROM libro WHERE ID='${id}'`;
+         const libro = `SELECT persona_id FROM libro WHERE ID='${id}'`;
          var response = await query(libro);
+         console.log (response)
          if (response.length ==0) {
              res.status(413).send({mensaje: "No se encontro el libro"});
+         }
+         else if (response[0].persona_id!=='NULL') {
+             res.status(413).send({mensaje: "El libro ya se encuentra prestado, no se puede prestar hasta que no se devuelva"});
          }
  
          const persona = `SELECT ID FROM persona WHERE ID='${persona_id}'`;
@@ -204,10 +209,13 @@ const libroPutDevolver = async function (req, res) {
     const id = req.params.id;
     
     try{
-        const libro = `SELECT ID FROM libro WHERE ID='${id}'`;
+        const libro = `SELECT persona_id FROM libro WHERE ID='${id}'`;
          var response = await query(libro);
          if (response.length ==0) {
-             res.status(413).send({mensaje: "No se encontro el libro"});
+             res.status(413).send({mensaje: "No se encuentra ese libro"});
+         }
+         else if (response[0].persona_id !=='NULL') {
+             res.status(413).send({mensaje: "Ese libro esta prestado no se puede borrar"});
          }
          else {
             const idQuery = `DELETE FROM libro WHERE ID='${id}'`;
