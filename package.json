@@ -1,0 +1,24 @@
+{
+  "name": "tpintegrador-wherearemybooks",
+  "version": "1.0.0",
+  "description": "TP Integrador de las unidades 3 y 4 de la Diplomatura en programación web full stack con React JS UTN",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dvillano/TPIntegrador-Wherearemybooks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dvillano/TPIntegrador-Wherearemybooks/issues"
+  },
+  "homepage": "https://github.com/Dvillano/TPIntegrador-Wherearemybooks#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.7"
+  }
+}
