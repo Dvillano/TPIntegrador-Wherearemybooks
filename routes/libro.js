@@ -2,10 +2,6 @@ const { connection } = require("../app");
 const util = require("util");
 const query = util.promisify(connection.query).bind(connection);
 
-/*TODO:
-put a mayuscula 
-*/
-
 const libroPost = async function (req, res) {
   const name = req.body.name;
   const description = req.body.description;
