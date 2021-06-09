@@ -14,14 +14,19 @@ const libroPost = async function (req, res) {
 
   try {
     //Validacion de datos
-    if (name == undefined || categoria_id == undefined) {
-      throw new Error("Nombre y categoria son datos obligatorios");
+    if (
+      name == undefined ||
+      name == "" ||
+      categoria_id == undefined ||
+      categoria_id == ""
+    ) {
+      res.status(413).send({mensaje:"Nombre y categoria son datos obligatorios"});
     }
-    if (name == undefined) {
-      throw new Error("Nombre es un dato obligatorio");
+    if (name == undefined || name == "") {
+      res.status(413).send({mensaje:"Nombre es un dato obligatorio"});
     }
-    if (categoria_id == undefined) {
-      throw new Error("Categoria es un dato obligatorio");
+    if (categoria_id == undefined || categoria_id == "") {
+      res.status(413).send({mensaje:"Categoria es un dato obligatorio"});
     }
     if (persona_id == undefined || persona_id == "") {
       persona_id = "NULL";
@@ -34,7 +39,7 @@ const libroPost = async function (req, res) {
       var response = await query(personaquery);
 
       if (response.length == 0) {
-        throw new Error("la persona indicada no existe");
+        res.status(413).send({mensaje:"la persona indicada no existe"});
       }
     }
 
@@ -43,25 +48,25 @@ const libroPost = async function (req, res) {
     response = await query(categoriaQuery);
 
     if (response.length == 0) {
-      throw new Error("la categoria indicada no existe");
+      res.status(413).send({mensaje:"la categoria indicada no existe"});
     }
 
     //Validacion de libro
     const libroquery = `SELECT titulo FROM libro WHERE titulo='${name}'`;
     response = await query(libroquery);
     if (response.length > 0) {
-      throw new Error("El libro ya existe");
+      res.status(413).send({mensaje:"El libro ya existe"});
     }
 
     //Post nuevo libro
     const postquery = `INSERT INTO libro (titulo,descripcion,genero_id,persona_id) VALUES ('${name}','${description}','${categoria_id}',${persona_id})`;
     var response = await query(postquery);
-    console.log(response.insertId);
+
     const selectPostedBook = `SELECT * FROM libro WHERE ID='${response.insertId}'`;
     response = await query(selectPostedBook);
     res.status(200).send(response);
   } catch (error) {
-    res.status(413).send({ msg: error.message });
+    res.status(413).send({ mensaje:"Error inesperado"});
   }
 };
 
@@ -72,20 +77,20 @@ const libroGetId = async function (req, res) {
     const getquery = `SELECT * FROM libro WHERE ID=${id}`;
     var response = await query(getquery);
     if (response.length == 0) {
-      throw new Error("no se encuentra ese libro");
+      res.status(413).send({ mensaje: "no se encuentra ese libro" });
     } else res.status(200).send(response[0]);
   } catch (error) {
     console.log(error);
     res.status(413).send({
-      msg: "Error inesperado",
+      mensaje: "Error inesperado",
     });
   }
 };
 
 const libroPutId = async function (req, res) {
   const nombre = req.body.nombre;
-  var persona_id = req.body.persona_id;
-  const genero_id = parseInt(req.body.genero_id);
+  var persona_id = parseInt(req.body.persona_id);
+  const categoria_id = parseInt(req.body.categoria_id);
 
   const id = req.params.id;
   const descripcion = req.body.descripcion;
@@ -95,32 +100,34 @@ const libroPutId = async function (req, res) {
     const libroquery = `SELECT * FROM libro WHERE ID='${id}'`;
     var response = await query(libroquery);
     if (response.length == 0) {
-      throw new Error("El libro que intenta actualizar no existe");
+      res
+        .status(413)
+        .send({ mensaje: "El libro que intenta actualizar no existe" });
     }
     if (persona_id == undefined || persona_id == "") {
       persona_id = null;
     }
 
     //solo se puede modificar la descripcion del libro
+
     if (
       nombre !== response[0].titulo ||
       persona_id !== response[0].persona_id ||
-      genero_id !== response[0].genero_id
+      categoria_id !== response[0].genero_id
     ) {
-      throw new Error("Solo se puede modificar la descripcion del libro");
+      res
+        .status(413)
+        .send({ mensaje: "Solo se puede modificar la descripcion del libro" });
     }
 
     //Update libro
     const updateQuery = `UPDATE libro SET descripcion='${descripcion}' WHERE ID='${id}'`;
     response = await query(updateQuery);
-    console.log(response);
-    
+
     const selectUpdatedBook = `SELECT * FROM libro WHERE ID='${id}'`;
     response = await query(selectUpdatedBook);
-    console.log(response);
     res.status(200).send(response);
   } catch (error) {
-    console.log(error);
     res.status(413).send({
       mensaje: error.message,
     });
@@ -133,16 +140,15 @@ const libroPutDevolver = async function (req, res) {
     //Validacion de libro
     const libroquery = `SELECT ID FROM libro WHERE ID='${id}'`;
     var response = await query(libroquery);
-    console.log(response);
     if (response.length == 0) {
-      throw new Error("El libro no existe");
+      res.status(413).send({ mensaje: "El libro no existe" });
     }
 
     //Validar que ese libro este prestado
     const personaquery = `SELECT persona_id FROM libro WHERE ID='${id}'`;
     response = await query(personaquery);
     if (response[0].persona_id == null) {
-      throw new Error("ese libro no estaba prestado");
+      res.status(413).send({ mensaje: "ese libro no estaba prestado" });
     }
 
     //Devolver libro
@@ -152,7 +158,7 @@ const libroPutDevolver = async function (req, res) {
   } catch (error) {
     console.log(error);
     res.status(413).send({
-      msg: error.message,
+      mensaje: "Error inesperado",
     });
   }
 };
@@ -179,23 +185,19 @@ const libroPutPrestarId = async function (req, res) {
     if (response.length == 0) {
       res.status(413).send({ mensaje: "No se encontro el libro" });
     } else if (response[0].persona_id !== null) {
-      res
-        .status(413)
-        .send({
-          mensaje:
-            "El libro ya se encuentra prestado, no se puede prestar hasta que no se devuelva",
-        });
+      res.status(413).send({
+        mensaje:
+          "El libro ya se encuentra prestado, no se puede prestar hasta que no se devuelva",
+      });
     }
 
     const persona = `SELECT ID FROM persona WHERE ID='${persona_id}'`;
     response = await query(persona);
     if (response.length == 0) {
-      res
-        .status(413)
-        .send({
-          mensaje:
-            "No se encontro la persona a la que se quiere prestar el libro",
-        });
+      res.status(413).send({
+        mensaje:
+          "No se encontro la persona a la que se quiere prestar el libro",
+      });
     } else {
       const prestar = `UPDATE libro SET PERSONA_ID ='${persona_id}' WHERE ID='${id}'`;
       response = await query(prestar);
