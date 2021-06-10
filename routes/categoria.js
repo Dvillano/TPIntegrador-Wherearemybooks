@@ -1,16 +1,10 @@
 const {connection} = require('../app');
 const util = require('util');
-const { response } = require('express');
-
 
 const qy = util.promisify(connection.query).bind(connection);
 /*toda la implementacion de los requests aca luego se agregan en index js*/
 
-
-
 //conexion a base de datos importada de index
-
-
 
 //crear una categoría
 const categoriaPost = async (req, res) => {
@@ -42,8 +36,6 @@ const categoriaPost = async (req, res) => {
     }
 };
 
-
-
 //buscar todas las categorias
 const categoriaGet = async (req, res) => {
     try{
@@ -51,19 +43,15 @@ const categoriaGet = async (req, res) => {
 
         const respuesta =  await qy(query);
         if (respuesta.length == null){
-            throw new Error('[]')
+            res.status(413).send('');
         }
-        
         res.send({"Respuesta": respuesta});
-
     }
     catch(e){
         console.error(e.message);
         res.status(413).send({'Error': e.message});
     }
 };
-
-
 
 //buscar las categorías por ID
 const categoriaGetById = async (req, res) => {
@@ -73,7 +61,7 @@ const categoriaGetById = async (req, res) => {
         let respuesta =  await qy(query, [req.params.id]);
 
         if (respuesta.length == 0 ) {
-            throw new Error ('Esa categoría no existe');
+            throw new Error ('Categoría no encontrada');
         };
         
         res.send({respuesta});
@@ -85,11 +73,6 @@ const categoriaGetById = async (req, res) => {
     }
 };
 
-
-
-
-
-
 //eliminar una categoria
 const categoriaDeleteById = async (req, res) => {
     try {
@@ -98,7 +81,7 @@ const categoriaDeleteById = async (req, res) => {
         }
 
         let consultaGenero = await qy('SELECT * FROM categoria WHERE genero = ?', [req.body.genero]);
-        if (consultaGenero == null){
+        if (consultaGenero.length ==  0){
             throw new Error ('No existe la categoría indicada');
         }
 
