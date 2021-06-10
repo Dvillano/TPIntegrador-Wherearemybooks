@@ -3,22 +3,22 @@ const util = require("util");
 const query = util.promisify(connection.query).bind(connection);
 
 const libroPost = async function (req, res) {
-  const name = req.body.name;
-  const description = req.body.description;
+  const nombre = req.body.nombre;
+  const descripcion = req.body.descripcion;
   const categoria_id = req.body.categoria_id;
   var persona_id = req.body.persona_id;
 
   try {
     //Validacion de datos
     if (
-      name == undefined ||
-      name == "" ||
+      nombre == undefined ||
+      nombre == "" ||
       categoria_id == undefined ||
       categoria_id == ""
     ) {
       res.status(413).send({mensaje:"Nombre y categoria son datos obligatorios"});
     }
-    if (name == undefined || name == "") {
+    if (nombre == undefined || nombre == "") {
       res.status(413).send({mensaje:"Nombre es un dato obligatorio"});
     }
     if (categoria_id == undefined || categoria_id == "") {
@@ -55,7 +55,7 @@ const libroPost = async function (req, res) {
     }
 
     //Post nuevo libro
-    const postquery = `INSERT INTO libro (titulo,descripcion,genero_id,persona_id) VALUES ('${name}','${description}','${categoria_id}',${persona_id})`;
+    const postquery = `INSERT INTO libro (titulo,descripcion,genero_id,persona_id) VALUES ('${name}','${descripcion}','${categoria_id}',${persona_id})`;
     var response = await query(postquery);
 
     const selectPostedBook = `SELECT * FROM libro WHERE ID='${response.insertId}'`;
