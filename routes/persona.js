@@ -12,7 +12,7 @@ function validateEmail(email) {
 
 // PERSONA
 // POST
-const categoriaPostPersona = async (req, res) => {
+const categoriaPostPersona = async (req, res) => { 
   try {
 
     // Validar que esten todos los campos
