@@ -1,5 +1,6 @@
 const {connection} = require('../app');
 const util = require('util');
+const { response } = require('express');
 
 
 const qy = util.promisify(connection.query).bind(connection);
@@ -30,12 +31,14 @@ const categoriaPost = async (req, res) => {
 
         respuesta = await qy(query, [req.body.genero.toUpperCase()]);
 
-        res.send({'respuesta': respuesta.insertId});
+        let response = await qy(`SELECT * FROM categoria WHERE ID='${respuesta.insertId}'`)
+
+        res.status(200).send(response);
         
     }
     catch(e){
         console.error(e.message);
-        res.status(413).send({'Error': e.message});
+        res.status(413).send({message: e.message});
     }
 };
 
@@ -47,6 +50,9 @@ const categoriaGet = async (req, res) => {
         const query = 'SELECT * FROM categoria';
 
         const respuesta =  await qy(query);
+        if (respuesta.length == null){
+            throw new Error('[]')
+        }
         
         res.send({"Respuesta": respuesta});
 
@@ -70,7 +76,7 @@ const categoriaGetById = async (req, res) => {
             throw new Error ('Esa categoría no existe');
         };
         
-        res.send({"Respuesta": respuesta});
+        res.send({respuesta});
 
     }
     catch(e){
@@ -87,7 +93,16 @@ const categoriaGetById = async (req, res) => {
 //eliminar una categoria
 const categoriaDeleteById = async (req, res) => {
     try {
-        let query = 'SELECT * FROM libro WHERE categoria_id = ?';
+        if(!req.body.genero){
+            throw new Error ('Debe indicar la categoria que desea borrar') 
+        }
+
+        let consultaGenero = await qy('SELECT * FROM categoria WHERE genero = ?', [req.body.genero]);
+        if (consultaGenero == null){
+            throw new Error ('No existe la categoría indicada');
+        }
+
+        let query = 'SELECT * FROM libro WHERE genero_id = ?';
         let respuesta = await qy (query, [req.params.id]);
 
         if (respuesta.length > 0 ) {
@@ -95,7 +110,7 @@ const categoriaDeleteById = async (req, res) => {
     }
         query =  'DELETE FROM categoria WHERE id = ?'; 
         respuesta = await qy (query, [req.params.id]) ;
-        res.send({'respuesta': respuesta});
+        res.send({respuesta: 'Se ha borrado correctamente la categoria'});
     }
     catch(e) {
         console.error(e.message);
