@@ -73,7 +73,7 @@ const categoriaGetPersonaById = async (req, res) => {
     if (respuesta == 0) {
       res.status(413).send({Respuesta :"No se encuentra esta persona"});
     }
-    res.status(200).send({ Respuesta: respuesta });
+    res.status(200).send({respuesta});
   } catch (error) {
     console.error(error.message);
     res.status(413).send({ Error: error.message });
