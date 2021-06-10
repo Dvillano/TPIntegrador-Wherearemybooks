@@ -14,7 +14,6 @@ function validateEmail(email) {
 // POST
 const categoriaPostPersona = async (req, res) => {
   try {
-<<<<<<< HEAD
 
     // Validar que esten todos los campos
     if (!req.body.nombre || !req.body.alias || !req.body.apellido || !req.body.email) {
@@ -26,18 +25,6 @@ const categoriaPostPersona = async (req, res) => {
     let apellido = req.body.apellido.toUpperCase().trim();
     let email = req.body.email.toUpperCase().trim();
 
-=======
-    let nombre = req.body.nombre.toUpperCase();
-    let alias = req.body.alias.toUpperCase();
-    let apellido = req.body.apellido.toUpperCase();
-    let email = req.body.email.toUpperCase();
-
-    // Validar que esten todos los campos
-    if (!nombre || !alias || !apellido || !email) {
-      res.status(413).send("Faltan datos");
-    }
-
->>>>>>> origin/D-commit
     // Validar estructura del email
     if (validateEmail(email) == false) {
       res.status(413).send("Mail invalido");
@@ -57,11 +44,7 @@ const categoriaPostPersona = async (req, res) => {
     respuesta = await qy(query, [nombre, alias, apellido, email]);
 
     console.log(respuesta);
-<<<<<<< HEAD
     res.status(200).send({"Respuesta": respuesta.insertId });
-=======
-    res.status(200).send({ Respuesta: respuesta });
->>>>>>> origin/D-commit
   } catch (error) {
     console.error(error.message);
     res.status(413).send({ Error: error.message });
@@ -74,11 +57,7 @@ const categoriaGetPersona = async (req, res) => {
     let query = "SELECT * FROM persona";
     let respuesta = await qy(query);
 
-<<<<<<< HEAD
     res.status(200).send({ Respuesta: respuesta });
-=======
-    res.status(200).send({ respuesta: respuesta });
->>>>>>> origin/D-commit
   } catch (error) {
     console.error(error.message);
     res.status(413).send({ Error: error.message }, "Error inesperado");
@@ -92,15 +71,9 @@ const categoriaGetPersonaById = async (req, res) => {
     let respuesta = await qy(query, [req.params.id]);
 
     if (respuesta == 0) {
-<<<<<<< HEAD
       res.status(413).send({Respuesta :"No se encuentra esta persona"});
     }
     res.status(200).send({ Respuesta: respuesta });
-=======
-      res.status(413).send("No se encuentra esta persona");
-    }
-    res.status(200).send({ respuesta: respuesta });
->>>>>>> origin/D-commit
   } catch (error) {
     console.error(error.message);
     res.status(413).send({ Error: error.message });
@@ -148,11 +121,7 @@ const categoriaPutPersonaById = async function (req, res) {
       );
     }
   } catch (e) {
-<<<<<<< HEAD
     res.status(413).send({ Error: e.message });
-=======
-    res.status(413).send(e.message);
->>>>>>> origin/D-commit
   }
 };
 
@@ -183,11 +152,7 @@ const categoriaDeletePersonaById = async function (req, res) {
       );
     }
   } catch (e) {
-<<<<<<< HEAD
     res.status(413).send({ Error: e.message });
-=======
-    res.status(413).send(e.message);
->>>>>>> origin/D-commit
   }
 };
 
