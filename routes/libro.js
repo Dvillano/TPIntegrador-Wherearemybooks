@@ -134,7 +134,7 @@ const libroPutDevolver = async function (req, res) {
             })
         }
 
-       //Validar que ese libro este prestado
+        //Validar que ese libro este prestado
         const personaquery = `SELECT persona_id FROM libro WHERE ID='${id}'`;
         response = await query(personaquery);
         console.log(response[0].persona_id);
@@ -166,6 +166,10 @@ const libroPutDevolver = async function (req, res) {
          let response = await query(queryLibro);
  
          res.status(200).send({response});    
+
+         if (response.length ==0) {
+             res.status(413).send({response});
+         }
  
      } catch (error){
          console.error(error.message);
@@ -181,9 +185,11 @@ const libroPutDevolver = async function (req, res) {
          var response = await query(libro);
          if (response.length ==0) {
              res.status(413).send({mensaje: "No se encontro el libro"});
+             return;
          }
-         else if (response[0].persona_id!==null) {
+         if (response[0].persona_id!==null) {
              res.status(413).send({mensaje: "El libro ya se encuentra prestado, no se puede prestar hasta que no se devuelva"});
+             return;
          }
  
          const persona = `SELECT ID FROM persona WHERE ID='${persona_id}'`;
@@ -212,16 +218,18 @@ const libroPutDevolver = async function (req, res) {
          var response = await query(libro);
          if (response.length ==0) {
              res.status(413).send({mensaje: "No se encuentra ese libro"});
+             return;
          }
-         else if (response[0].persona_id !==null) {
+         if (response[0].persona_id !==null) {
              res.status(413).send({mensaje: "Ese libro esta prestado no se puede borrar"});
+             return;
          }
          else {
             const idQuery = `DELETE FROM libro WHERE ID='${id}'`;
             response = await query(idQuery);
             res.status(200).send({mensaje: "Se borro correctamente"});
          }
-
+        
         
     }catch (error){
         console.error(error.message);
