@@ -100,12 +100,11 @@ const libroPutId = async function (req, res) {
         .status(413)
         .send({ mensaje: "El libro que intenta actualizar no existe" });
     }
-    if (persona_id == undefined || persona_id == "") {
+    if (Number.isNaN(persona_id) || persona_id == "") {
       persona_id = null;
     }
 
     //solo se puede modificar la descripcion del libro
-
     if (
       nombre !== response[0].titulo ||
       persona_id !== response[0].persona_id ||
