@@ -28,7 +28,7 @@ const libroPost = async function (req, res) {
       persona_id = "NULL";
     }
 
-    //Si el libro esta prestado a alguien
+    //Validar existencia de persona
     if (persona_id !== "NULL") {
       const personaquery = `SELECT ID FROM persona WHERE ID='${persona_id}'`;
 
