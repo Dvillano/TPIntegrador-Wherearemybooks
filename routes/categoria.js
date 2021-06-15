@@ -76,31 +76,19 @@ const categoriaGetById = async (req, res) => {
 //eliminar una categoria
 const categoriaDeleteById = async (req, res) => {
     try {
-        /*
-        if(!req.body.genero){
-            throw new Error ('Debe indicar la categoria que desea borrar') 
-        }
-
-        let consultaGenero = await qy('SELECT * FROM categoria WHERE genero = ?', [req.body.genero.toUpperCase()]);
-        if (consultaGenero.length ==  0){
-            throw new Error ('No existe la categoría indicada');
-        }
-        */
+        // validacion de que existe el genero enviado
         let consultaGeneroID = await qy('SELECT * FROM categoria WHERE id = ?', [req.params.id]);
         if(consultaGeneroID.length == 0){
             throw new Error ('No existe genero con el ID indicado')
         } 
-        /*
-        if(consultaGenero.genero != consultaGeneroID.genero){
-            throw new Error ('no coincide el ID con el nombre del genero que desea borrar');
-        }
-        */
+        // validación que el genero no tenga libros asociados
         let query = 'SELECT * FROM libro WHERE genero_id = ?';
         let respuesta = await qy (query, [req.params.id]);
 
         if (respuesta.length > 0 ) {
         throw new Error ('Esta categoría tiene productos asociados, no se puede borrar');
-    }
+        }
+        //eliminacino del genero
         query =  'DELETE FROM categoria WHERE genero = ?'; 
         respuesta = await qy (query, [req.body.genero]) ;
         res.send({respuesta: 'Se ha borrado correctamente la categoria'});
