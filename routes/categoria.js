@@ -13,11 +13,9 @@ const categoriaPost = async (req, res) => {
             throw new Error ('Falta enviar el genero');
         }
 
-        let query = 'SELECT id FROM categoria WHERE genero = ?';
+        let consulta = await  qy ('SELECT id FROM categoria WHERE genero = ?',[req.body.genero.toUpperCase()]);
 
-        let respuesta = await  qy(query, [req.body.genero.toUpperCase()]);
-
-        if (respuesta.length > 0 ) {
+        if (consulta.length > 0 ) {
             throw new Error ('¡Esa categoria ya existe!');
         };
 
@@ -89,8 +87,8 @@ const categoriaDeleteById = async (req, res) => {
         throw new Error ('Esta categoría tiene productos asociados, no se puede borrar');
         }
         //eliminacino del genero
-        query =  'DELETE FROM categoria WHERE genero = ?'; 
-        respuesta = await qy (query, [req.body.genero]) ;
+        query =  'DELETE FROM categoria WHERE id = ?'; 
+        respuesta = await qy (query, [req.params.id]) ;
         res.send({respuesta: 'Se ha borrado correctamente la categoria'});
     }
     catch(e) {
