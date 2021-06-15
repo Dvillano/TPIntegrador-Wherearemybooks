@@ -3,66 +3,66 @@ const util = require("util");
 const query = util.promisify(connection.query).bind(connection);
 
 const libroPost = async function (req, res) {
-  const nombre = req.body.nombre;
+  const nombre = req.body.titulo;
   const descripcion = req.body.descripcion;
   const genero_id = req.body.genero_id;
-  var persona_id = req.body.persona_id;
+  const persona_id = req.body.persona_id;
 
   try {
     //Validacion de datos
-    if (
-      nombre == undefined ||
-      nombre == "" ||
-      genero_id == undefined ||
-      genero_id == ""
-    ) {
-      res.status(413).send({mensaje:"Nombre y categoria son datos obligatorios"});
+    if (nombre == undefined || nombre == "" || genero_id == undefined || genero_id == "" ) {
+      throw new Error ("Nombre y categoria son datos obligatorios");
     }
     if (nombre == undefined || nombre == "") {
-      res.status(413).send({mensaje:"Nombre es un dato obligatorio"});
+      throw new Error ({mensaje:"Nombre es un dato obligatorio"});
     }
     if (genero_id == undefined || genero_id == "") {
-      res.status(413).send({mensaje:"Categoria es un dato obligatorio"});
-    }
-    if (persona_id == undefined || persona_id == "") {
-      persona_id = "NULL";
+      throw new Error ("Categoria es un dato obligatorio");
     }
 
+    // esta parte me parece que el null se pone directamente en la tabla, se le tilda la opcion de nulo
+    /*if (persona_id == undefined || persona_id == "") {
+      persona_id = "NULL";
+    }
+    
+    //PORQUE PARA CARGAR UN LIBRO SE VERIFICA QUE ESTÉ PRESTADO? NO PUEDE ESTAR PRESTADO ALGO QUE NO ESTÁ CARGADO. 
     //Si el libro esta prestado a alguien
     if (persona_id !== "NULL") {
       const personaquery = `SELECT ID FROM persona WHERE ID='${persona_id}'`;
 
-      var response = await query(personaquery);
+      let response = await query(personaquery);
 
       if (response.length == 0) {
-        res.status(413).send({mensaje:"la persona indicada no existe"});
+        throw new Error  ("la persona indicada no existe");
       }
     }
-
+    */
     //Validacion de categoria
-    const categoriaQuery = `SELECT ID FROM categoria WHERE ID='${genero_id}'`;
-    response = await query(categoriaQuery);
+    const categoriaQuery = 'SELECT ID FROM categoria WHERE ID= ?';
+    let response = await query(categoriaQuery, [genero_id]);
 
     if (response.length == 0) {
-      res.status(413).send({mensaje:"la categoria indicada no existe"});
+      throw new Error ("la categoria indicada no existe");
     }
 
     //Validacion de libro
-    const libroquery = `SELECT titulo FROM libro WHERE titulo='${nombre}'`;
-    response = await query(libroquery);
+    const libroquery = 'SELECT titulo FROM libro WHERE titulo= ?';
+    response = await query(libroquery, nombre);
     if (response.length > 0) {
-      res.status(413).send({mensaje:"El libro ya existe"});
+      throw new Error ("El libro ya existe");
     }
 
     //Post nuevo libro
-    const postquery = `INSERT INTO libro (titulo,descripcion,genero_id,persona_id) VALUES ('${nombre}','${descripcion}','${genero_id}',${persona_id})`;
-    var response = await query(postquery);
+    const postquery = 'INSERT INTO libro (titulo,descripcion,genero_id,persona_id) VALUES (?, ?, ?, ?)';
+    response = await query(postquery, [nombre, descripcion, genero_id, persona_id]);
 
-    const selectPostedBook = `SELECT * FROM libro WHERE ID='${response.insertId}'`;
-    response = await query(selectPostedBook);
-    res.status(200).send(response);
+    const selectPostedBook = await query(`SELECT titulo FROM libro WHERE ID = '${response.insertId}'`);
+
+    res.status(200).send(selectPostedBook);
+
   } catch (error) {
-    res.status(413).send({ mensaje:"Error inesperado"});
+    console.error(error.message)
+    res.status(413).send({'Error': error.message});
   }
 };
 
