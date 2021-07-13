@@ -12,7 +12,7 @@ function validateEmail(email) {
 
 // PERSONA
 // POST
-const categoriaPostPersona = async (req, res) => { 
+const postPersona = async (req, res) => { 
   try {
 
     // Validar que esten todos los campos
@@ -52,7 +52,7 @@ const categoriaPostPersona = async (req, res) => {
 };
 
 //GET
-const categoriaGetPersona = async (req, res) => {
+const getPersona = async (req, res) => {
   try {
     let query = "SELECT * FROM persona";
     let respuesta = await qy(query);
@@ -65,7 +65,7 @@ const categoriaGetPersona = async (req, res) => {
 };
 
 //GET by ID
-const categoriaGetPersonaById = async (req, res) => {
+const getPersonaById = async (req, res) => {
   try {
     let query = "SELECT * FROM persona WHERE id = ?";
     let respuesta = await qy(query, [req.params.id]);
@@ -83,7 +83,7 @@ const categoriaGetPersonaById = async (req, res) => {
 //PUT '/persona/:id' recibe: {nombre: string, apellido: string, alias: string, email: string} el email no se puede modificar
 //retorna status 200 y el objeto modificado o bien status 413, {mensaje: <descripcion del error>} "error inesperado", "no se encuentra esa persona"
 
-const categoriaPutPersonaById = async function (req, res) {
+const putPersonaById = async function (req, res) {
   try {
     const consulta = await qy("SELECT * FROM persona WHERE id=?", [
       req.params.id,
@@ -128,7 +128,7 @@ const categoriaPutPersonaById = async function (req, res) {
 //DELETE '/persona/:id' retorna: 200 y {mensaje: "se borro correctamente"}
 // o bien 413, {mensaje: <descripcion del error>} "error inesperado", "no existe esa persona", "esa persona tiene libros asociados, no se puede eliminar"
 
-const categoriaDeletePersonaById = async function (req, res) {
+const deletePersonaById = async function (req, res) {
   try {
     const idregistro = await qy("SELECT * FROM persona WHERE id=?", [
       req.params.id,
@@ -157,11 +157,11 @@ const categoriaDeletePersonaById = async function (req, res) {
 };
 
 module.exports = {
-  categoriaPostPersona,
-  categoriaGetPersona,
-  categoriaGetPersonaById,
-  categoriaPutPersonaById,
-  categoriaDeletePersonaById,
+  postPersona,
+  getPersona,
+  getPersonaById,
+  putPersonaById,
+  deletePersonaById,
 };
 
 //PUT '/persona/:id' recibe: {nombre: string, apellido: string, alias: string, email: string} el email no se puede modificar
