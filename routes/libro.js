@@ -24,9 +24,14 @@ const libroPost = async function (req, res) {
     /*if (persona_id == undefined || persona_id == "") {
       persona_id = "NULL";
     }
+<<<<<<< HEAD
     
     //PORQUE PARA CARGAR UN LIBRO SE VERIFICA QUE ESTÉ PRESTADO? NO PUEDE ESTAR PRESTADO ALGO QUE NO ESTÁ CARGADO. 
     //Si el libro esta prestado a alguien
+=======
+
+    //Validar existencia de persona
+>>>>>>> main
     if (persona_id !== "NULL") {
       const personaquery = `SELECT ID FROM persona WHERE ID='${persona_id}'`;
 
