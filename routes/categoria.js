@@ -15,17 +15,15 @@ const categoriaPost = async (req, res) => {
 
         let consulta = await  qy ('SELECT id FROM categoria WHERE genero = ?',[req.body.genero.toUpperCase()]);
 
-        if (consulta.length > 0 ) {
-            throw new Error ('¡Esa categoria ya existe!');
-        };
+            if (consulta.length > 0 ) {
+                throw new Error ('¡Esa categoria ya existe!');
+            };
 
-        query = 'INSERT INTO categoria (genero) VALUE (?)';
+        const query = 'INSERT INTO categoria (genero) VALUE (?)';
 
-        respuesta = await qy(query, [req.body.genero.toUpperCase()]);
+        const respuesta = await qy(query, [req.body.genero.toUpperCase()]);
 
-        let response = await qy(`SELECT * FROM categoria WHERE ID='${respuesta.insertId}'`)
-
-        res.status(200).send(response);
+        res.status(200).send(respuesta.insertedId);
         
     }
     catch(e){
@@ -40,10 +38,10 @@ const categoriaGet = async (req, res) => {
         const query = 'SELECT * FROM categoria';
 
         const respuesta =  await qy(query);
-        if (respuesta.length == null){
-            res.status(413).send('');
-        }
-        res.send({"Respuesta": respuesta});
+            if (respuesta.length == 0){
+                throw new Error ('No hay categorias cargadas');
+            }
+        res.status(200).send({respuesta});
     }
     catch(e){
         console.error(e.message);
@@ -58,11 +56,11 @@ const categoriaGetById = async (req, res) => {
         
         let respuesta =  await qy(query, [req.params.id]);
 
-        if (respuesta.length == 0 ) {
-            throw new Error ('Categoría no encontrada');
-        };
+            if (respuesta.length == 0 ) {
+                throw new Error ('Categoría no encontrada');
+            };
         
-        res.send({respuesta});
+        res.status(200).send({respuesta});
 
     }
     catch(e){
@@ -76,17 +74,18 @@ const categoriaDeleteById = async (req, res) => {
     try {
         // validacion de que existe el genero enviado
         let consultaGeneroID = await qy('SELECT * FROM categoria WHERE id = ?', [req.params.id]);
-        if(consultaGeneroID.length == 0){
-            throw new Error ('No existe genero con el ID indicado')
-        } 
+
+            if(consultaGeneroID.length == 0){
+                throw new Error ('No existe genero con el ID indicado')
+            } 
         // validación que el genero no tenga libros asociados
         let query = 'SELECT * FROM libro WHERE genero_id = ?';
         let respuesta = await qy (query, [req.params.id]);
 
-        if (respuesta.length > 0 ) {
-        throw new Error ('Esta categoría tiene productos asociados, no se puede borrar');
-        }
-        //eliminacino del genero
+            if (respuesta.length > 0 ) {
+                throw new Error ('Esta categoría tiene productos asociados, no se puede borrar');
+            }
+        //eliminacion del genero
         query =  'DELETE FROM categoria WHERE id = ?'; 
         respuesta = await qy (query, [req.params.id]) ;
         res.send({respuesta: 'Se ha borrado correctamente la categoria'});
