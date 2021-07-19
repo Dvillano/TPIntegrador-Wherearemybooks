@@ -1,9 +1,12 @@
 const express = require("express");
 const app = express();
 const mysql = require("mysql");
+const cors = require('cors');
 
+
+app.use(cors({origin:"http://localhost:3000",credentials:true}));
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended : true}));
 
 // Conexion a DB
 const connection = mysql.createConnection({
@@ -33,11 +36,11 @@ const {
   categoriaDeleteById,
 } = require("./routes/categoria");
 const {
-  categoriaPostPersona,
-  categoriaGetPersona,
-  categoriaGetPersonaById,
-  categoriaPutPersonaById,
-  categoriaDeletePersonaById,
+  postPersona,
+  getPersona,
+  getPersonaById,
+  putPersonaById,
+  deletePersonaById,
 } = require("./routes/persona");
 
 const {
@@ -51,11 +54,11 @@ const {
 } = require("./routes/libro");
 
 //Requests de persona:
-app.post("/persona", categoriaPostPersona);
-app.get("/persona", categoriaGetPersona);
-app.get("/persona/:id", categoriaGetPersonaById);
-app.put("/persona/:id", categoriaPutPersonaById);
-app.delete("/persona/:id", categoriaDeletePersonaById);
+app.post("/persona", postPersona);
+app.get("/persona", getPersona);
+app.get("/persona/:id", getPersonaById);
+app.put("/persona/:id", putPersonaById);
+app.delete("/persona/:id", deletePersonaById);
 
 //fin de requests Persona
 
