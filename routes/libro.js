@@ -30,9 +30,9 @@ const libroPost = async function (req, res) {
 
     //Si el libro esta prestado a alguien
     if (persona_id !== "NULL") {
-      const personaquery = `SELECT ID FROM persona WHERE ID='${persona_id}'`;
+      const personaquery = `SELECT ID FROM persona WHERE ID=?`;
 
-      var response = await query(personaquery);
+      var response = await query(personaquery,[persona_id]);
 
       if (response.length == 0) {
         res.status(413).send({mensaje:"la persona indicada no existe"});
@@ -40,16 +40,16 @@ const libroPost = async function (req, res) {
     }
 
     //Validacion de categoria
-    const categoriaQuery = `SELECT ID FROM categoria WHERE ID='${genero_id}'`;
-    response = await query(categoriaQuery);
+    const categoriaQuery = `SELECT ID FROM categoria WHERE ID=?`;
+    response = await query(categoriaQuery,[genero_id]);
 
     if (response.length == 0) {
       res.status(413).send({mensaje:"la categoria indicada no existe"});
     }
 
     //Validacion de libro
-    const libroquery = `SELECT titulo FROM libro WHERE titulo='${nombre}'`;
-    response = await query(libroquery);
+    const libroquery = `SELECT titulo FROM libro WHERE titulo=?`;
+    response = await query(libroquery,[nombre]);
     if (response.length > 0) {
       res.status(413).send({mensaje:"El libro ya existe"});
     }
@@ -70,8 +70,8 @@ const libroGetId = async function (req, res) {
   const id = req.params.id;
   try {
     //Buscar libro devolver error en caso de que no exista
-    const getquery = `SELECT * FROM libro WHERE ID=${id}`;
-    var response = await query(getquery);
+    const getquery = `SELECT * FROM libro WHERE ID=?`;
+    var response = await query(getquery,[id]);
     if (response.length == 0) {
       res.status(413).send({ mensaje: "no se encuentra ese libro" });
     } else res.status(200).send(response[0]);
@@ -93,8 +93,8 @@ const libroPutId = async function (req, res) {
 
   try {
     //Validacion de libro
-    const libroquery = `SELECT * FROM libro WHERE ID='${id}'`;
-    var response = await query(libroquery);
+    const libroquery = `SELECT * FROM libro WHERE ID=?`;
+    var response = await query(libroquery,[id]);
     if (response.length == 0) {
       res
         .status(413)
@@ -117,11 +117,11 @@ const libroPutId = async function (req, res) {
     }
 
     //Update libro
-    const updateQuery = `UPDATE libro SET descripcion='${descripcion}' WHERE ID='${id}'`;
-    response = await query(updateQuery);
+    const updateQuery = `UPDATE libro SET descripcion=? WHERE ID=?`;
+    response = await query(updateQuery,[descripcion][id]);
 
-    const selectUpdatedBook = `SELECT * FROM libro WHERE ID='${id}'`;
-    response = await query(selectUpdatedBook);
+    const selectUpdatedBook = `SELECT * FROM libro WHERE ID=?`;
+    var response = await query(selectUpdatedBook,[id]);
     res.status(200).send(response);
   } catch (error) {
     res.status(413).send({
@@ -134,22 +134,22 @@ const libroPutDevolver = async function (req, res) {
   const id = req.params.id;
   try {
     //Validacion de libro
-    const libroquery = `SELECT ID FROM libro WHERE ID='${id}'`;
-    var response = await query(libroquery);
+    const libroquery = `SELECT ID FROM libro WHERE ID=?`;
+    var response = await query(libroquery,[id]);
     if (response.length == 0) {
       res.status(413).send({ mensaje: "El libro no existe" });
     }
 
     //Validar que ese libro este prestado
-    const personaquery = `SELECT persona_id FROM libro WHERE ID='${id}'`;
-    response = await query(personaquery);
+    const personaquery = `SELECT persona_id FROM libro WHERE ID=?`;
+    var response = await query(personaquery,[id]);
     if (response[0].persona_id == null) {
       res.status(413).send({ mensaje: "ese libro no estaba prestado" });
     }
 
     //Devolver libro
-    const updateQuery = `UPDATE libro SET persona_id=NULL WHERE ID ='${id}'`;
-    response = await query(updateQuery);
+    const updateQuery = `UPDATE libro SET persona_id=NULL WHERE ID =?`;
+    var response = await query(updateQuery,[id]);
     res.status(200).send({ mensaje: "Se realizo la devolucion correctamente" });
   } catch (error) {
     console.log(error);
@@ -176,8 +176,8 @@ const libroPutPrestarId = async function (req, res) {
   const persona_id = req.body.persona_id;
 
   try {
-    const libro = `SELECT persona_id FROM libro WHERE ID='${id}'`;
-    var response = await query(libro);
+    const libro = `SELECT persona_id FROM libro WHERE ID=?`;
+    var response = await query(libro,[id]);
     if (response.length == 0) {
       res.status(413).send({ mensaje: "No se encontro el libro" });
     } else if (response[0].persona_id !== null) {
@@ -187,16 +187,16 @@ const libroPutPrestarId = async function (req, res) {
       });
     }
 
-    const persona = `SELECT ID FROM persona WHERE ID='${persona_id}'`;
-    response = await query(persona);
+    const persona = `SELECT ID FROM persona WHERE ID=?`;
+    response = await query(persona, [persona_id]);
     if (response.length == 0) {
       res.status(413).send({
         mensaje:
           "No se encontro la persona a la que se quiere prestar el libro",
       });
     } else {
-      const prestar = `UPDATE libro SET PERSONA_ID ='${persona_id}' WHERE ID='${id}'`;
-      response = await query(prestar);
+      const prestar = `UPDATE libro SET PERSONA_ID =? WHERE ID=?`;
+      var response = await query(prestar,[persona_id][id]);
       res.status(200).send({ mensaje: "Se presto correctamente" });
     }
   } catch (error) {
@@ -209,8 +209,8 @@ const DeleteLibroId = async function (req, res) {
   const id = req.params.id;
 
   try {
-    const libro = `SELECT persona_id FROM libro WHERE ID='${id}'`;
-    var response = await query(libro);
+    const libro = `SELECT persona_id FROM libro WHERE ID=?`;
+    var response = await query(libro[id]);
     if (response.length == 0) {
       res.status(413).send({ mensaje: "No se encuentra ese libro" });
     } else if (response[0].persona_id !== null) {
@@ -218,8 +218,8 @@ const DeleteLibroId = async function (req, res) {
         .status(413)
         .send({ mensaje: "Ese libro esta prestado no se puede borrar" });
     } else {
-      const idQuery = `DELETE FROM libro WHERE ID='${id}'`;
-      response = await query(idQuery);
+      const idQuery = `DELETE FROM libro WHERE ID=?`;
+      response = await query(idQuery,[id]);
       res.status(200).send({ mensaje: "Se borro correctamente" });
     }
   } catch (error) {

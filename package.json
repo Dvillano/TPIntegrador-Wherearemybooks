@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/Dvillano/TPIntegrador-Wherearemybooks#readme",
   "dependencies": {
+    "explorer": "0.0.5",
     "express": "^4.17.1",
     "mysql": "^2.18.1",
+    "node": "^16.5.0",
     "nodemon": "^2.0.7"
   }
 }
