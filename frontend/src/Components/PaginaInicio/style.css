@@ -1,0 +1,36 @@
+.navbar{
+    display: grid;
+    grid-template-columns:100%;
+    grid-template-rows:20% 40%;
+}
+.title{
+margin: 1% auto;
+padding:0% 20%;
+display:flex;
+color:#DCBE87;
+flex-direction: row;
+background-color: #AD6A34;
+}
+.options{
+display:grid;
+grid-template-columns: repeat(3,33%);
+grid-template-rows:repeat(6,60px);
+}
+.link{
+    margin-bottom: 20px;
+    text-decoration: none;
+    text-align: center;
+    color:#517174;
+    background-color: #DCBE87;
+}
+    
+.link.left{
+    margin-left:10%;
+}
+.link.middle{
+ margin-left: 10%;
+ margin-right: 10%;
+}
+.link.right{
+margin-right:10%
+}
