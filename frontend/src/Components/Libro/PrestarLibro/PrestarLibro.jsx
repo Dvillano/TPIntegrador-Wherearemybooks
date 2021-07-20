@@ -1,21 +1,23 @@
 import './style.css'
 
+import React,{useEffect, useState} from 'react'
+
 import PersonaCard from './PersonaCard'
-import React from 'react'
 import Titulo from './Titulo'
 import axios from 'axios'
 
-export default function(){
+function PrestarLibro(){
   const personaurl = "http://localhost:3000/persona"
 
-  const [data,setData] = React.useState([]);
+  const [data,setData] = useState([]);
 
 const onClick = ()=>{
 
 }
 
-  React.useEffect(() => {
+ useEffect(() => {
   axios.get(personaurl).then(response=>{
+    console.log(response)
       setData(response.data.Respuesta)
   })
   }, [])
@@ -27,3 +29,5 @@ const onClick = ()=>{
      })}
     </div>)
 }
+
+export default PrestarLibro

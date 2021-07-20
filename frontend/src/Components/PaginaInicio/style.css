@@ -1,11 +1,10 @@
 .navbar{
     display: grid;
-    grid-template-columns:100%;
-    grid-template-rows:20% 40%;
 }
 .title{
 margin: 1% auto;
-padding:0% 20%;
+text-align: center;
+padding:0% 30%;
 display:flex;
 color:#DCBE87;
 flex-direction: row;
@@ -13,10 +12,12 @@ background-color: #AD6A34;
 }
 .options{
 display:grid;
-grid-template-columns: repeat(3,33%);
-grid-template-rows:repeat(6,60px);
+margin:auto;
+grid-template-columns: repeat(3,32vw);
+grid-template-rows:repeat(2,62px);
 }
 .link{
+    font-size: 140%;
     margin-bottom: 20px;
     text-decoration: none;
     text-align: center;
@@ -25,12 +26,14 @@ grid-template-rows:repeat(6,60px);
 }
     
 .link.left{
-    margin-left:10%;
+    margin-left:40%;
+    margin-right: 5%;
 }
 .link.middle{
- margin-left: 10%;
- margin-right: 10%;
+ margin-left: 20%;
+ margin-right: 20%;
 }
 .link.right{
-margin-right:10%
+margin-right:40%;
+margin-left:5%
 }

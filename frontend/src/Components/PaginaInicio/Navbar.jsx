@@ -3,7 +3,7 @@ import './style.css'
 import { Link } from "react-router-dom"
 import Title from "./Title"
 
-export default function(){
+function Navbar(){
     return(<div className="navbar">
    <Title/>
    <div className="options">
@@ -17,3 +17,6 @@ export default function(){
    </div>
     </div>)
 }
+
+
+export default Navbar

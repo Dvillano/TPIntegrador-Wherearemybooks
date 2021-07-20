@@ -3,7 +3,7 @@ import Apellido from "./Apellido";
 import Email from "./Email";
 import Nombre from "./Nombre";
 
-export default function(props){
+function PersonaCard(props){
     return(
     <div>
     <button onClick={props.onClick}>
@@ -14,3 +14,5 @@ export default function(props){
    </button>
     </div>)
 }
+
+export default PersonaCard
