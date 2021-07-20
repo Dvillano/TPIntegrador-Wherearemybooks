@@ -3,7 +3,7 @@ const util = require("util");
 const query = util.promisify(connection.query).bind(connection);
 
 const libroPost = async function (req, res) {
-<<<<<<< HEAD
+//<<<<<<< HEAD
   const nombre = req.body.titulo;
   const descripcion = req.body.descripcion;
   const genero_id = req.body.genero_id;
@@ -25,11 +25,6 @@ const libroPost = async function (req, res) {
     /*if (persona_id == undefined || persona_id == "") {
       persona_id = "NULL";
     }
-<<<<<<< HEAD
-    
-    //PORQUE PARA CARGAR UN LIBRO SE VERIFICA QUE ESTÉ PRESTADO? NO PUEDE ESTAR PRESTADO ALGO QUE NO ESTÁ CARGADO. 
-    //Si el libro esta prestado a alguien
-=======
 =======
 
  if(!req.body.nombre || !req.body.genero_id || !req.body.descripcion){
@@ -49,7 +44,6 @@ const libroPost = async function (req, res) {
   }else{
     persona_id =req.body.persona_id
   }
->>>>>>> main
 
   try {
     //Validar existencia de persona
@@ -73,47 +67,27 @@ const libroPost = async function (req, res) {
     }
     */
     //Validacion de categoria
-<<<<<<< HEAD
-    const categoriaQuery = 'SELECT ID FROM categoria WHERE ID= ?';
-    let response = await query(categoriaQuery, [genero_id]);
-=======
     const categoriaQuery = 'SELECT ID FROM categoria WHERE ID=?';
     response = await query(categoriaQuery,[genero_id]);
->>>>>>> main
 
     if (response.length == 0) {
       throw new Error ("la categoria indicada no existe");
     }
 
     //Validacion de libro
-<<<<<<< HEAD
-    const libroquery = 'SELECT titulo FROM libro WHERE titulo= ?';
-    response = await query(libroquery, nombre);
-=======
     const libroquery = 'SELECT titulo FROM libro WHERE titulo=?';
     response = await query(libroquery,[nombre]);
->>>>>>> main
     if (response.length > 0) {
       throw new Error ("El libro ya existe");
     }
 
     //Post nuevo libro
-<<<<<<< HEAD
-    const postquery = 'INSERT INTO libro (titulo,descripcion,genero_id,persona_id) VALUES (?, ?, ?, ?)';
-    response = await query(postquery, [nombre, descripcion, genero_id, persona_id]);
-
-    const selectPostedBook = await query(`SELECT titulo FROM libro WHERE ID = '${response.insertId}'`);
-
-    res.status(200).send(selectPostedBook);
-
-=======
     const postquery = `INSERT INTO libro (titulo,descripcion,genero_id,persona_id) VALUES (?,?,?,?)`;
     var response = await query(postquery,[nombre,descripcion,genero_id,persona_id]);
 
     const selectPostedBook = 'SELECT * FROM libro WHERE ID=?';
     response = await query(selectPostedBook,response.insertId);
     res.status(200).send(response);
->>>>>>> main
   } catch (error) {
     console.error(error.message)
     res.status(413).send({'Error': error.message});
