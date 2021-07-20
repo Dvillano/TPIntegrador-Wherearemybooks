@@ -1,0 +1,27 @@
+.tituloPrestarLibro{
+margin:0% 10%;
+padding:1.5vh 0vh;
+text-align: center;   
+color:#DCBE87;
+background-color: #4E1D04;
+}
+
+.prestarBtn{
+
+}
+.card{
+    background-color: #DCBE87;
+    display: grid;
+    margin: 2% 22%;
+    grid-template-columns: repeat(2,50%);
+    width:50%;
+    }
+.cardData{
+    display:flex;
+    color:#325453
+}
+.cardTitle{
+font-weight: bold;
+color:#4E1D04;
+}
+

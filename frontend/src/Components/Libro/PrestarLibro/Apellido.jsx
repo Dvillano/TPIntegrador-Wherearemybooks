@@ -1,5 +1,5 @@
 function Apellido(props){
-    return(<div>
+    return(<div className="cardData">
         <p className="cardTitle">Apellido:</p><p>{props.apellido}</p>
     </div>)
 }

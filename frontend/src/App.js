@@ -2,6 +2,7 @@ import './App.css';
 
 import {Route, BrowserRouter as Router} from 'react-router-dom'
 
+import EditarLibro from './Components/Libro/EditarLibro/EditarLibro';
 import Navbar from './Components/PaginaInicio/Navbar'
 import PrestarLibro from './Components/Libro/PrestarLibro/PrestarLibro';
 

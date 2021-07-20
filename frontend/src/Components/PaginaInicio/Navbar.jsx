@@ -14,6 +14,7 @@ function Navbar(){
    <Link to="/ingresarLibro" className="link middle">Ingresar nuevo libro</Link>
    <Link to="/listadoLibro" className="link right">Listado de libros</Link>
    <Link to="/prestarLibro" className="link">Prestar Libro(prueba)</Link>
+   <Link to="/editarLibro" className="link">Editar Libro(prueba)</Link>
    </div>
     </div>)
 }
