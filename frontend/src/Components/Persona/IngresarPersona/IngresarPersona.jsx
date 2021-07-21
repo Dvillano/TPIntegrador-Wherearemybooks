@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 const axios = require('axios');
 
-const apiUrl = 'http://localhost:4500/persona'
+const apiUrl = 'http://localhost:4200/persona'
 
 
 //Formulario para ingresar nueva persona
@@ -60,7 +60,7 @@ const Cargando = () => {
     return(null);
 }
 
-export default function PersonaForm() {
+export default function IngresarPersona() {
 
     const [session, setSession] = useState(false);
 

@@ -7,7 +7,7 @@ import { faTrashAlt, faEdit} from '@fortawesome/free-solid-svg-icons'
 const iconoModificar = <FontAwesomeIcon icon={faEdit} />
 const iconoBorrar = <FontAwesomeIcon icon={faTrashAlt} />
 
-const apiUrl = 'http://localhost:4500/persona/'
+const apiUrl = 'http://localhost:4200/persona/'
 
 const handleDelete = async (idPersona) => {
     
@@ -80,9 +80,9 @@ function MostrarPersonas() {
     )
 }
 
-export default function ListaPersona() {
+export default function ListadoPersona() {
     
-    const [session, setSession] = useState(false);
+    const [session, setSession] =   useState(false);
 
     const showPersonas = () => {
         !session ? setSession(true) : setSession(false)
