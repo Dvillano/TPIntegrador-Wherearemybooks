@@ -9,11 +9,10 @@ const iconoBorrar = <FontAwesomeIcon icon={faTrashAlt} />
 
 const apiUrl = 'http://localhost:4200/persona/'
 
-const handleDelete = async (idPersona) => {
-    
 
+const handleDelete = async (idPersona) => {
     try {
-        const respuesta = await axios.delete(apiUrl+idPersona); // BUSCAR ALTERNATIVA, NO ENVIAR VARIABLES EN REQUEST
+        const respuesta = await axios.delete(apiUrl+idPersona);
         
         if(respuesta.status === 200){
             alert("Persona Borrada");
@@ -24,9 +23,8 @@ const handleDelete = async (idPersona) => {
     }
 }
 
-
 // Lista de personas con GET
-function MostrarPersonas() {
+export default function ListadoPersona() {
 
     const [data, setData] = useState([]);
 
@@ -36,7 +34,7 @@ function MostrarPersonas() {
 
         try{
             const fetchData = async () => {
-                const respuesta = await axios.get('http://localhost:4500/persona');
+                const respuesta = await axios.get(apiUrl);
 
                 if (respuesta.status === 200 && isMounted){
                     setData(respuesta.data.Respuesta);
@@ -50,7 +48,7 @@ function MostrarPersonas() {
             alert(err.response.data);
         }
 
-        return () => {isMounted = false}
+        return () => { isMounted = false }
 
     }, [data])
 
@@ -60,14 +58,17 @@ function MostrarPersonas() {
 
             <div key={el.ID}>
                 <div >
-                <p>{"Nombre: " + el.nombre}</p>
-                <p>{"Apellido :" + el.apellido}</p>
-                <p>{"Alias :" + el.alias}</p>
-                <p>{"Email :" + el.email}</p>
-                <button>{iconoModificar}</button>
-                <button onClick={() => handleDelete(el.ID)}>{iconoBorrar}</button>
-                <br />
-                <br />
+                    <ul>
+                        <li>
+                            <p>{"Nombre: " + el.nombre}</p>
+                            <p>{"Apellido :" + el.apellido}</p>
+                            <p>{"Alias :" + el.alias}</p>
+                            <p>{"Email :" + el.email}</p>
+                            <button>{iconoModificar}</button>
+                            <button onClick={() => handleDelete(el.ID)}>{iconoBorrar}</button>
+                            <button>Ver libros prestados</button> 
+                        </li>
+                    </ul>
                 </div>
             </div>
         )
@@ -80,20 +81,3 @@ function MostrarPersonas() {
     )
 }
 
-export default function ListadoPersona() {
-    
-    const [session, setSession] =   useState(false);
-
-    const showPersonas = () => {
-        !session ? setSession(true) : setSession(false)
-    }
-
-    return(
-        <div>
-            {/* Mostramos el formulario al cliquear en el componente */}
-            <h1 onClick={showPersonas}>Listado de personas</h1> 
-            {session ? <MostrarPersonas /> : <></>}
-        </div>
-    )
-
-}

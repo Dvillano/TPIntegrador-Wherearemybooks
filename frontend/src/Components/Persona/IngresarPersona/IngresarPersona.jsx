@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-const axios = require('axios');
+import axios from 'axios';
 
 const apiUrl = 'http://localhost:4200/persona'
 
 
 //Formulario para ingresar nueva persona
-function FormularioPostPersona() {
+export default function IngresarPersona() {
 
     const [nombre, setNombre] = useState('');
     const [apellido, setApellido] = useState('');
     const [email, setEmail] = useState('');
     const [alias, setAlias] = useState('');   
 
-    const handleSubmit = async () => {
-        const data = {
+    const handleSubmit = async (e) => {
+        const form = {
             nombre: nombre,
             apellido: apellido,
             email: email,
@@ -21,7 +21,7 @@ function FormularioPostPersona() {
         }
 
         try {
-            const respuesta = await axios.post(apiUrl, data);
+            const respuesta = await axios.post(apiUrl, form);
             
             if(respuesta.status === 200){
                 alert("Persona creada");
@@ -29,7 +29,8 @@ function FormularioPostPersona() {
 
         } catch (err) {
             console.log('Error: ', err.message);
-            alert(err.response.data);
+            alert(err.message.data);
+
         }
 
     }
@@ -50,29 +51,8 @@ function FormularioPostPersona() {
                 <label>Email</label>
                 <input required type="email" id="email" value={email} onChange={e => setEmail(e.target.value)} />
 
-                <button onClick={handleSubmit}>Enviar</button>
+                <button type="submit" onClick={handleSubmit}>Enviar</button>
             </form>
         </>
     );
-}
-
-const Cargando = () => {
-    return(null);
-}
-
-export default function IngresarPersona() {
-
-    const [session, setSession] = useState(false);
-
-    const showForm = () => {
-        !session ? setSession(true) : setSession(false)
-    }
-
-    return(
-        <div>
-            <h1 onClick={showForm}>Ingresar nueva persona</h1> 
-            {session ? <FormularioPostPersona /> : <Cargando />}
-        </div>
-    )
-
 }
