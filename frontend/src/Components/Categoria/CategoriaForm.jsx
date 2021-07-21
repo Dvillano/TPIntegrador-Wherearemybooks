@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import shortid from "shortid";
+import './formCss.css'
 
 export default function CategoriaForm() {
     const [categoria, setCategoria] = useState(''); //uso este estado para guardar lo que se pone en el input
@@ -35,7 +36,7 @@ export default function CategoriaForm() {
     //console.log(categoria);
 
     return (
-        <div>
+        <div className='form-container'> 
             <h3>Ingrese una nueva categoría</h3>
             <form>              
                       
@@ -43,7 +44,7 @@ export default function CategoriaForm() {
                     value={categoria} 
                     onChange={inputCategoriaHandler} 
                     type='text'                    
-                    placeholder='nueva categoría...'>
+                    placeholder='Nueva categoría...'>
                 </input>
 
                 <button 
