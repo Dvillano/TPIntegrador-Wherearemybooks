@@ -13,6 +13,7 @@ export default function IngresarPersona() {
     const [alias, setAlias] = useState('');   
 
     const handleSubmit = async (e) => {
+        e.preventDefault();
         const form = {
             nombre: nombre,
             apellido: apellido,
@@ -28,9 +29,8 @@ export default function IngresarPersona() {
             }
 
         } catch (err) {
+            alert(err.response.data);
             console.log('Error: ', err.message);
-            alert(err.message.data);
-
         }
 
     }

@@ -10,7 +10,7 @@ const iconoBorrar = <FontAwesomeIcon icon={faTrashAlt} />
 const apiUrl = 'http://localhost:4200/persona/'
 
 
-const handleDelete = async (idPersona) => {
+const BorrarPersona = async (idPersona) => {
     try {
         const respuesta = await axios.delete(apiUrl+idPersona);
         
@@ -65,7 +65,7 @@ export default function ListadoPersona() {
                             <p>{"Alias :" + el.alias}</p>
                             <p>{"Email :" + el.email}</p>
                             <button>{iconoModificar}</button>
-                            <button onClick={() => handleDelete(el.ID)}>{iconoBorrar}</button>
+                            <button onClick={() => BorrarPersona(el.ID)}>{iconoBorrar}</button>
                             <button>Ver libros prestados</button> 
                         </li>
                     </ul>
