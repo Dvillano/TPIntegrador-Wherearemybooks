@@ -1,9 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import { Link } from "react-router-dom"
+
 
 // Iconos para modificar y borrar datos
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit} from '@fortawesome/free-solid-svg-icons'
+
 const iconoModificar = <FontAwesomeIcon icon={faEdit} />
 const iconoBorrar = <FontAwesomeIcon icon={faTrashAlt} />
 
@@ -24,8 +27,10 @@ const BorrarPersona = async (idPersona) => {
     }
 }
 
+
 // GET Lista Persona
 export default function ListadoPersona() {
+
 
     const [data, setData] = useState([]);
 
@@ -65,9 +70,9 @@ export default function ListadoPersona() {
                             <p>{"Apellido :" + el.apellido}</p>
                             <p>{"Alias :" + el.alias}</p>
                             <p>{"Email :" + el.email}</p>
-                            <button>{iconoModificar}</button>
-                            <button onClick={() => BorrarPersona(el.ID)}>{iconoBorrar}</button>
-                            <button>Ver libros prestados</button> 
+                            <button><Link to="/editarPersona">Editar {iconoModificar}</Link></button>
+                            <button onClick={() => BorrarPersona(el.ID)}>Borrar {iconoBorrar}</button>
+                            <button><Link to="/listaPersonaLibro">Mostrar libros prestados</Link></button> 
                         </li>
                     </ul>
                 </div>

@@ -13,7 +13,7 @@ export default function IngresarPersona() {
     const [alias, setAlias] = useState('');   
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        
         const form = {
             nombre: nombre,
             apellido: apellido,
@@ -26,6 +26,7 @@ export default function IngresarPersona() {
             
             if(respuesta.status === 200){
                 alert("Persona creada");
+                e.preventDefault();
             }
 
         } catch (err) {
