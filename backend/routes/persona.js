@@ -28,6 +28,7 @@ const postPersona = async (req, res) => {
     // Validar estructura del email
     if (validateEmail(email) == false) {
       res.status(413).send("Mail invalido");
+      return;
     }
 
     let query = "SELECT id FROM persona WHERE email = ?";
@@ -35,7 +36,7 @@ const postPersona = async (req, res) => {
 
     // Validar email repetido
     if (respuesta.length > 0) {
-      throw new Error("Ese email ya esta registrado");
+      res.status(413).send("Ese email ya esta registrado");
     }
 
     //Guardo nueva persona
@@ -91,7 +92,7 @@ const putPersonaById = async function (req, res) {
 
     if (consulta.length == 1) {
       if (!req.body.nombre || !req.body.apellido || !req.body.alias) {
-        throw new Error("Todos los campos son requeridos.");
+        res.status(413).send("Todos los campos son requeridos.");
       }
       let newEmail = await qy("SELECT email FROM persona WHERE id = ?", [
         req.params.id,
@@ -100,7 +101,7 @@ const putPersonaById = async function (req, res) {
       const email = req.body.email.toUpperCase().trim();
 
       if (email != newEmail[0].email) {
-        throw new Error("No se puede modificar el e-mail.");
+        res.status(413).send("No se puede modificar el e-mail.");
       }
 
       const nombre = req.body.nombre.toUpperCase().trim();
