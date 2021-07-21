@@ -17,10 +17,7 @@
   },
   "homepage": "https://github.com/Dvillano/TPIntegrador-Wherearemybooks#readme",
   "dependencies": {
-<<<<<<< HEAD
-=======
     "explorer": "0.0.5",
->>>>>>> main
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mysql": "^2.18.1",
