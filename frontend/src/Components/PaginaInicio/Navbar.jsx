@@ -3,7 +3,7 @@ import './style.css'
 import { Link } from "react-router-dom"
 import Title from "./Title"
 
-export default function(){
+function Navbar(){
     return(<div className="navbar">
    <Title/>
    <div className="options">
@@ -14,6 +14,10 @@ export default function(){
    <Link to="/ingresarLibro" className="link middle">Ingresar nuevo libro</Link>
    <Link to="/listadoLibro" className="link right">Listado de libros</Link>
    <Link to="/prestarLibro" className="link">Prestar Libro(prueba)</Link>
+   <Link to="/editarLibro" className="link">Editar Libro(prueba)</Link>
    </div>
     </div>)
 }
+
+
+export default Navbar

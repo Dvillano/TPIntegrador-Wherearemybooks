@@ -2,15 +2,17 @@ import Alias from "./Alias"
 import Apellido from "./Apellido";
 import Email from "./Email";
 import Nombre from "./Nombre";
+import PrestarBtn from "./PrestarBtn";
 
-export default function(props){
+function PersonaCard(props){
     return(
-    <div>
-    <button onClick={props.onClick}>
+    <div className="card">
    <Nombre nombre={props.nombre}/>
    <Apellido apellido={props.apellido}/>
    <Email email={props.email}/>
    <Alias alias={props.alias}/>
-   </button>
+   <PrestarBtn onClick={props.onClick} personaid={props.personaid}/>
     </div>)
 }
+
+export default PersonaCard

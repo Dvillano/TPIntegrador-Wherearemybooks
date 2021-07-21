@@ -1,0 +1,39 @@
+.containerEditarLibro{
+
+}
+
+.tituloEditarLibro{
+margin-left:40vw;
+color:#DCBE87;
+}
+
+.descripcion{
+color:#DCBE87;
+margin-left:40vw
+}
+
+.descripcionInput{
+margin-left:40vw;
+color:#DCBE87
+}
+
+.descripcionInput textarea{
+background-color: #517174;
+color:#DCBE87;
+font-size: 2.5vh;
+height:18vh;
+width:18vw;
+text-justify: auto;
+}
+
+.aceptarbtn{
+margin-left:46.5vw;
+margin-top:2vh;
+}
+.aceptarbtn input{
+padding:1vh 1vw;
+font-size: 110%;   
+color:#325453;
+background-color: #DCBE87;
+border: 0cm;
+}
