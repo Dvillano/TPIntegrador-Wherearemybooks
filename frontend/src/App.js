@@ -12,6 +12,7 @@ function App() {
     <div className="App">
     <Navbar/>
      <Route path="/prestarLibro" component={PrestarLibro}/>
+     <Route path="/editarLibro" component={EditarLibro}/>
     </div>
     </Router>
   );

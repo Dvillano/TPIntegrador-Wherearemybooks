@@ -11,7 +11,7 @@ function PersonaCard(props){
    <Apellido apellido={props.apellido}/>
    <Email email={props.email}/>
    <Alias alias={props.alias}/>
-   <PrestarBtn onClick={props.onClick} personaId={props.key}/>
+   <PrestarBtn onClick={props.onClick} personaid={props.personaid}/>
     </div>)
 }
 

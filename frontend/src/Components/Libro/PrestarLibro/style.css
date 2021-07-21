@@ -6,8 +6,11 @@ color:#DCBE87;
 background-color: #4E1D04;
 }
 
-.prestarBtn{
-
+.prestarBtn button{
+    padding:2% 7%;
+    background-color: #4E1D04;
+    color: #DCBE87;
+    margin-left: 175%;
 }
 .card{
     background-color: #DCBE87;
@@ -24,4 +27,13 @@ background-color: #4E1D04;
 font-weight: bold;
 color:#4E1D04;
 }
+
+.message{
+ margin:auto
+    
+}
+.message .link .volver{
+
+}
+
 
