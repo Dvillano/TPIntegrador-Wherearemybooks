@@ -10,6 +10,7 @@ const iconoBorrar = <FontAwesomeIcon icon={faTrashAlt} />
 const apiUrl = 'http://localhost:4200/persona/'
 
 
+// DELETE Persona
 const BorrarPersona = async (idPersona) => {
     try {
         const respuesta = await axios.delete(apiUrl+idPersona);
@@ -23,7 +24,7 @@ const BorrarPersona = async (idPersona) => {
     }
 }
 
-// Lista de personas con GET
+// GET Lista Persona
 export default function ListadoPersona() {
 
     const [data, setData] = useState([]);

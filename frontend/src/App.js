@@ -9,7 +9,6 @@ import PrestarLibro from './Components/Libro/PrestarLibro/PrestarLibro';
 import IngresarPersona from './Components/Persona/IngresarPersona/IngresarPersona';
 import ListadoPersona from './Components/Persona/ListadoPersona/ListadoPersona';
 
-
 function App() {
   return (
     <Router>
