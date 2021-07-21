@@ -2,7 +2,7 @@ import './style.css'
 
 import React,{useEffect, useState} from 'react'
 
-import Message from './Message'
+import Message from '../Common/Message'
 import PersonaCard from './PersonaCard'
 import Titulo from './Titulo'
 import axios from 'axios'
@@ -13,14 +13,24 @@ function PrestarLibro(props){
 
   const [data,setData] = useState([]);
   const [prestado,setPrestado] = useState(false)
+  const [mensaje,setMensaje] = useState("")
+  const [error,setError] = useState(false)
 
   const onClick = (e)=>{
-    /*si se presta el libro de forma exitosa setPrestado a true
-    id de libro a prestar
-    */
-    const prestarUrl = "http://localhost:4200/libro/prestar"
+    const prestarUrl = "http://localhost:4200/libro/prestar" + "/" +libroId
     const personaId=e.target.attributes[0].value
-    setPrestado(!prestado);
+
+    axios.put(prestarUrl,{persona_id:personaId}).then(response=>{
+     if(response.status == 200){
+      setPrestado(true);
+      setMensaje(response.data.mensaje)
+     }
+    }).catch(error=>{
+      setError(true)
+      setMensaje("Error inesperado")
+      console.error(error)
+    })
+    
    }
 
 const mostrarPersona = data.map(element=>{
@@ -29,7 +39,9 @@ const mostrarPersona = data.map(element=>{
 
  useEffect(() => {
   axios.get(personaurl).then(response=>{
+    if(response.status == 200){
       setData(response.data.Respuesta)
+    }
   })
   }, [])
 
@@ -38,10 +50,8 @@ const mostrarPersona = data.map(element=>{
       <Titulo/>
       {mostrarPersona}
      </div>)
-  }else if(prestado){
-    /*Devolver el libro fue prestado de forma exitosa
-    */
-    return(<Message message="El libro fue prestado de forma exitosa"/>)
+  }else if(prestado || error){
+    return(<Message message={mensaje}/>)
   }
    
 }
