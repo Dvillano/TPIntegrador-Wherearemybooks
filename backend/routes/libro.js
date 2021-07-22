@@ -22,7 +22,7 @@ const libroPost = async function (req, res) {
     persona_id =req.body.persona_id
   }
 
-  try {
+  try{
     //Validar existencia de persona
     if (persona_id !== null) {
 
@@ -34,7 +34,6 @@ const libroPost = async function (req, res) {
         res.status(413).send({mensaje:"la persona indicada no existe"});
       }
     }
-
     //Validacion de categoria
     const categoriaQuery = 'SELECT ID FROM categoria WHERE ID=?';
     response = await query(categoriaQuery,[genero_id]);
@@ -55,12 +54,14 @@ const libroPost = async function (req, res) {
     var response = await query(postquery,[nombre,descripcion,genero_id,persona_id]);
 
     const selectPostedBook = 'SELECT * FROM libro WHERE ID=?';
-    response = await query(selectPostedBook,response.insertId);
+    response = await query(selectPostedBook,[response.insertId]);
     res.status(200).send(response);
-  } catch (error) {
+  } 
+  catch (error) {
     res.status(413).send({ mensaje:"Error inesperado"});
   }
-};
+
+}
 
 const libroGetId = async function (req, res) {
   const id = req.params.id;
