@@ -1,5 +1,6 @@
 const {connection} = require('../app');
 const util = require('util');
+const e = require('express');
 
 const qy = util.promisify(connection.query).bind(connection);
 
@@ -9,7 +10,9 @@ const categoriaPost = async (req, res) => {
             throw new Error ('Falta enviar el genero');
         }
 
-        let consulta = await  qy ('SELECT id FROM categoria WHERE genero = ?',[req.body.genero.toUpperCase()]);
+        const categoria = req.body.genero.toUpperCase();
+
+        let consulta = await  qy ('SELECT id FROM categoria WHERE genero = ?',[categoria]);
 
             if (consulta.length > 0 ) {
                 throw new Error ('¡Esa categoria ya existe!');
@@ -17,12 +20,12 @@ const categoriaPost = async (req, res) => {
 
         const query = 'INSERT INTO categoria (genero) VALUE (?)';
 
-        const respuesta = await qy(query, [req.body.genero.toUpperCase()]);
+        const respuesta = await qy(query, [categoria]);
 
         if(res.status(200)){
-            console.log('categoria agregada correctamente')
+            console.log('Se ha agregado correctamente la categoría',categoria)    
         }
-        res.status(200).send(respuesta);
+        res.status(200).send({'Se ha agregado correctamente la categoría': categoria});
         
     }
     catch(e){

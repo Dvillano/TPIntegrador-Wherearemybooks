@@ -3,29 +3,48 @@ import axios from 'axios';
 import './formCss.css'
 
 export default function CategoriaForm() {
-    const [categoria, setCategoria] = useState([]); //uso este estado para guardar lo que se pone en el input
-    const [genero, setGenero] = useState([]); //uso este estado para guardar lo que se agrega con submit
+    const [categoria, setCategoria] = useState([]); 
+    const [genero, setGenero] = useState([]);
     const [data, setData] = useState([]);
 
-        const inputCategoriaHandler = (e) => { //esta funcion es para manejar que el valor que se pone en el input y se guarde en la const categoria
-            setCategoria(e.target.value)
-            //console.log(e.target.value, typeof e.target.value)
-        }
-        
-        //console.log(categoria)
+    return (
+        <div className='form-container'> 
+            <Titulo />
+            <Form 
+                categoria={categoria}
+                setCategoria={setCategoria}
+                genero = {genero}
+                setGenero={setGenero}
+                data={data}
+                setData={setData}
+            />                 
+        </div>
+    )
+}
 
-        function submitHandler(e) { // esta funcion es para guargar en genero con el boton submit en el estado de genero desde la línea 17 a 22
-            e.preventDefault(); // esta funcion es para evitar que vuelva a cargar la página cuando se aprete el botón
-            setGenero([             
-                        {                  
-                            genero:categoria
-                        }
-                    ]);
-            setCategoria('') // este llamado es para vaciar el input una vez apretado el botón
-        }    
+const Titulo = () => {
+    return(
+        <h3>Ingrese una nueva categoría</h3>
+    )
+};
+
+const Form = ({categoria, setCategoria, genero, setGenero, data, setData}) => {
     
-    const postPersonaUrl = 'http://localhost:4200/categoria'   //direccion servidor
-    
+    const inputCategoriaHandler = (e) => { 
+        setCategoria(e.target.value)
+    }
+
+    function submitHandler(e) { 
+        e.preventDefault(); 
+        setGenero([             
+                {                  
+                genero:categoria
+            }
+        ]);
+        setCategoria('') 
+    }
+    const postPersonaUrl = 'http://localhost:4200/categoria' 
+
     useEffect( async () => { 
         const response = await axios.post(postPersonaUrl, genero[0])
             if(response.status === 200){
@@ -33,32 +52,24 @@ export default function CategoriaForm() {
             
         };            
     }, [genero]);
-     
-    console.log(data)
-    //console.log(response.data, typeof data)
-    //console.log(typeof useEffect);
-    //console.log(categoria);
 
-    return (
-        <div className='form-container'> 
-            <h3>Ingrese una nueva categoría</h3>
-            <form>              
-                      
-                <input 
-                    value={categoria} 
-                    onChange={inputCategoriaHandler} 
-                    type='text'                    
-                    placeholder='Nueva categoría...'>
-                </input>
-
-                <button 
-                    onClick={submitHandler} 
-                    type='submit'>
-                        Agregar
-                </button>
-            </form>
-        </div>
+    return(
+        <form>                                   
+            <input 
+                value={categoria} 
+                onChange={inputCategoriaHandler} 
+                type='text'                    
+                placeholder='Nueva categoría...'>
+            </input>
+            <button 
+                onClick={submitHandler} 
+                type='submit'>
+                    Agregar
+            </button>
+            <p data={data}>
+                    
+            </p>
+        </form>
     )
-}
-
+};
 
