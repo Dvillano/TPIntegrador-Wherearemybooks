@@ -15,11 +15,8 @@ function App() {
     <div className="App">
     <Navbar/>
      <Route path="/prestarLibro" component={PrestarLibro}/>
-<<<<<<< HEAD
-     <Route path="/ingresarGenero" component={CategoriaForm}/>
-=======
      <Route path="/editarLibro" component={EditarLibro}/>
->>>>>>> main
+     <Route path="/ingresarGenero" component={CategoriaForm}/>
     </div>
     </Router>
   );

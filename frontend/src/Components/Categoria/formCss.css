@@ -3,17 +3,15 @@
     text-align: center;
     justify-content: center;
     align-items: center;
+    display: block;
 }
 
 h3 {
     margin: 20px;
     display: inline-flex;
-    color: white;
+    color: #DCBE87;
     margin-top: 0px;
-    /*
-    color:#517174;
-    background-color: #DCBE87;
-    */
+    
 }
 
 input{
@@ -23,10 +21,11 @@ input{
     border: none;
     border-bottom: 2px solid  #DCBE87;
     margin: 20px;
-    font-size: inherit;
+    font-size: 18px;
 }
 
 button{
+    
     padding: 5px;
     padding-bottom: 5px;
     display: inline-block;

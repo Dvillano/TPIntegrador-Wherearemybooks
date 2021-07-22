@@ -8,6 +8,8 @@ app.use(cors({origin:"http://localhost:3000",credentials:true}));
 app.use(express.json());
 app.use(express.urlencoded({ extended : true}));
 
+const PORT = process.env.PORT ? process.env.PORT : 4200;
+
 // Conexion a DB
 const connection = mysql.createConnection({
   host: "localhost",
@@ -79,4 +81,4 @@ app.get("/categoria/:id", categoriaGetById);
 app.delete("/categoria/:id", categoriaDeleteById);
 //fin de requests de categoria
 
-app.listen(4200, () => console.log("listening on port 4200"));
+app.listen(PORT, () => console.log("listening on port ", PORT));
