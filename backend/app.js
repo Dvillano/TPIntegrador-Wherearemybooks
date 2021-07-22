@@ -3,7 +3,6 @@ const app = express();
 const mysql = require("mysql");
 const cors = require('cors');
 
-
 app.use(cors({origin:"http://localhost:3000",credentials:true}));
 app.use(express.json());
 app.use(express.urlencoded({ extended : true}));
@@ -79,4 +78,4 @@ app.get("/categoria/:id", categoriaGetById);
 app.delete("/categoria/:id", categoriaDeleteById);
 //fin de requests de categoria
 
-app.listen(4200, () => console.log("listening on port ", 4200));
+app.listen(4200, () => console.log("listening on port 4200"));

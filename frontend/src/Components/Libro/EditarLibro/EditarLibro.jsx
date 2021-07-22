@@ -46,7 +46,7 @@ const onSubmit=async (e)=>{
        console.error(error)
    })*/
 }
-
+//Try redux here with libro editado to avoid passing too many props
 if(error){
     return(<Message message={message}/>)
 }

@@ -47,15 +47,19 @@ const mostrarPersona = data.map(element=>{
     return(<PersonaCard personaid={element.ID} key={element.ID} onClick={onClick} alias={element.alias} nombre={element.nombre} apellido={element.apellido} email={element.email}/>)
 })
 
- useEffect(() => {
+ useEffect(async () => {
    //si no hay datos,buscarlos en la bd
    if(data.length == 0){
-    axios.get(personaurl).then(response=>{
-      if(response.status == 200){
-        setData(response.data.Respuesta)
+     try {
+      const personas=await axios.get(personaurl)
+      if(personas.status == 200){
+        setData([...personas.data.Respuesta])
       }
-    })
-   }
+     } catch (error) {
+       console.error(error)
+       setData([]);
+     }
+    }
   }, [])
 
   if(prestado ===true || error===true){
