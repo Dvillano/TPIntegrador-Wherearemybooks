@@ -19,7 +19,10 @@ const categoriaPost = async (req, res) => {
 
         const respuesta = await qy(query, [req.body.genero.toUpperCase()]);
 
-        res.status(200).send(respuesta.insertedId);
+        if(res.status(200)){
+            console.log('categoria agregada correctamente')
+        }
+        res.status(200).send(respuesta);
         
     }
     catch(e){
