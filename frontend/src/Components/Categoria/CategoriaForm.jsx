@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
+<<<<<<< HEAD
+//import shortid from "shortid";
+=======
+>>>>>>> 75b1228464f4ee3cd84c5ffb9ea03d379ee42465
 import './formCss.css'
 
 export default function CategoriaForm() {
