@@ -17,12 +17,19 @@ grid-template-columns: repeat(3,32vw);
 grid-template-rows:repeat(2,62px);
 }
 .link{
-    font-size: 140%;
+    font-size: 1em;
     margin-bottom: 20px;
     text-decoration: none;
     text-align: center;
+    justify-items: center;
     color:#517174;
     background-color: #DCBE87;
+}
+.link:hover {background-color: #d8a953}
+
+.link:active {
+  background-color: #d8a953;
+  transform: translateY(2px);
 }
     
 .link.left{
