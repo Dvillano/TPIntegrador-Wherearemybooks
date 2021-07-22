@@ -28,13 +28,15 @@ export default function CategoriaForm() {
     
     useEffect( async () => { 
         const response = await axios.post(postPersonaUrl, genero[0])
-            //console.log(genero[0].genero.value, typeof genero[0].genero.value)
             if(response.status === 200){
-            setData(response.data)};            
+            setData(response.data)
+            
+        };            
     }, [genero]);
-       
-    //console.log(data, typeof data)
-    console.log(genero[0], typeof genero[0]);
+     
+    console.log(data)
+    //console.log(response.data, typeof data)
+    //console.log(typeof useEffect);
     //console.log(categoria);
 
     return (
