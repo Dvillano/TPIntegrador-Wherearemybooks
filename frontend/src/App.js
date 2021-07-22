@@ -6,6 +6,7 @@ import EditarLibro from './Components/Libro/EditarLibro/EditarLibro';
 import Navbar from './Components/PaginaInicio/Navbar'
 import PrestarLibro from './Components/Libro/PrestarLibro/PrestarLibro';
 import CategoriaForm from './Components/Categoria/CategoriaForm';
+import CategoriaList from './Components/Categoria/CategoriaList';
 
 
 
@@ -15,11 +16,9 @@ function App() {
     <div className="App">
     <Navbar/>
      <Route path="/prestarLibro" component={PrestarLibro}/>
-<<<<<<< HEAD
-     <Route path="/ingresarGenero" component={CategoriaForm}/>
-=======
      <Route path="/editarLibro" component={EditarLibro}/>
->>>>>>> main
+     <Route path="/ingresarGenero" component={CategoriaForm}/>
+     <Route path="/listadoGenero" component={CategoriaList}/>
     </div>
     </Router>
   );

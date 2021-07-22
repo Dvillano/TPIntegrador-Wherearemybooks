@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import shortid from "shortid";
+//import shortid from "shortid";
 import './formCss.css'
 
 export default function CategoriaForm() {
@@ -50,7 +50,7 @@ export default function CategoriaForm() {
                 <button 
                     onClick={submitHandler} 
                     type='submit'>
-                        Agregar!
+                        Agregar
                 </button>
             </form>
         </div>
