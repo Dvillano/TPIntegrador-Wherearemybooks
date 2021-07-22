@@ -17,11 +17,24 @@ const [libroData,setLibroData] = useState({})
 const [message,setMessage] = useState("")
 const [error,setError] = useState(false)
 
-const onSubmit=(e)=>{
+const onSubmit=async (e)=>{
     e.preventDefault()
     const descripcion = e.target[0].value;
-    const editarUrl = "http://localhost:3000/libro/" + id
- axios.put(editarUrl,{descripcion:descripcion}).then((response)=>{
+    const editarUrl = "http://localhost:4200/libro/" + id
+    try{
+        const response = await axios.put(editarUrl,{descripcion:descripcion})
+        if(response.status == 200){
+            setEditado(true)
+            setMessage("El libro fue editado de forma exitosa")
+            setLibroData(response.data[0])
+          }
+    }catch(error){
+        setError(true);
+        setMessage("Error inesperado:" +error.response.data.mensaje)
+        console.error(error)
+    }
+
+    /*axios.put(editarUrl,{descripcion:descripcion}).then((response)=>{
   if(response.status == 200){
      setEditado(true)
      setMessage("El libro fue editado de forma exitosa")
@@ -31,11 +44,13 @@ const onSubmit=(e)=>{
        setError(true);
        setMessage("Error inesperado")
        console.error(error)
-   })
- 
+   })*/
 }
 
-if(!editado){
+if(error){
+    return(<Message message={message}/>)
+}
+else if(!editado){
  return(<div className="containerEditarLibro">
      <Titulo/>
      <Descripcion/>
@@ -47,8 +62,6 @@ if(!editado){
 }else if(editado){
     return(<div><Message message={message}/>
     <LibroEditado titulo={libroData.titulo} descripcion={libroData.descripcion} genero_id={libroData.genero_id} persona_id={libroData.persona_id}/></div>)
-}else if(error){
-    return(<Message message={message}/>)
 }
 }
 export default EditarLibro

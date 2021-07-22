@@ -9,15 +9,17 @@ function Genero(props){
   const [genero,setGenero] = useState("");
   const generoUrl = "http://localhost:4200/genero/"+genero_id
 
-  useEffect(()=>{
-    axios.get(generoUrl).then(response=>{
-        if(response.status==200){
-            setGenero(response.data.respuesta[0].genero)
-        }
-    }).catch(error=>{
+  useEffect(async ()=>{
+    try{
+      const response = await  axios.get(generoUrl)
+      if(response.status==200){
+        setGenero(response.data.respuesta[0].genero)
+    }
+    }catch(error){
         //Manejo de error
+        alert("Error inesperado")
         console.error(error)
-    })
+   }
   },[])
 
     return(<div>{genero}</div>)

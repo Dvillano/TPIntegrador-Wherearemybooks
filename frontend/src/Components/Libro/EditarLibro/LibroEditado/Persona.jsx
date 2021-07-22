@@ -7,15 +7,18 @@ function Persona(props){
    const personaUrl = "http://localhost:4200/persona/" + persona_id
    const [persona,setPersona] = useState("");
 
-   useEffect(()=>{
-   axios.get(personaUrl).then(response=>{
-       if(response.status==200){
-           setPersona(response.data.respuesta[0].alias)
-       }
-   }).catch(error=>{
-       console.error(error)
-   })
+   useEffect(async()=>{
+  try {
+      const response = await axios.get(personaUrl)
+      if(response.status==200){
+        setPersona(response.data.respuesta[0].alias)
+    }
+  } catch (error) {
+    alert("Error inesperado")
+    console.error(error)
+  } 
    },[])
+   
     //Buscar persona si no existe libro no esta prestado
    if(persona == ""){
     return(<div>Este libro no esta prestado</div>)

@@ -3,11 +3,10 @@ import './App.css';
 import {Route, BrowserRouter as Router} from 'react-router-dom'
 
 import EditarLibro from './Components/Libro/EditarLibro/EditarLibro';
-import Navbar from './Components/PaginaInicio/Navbar'
-import PrestarLibro from './Components/Libro/PrestarLibro/PrestarLibro';
-
 import IngresarPersona from './Components/Persona/IngresarPersona/IngresarPersona';
 import ListadoPersona from './Components/Persona/ListadoPersona/ListadoPersona';
+import Navbar from './Components/PaginaInicio/Navbar'
+import PrestarLibro from './Components/Libro/PrestarLibro/PrestarLibro';
 
 function App() {
   return (

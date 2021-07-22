@@ -4,9 +4,6 @@ import Persona from "./Persona";
 import Titulo from "./Titulo";
 
 function LibroEditado(props){
-
- 
-
  return(<div>
   <Titulo titulo={props.titulo}/>
   <Genero genero_id={props.genero_id}/>

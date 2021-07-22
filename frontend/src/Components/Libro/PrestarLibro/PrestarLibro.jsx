@@ -16,11 +16,22 @@ function PrestarLibro(props){
   const [mensaje,setMensaje] = useState("")
   const [error,setError] = useState(false)
 
-  const onClick = (e)=>{
+  const onClick =async (e)=>{
     const prestarUrl = "http://localhost:4200/libro/prestar" + "/" +libroId
     const personaId=e.target.attributes[0].value
-
-    axios.put(prestarUrl,{persona_id:personaId}).then(response=>{
+  
+    try{
+      const respuesta= await axios.put(prestarUrl,{persona_id:personaId})
+      if(respuesta.status==200){
+        setPrestado(true);
+        setMensaje(respuesta.data.mensaje)
+      }
+    }catch(error){
+      setError(true)
+      setMensaje("Error inesperado:" +error.response.data.mensaje )
+      console.error(error)
+    }
+    /*.then(response=>{
      if(response.status == 200){
       setPrestado(true);
       setMensaje(response.data.mensaje)
@@ -29,8 +40,7 @@ function PrestarLibro(props){
       setError(true)
       setMensaje("Error inesperado")
       console.error(error)
-    })
-    
+    })*/ 
    }
 
 const mostrarPersona = data.map(element=>{
@@ -38,21 +48,25 @@ const mostrarPersona = data.map(element=>{
 })
 
  useEffect(() => {
-  axios.get(personaurl).then(response=>{
-    if(response.status == 200){
-      setData(response.data.Respuesta)
-    }
-  })
+   //si no hay datos,buscarlos en la bd
+   if(data.length == 0){
+    axios.get(personaurl).then(response=>{
+      if(response.status == 200){
+        setData(response.data.Respuesta)
+      }
+    })
+   }
   }, [])
 
-  if(!prestado){
+  if(prestado ===true || error===true){
+    return(<Message message={mensaje}/>)
+  }
+ else if(prestado===false){
     return(<div>
       <Titulo/>
       {mostrarPersona}
      </div>)
-  }else if(prestado || error){
-    return(<Message message={mensaje}/>)
-  }
+  } 
    
 }
 
