@@ -79,4 +79,4 @@ app.get("/categoria/:id", categoriaGetById);
 app.delete("/categoria/:id", categoriaDeleteById);
 //fin de requests de categoria
 
-app.listen(4200, () => console.log("listening on port ", PORT));
+app.listen(4200, () => console.log("listening on port ", 4200));

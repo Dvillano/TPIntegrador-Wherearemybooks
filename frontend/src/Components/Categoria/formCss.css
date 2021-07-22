@@ -6,7 +6,7 @@
     display: block;
 }
 
-h3 {
+.categoriaformtitulo {
     margin: 20px;
     display: inline-flex;
     color: #DCBE87;
@@ -14,7 +14,7 @@ h3 {
     
 }
 
-input{
+.categoriaforminput{
     color: whitesmoke;
     outline: none;
     background-color: #325453;
@@ -24,8 +24,7 @@ input{
     font-size: 18px;
 }
 
-button{
-    
+.agregarbtn{
     padding: 5px;
     padding-bottom: 5px;
     display: inline-block;
@@ -38,9 +37,9 @@ button{
     border-radius: 8px;
 }
 
-button:hover {background-color: #d8a953}
+.agregarbtn:hover {background-color: #d8a953}
 
-button:active {
+.agregarbtn:active {
   background-color: #d8a953;
   transform: translateY(2px);
 }

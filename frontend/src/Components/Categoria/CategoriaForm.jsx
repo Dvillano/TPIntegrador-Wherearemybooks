@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
-import axios from 'axios';
 import './formCss.css'
+
+import React, { useEffect, useState } from "react";
+
+import axios from 'axios';
 
 export default function CategoriaForm() {
     const [categoria, setCategoria] = useState([]); //uso este estado para guardar lo que se pone en el input
@@ -39,17 +41,18 @@ export default function CategoriaForm() {
 
     return (
         <div className='form-container'> 
-            <h3>Ingrese una nueva categoría</h3>
+            <h3 className="categoriaformtitulo">Ingrese una nueva categoría</h3>
             <form>              
                       
                 <input 
+                    className="categoriaforminput"
                     value={categoria} 
                     onChange={inputCategoriaHandler} 
                     type='text'                    
                     placeholder='Nueva categoría...'>
                 </input>
 
-                <button 
+                <button className="agregarbtn" 
                     onClick={submitHandler} 
                     type='submit'>
                         Agregar
