@@ -8,9 +8,7 @@ export default function CategoriaForm() {
     return (
         <div className='form-container'> 
             <Titulo />
-            <Form 
-
-            />                 
+            <Form />                 
         </div>
     )
 }
@@ -28,6 +26,7 @@ const Form = () => {
     
 
     const inputCategoriaHandler = (e) => { 
+        e.preventDefault();
         setCategoria(e.target.value)
     }
 
@@ -43,13 +42,20 @@ const Form = () => {
     const postPersonaUrl = 'http://localhost:4200/categoria' 
 
     useEffect( async () => { 
+        
+        try{
         const response = await axios.post(postPersonaUrl, genero[0])
-            if(response.status === 200){
+            //if(response.status === 200){
             setData(response.data)
-            
-        };            
+           }         
+       // } 
+        catch(e) {
+            console.error(e.message);
+            setData(e.message);
+        }         
     }, [genero]);
-
+       
+   console.log(data, typeof data)
     return(
         <form>                                   
             <input 
@@ -59,12 +65,12 @@ const Form = () => {
                 placeholder='Nueva categoría...'>
             </input>
             <button 
-                onClick={submitHandler} 
+                onSubmit={submitHandler} 
                 type='submit'>
                     Agregar
             </button>
-            <p data={data}>
-                    
+            <p>
+               
             </p>
         </form>
     )
