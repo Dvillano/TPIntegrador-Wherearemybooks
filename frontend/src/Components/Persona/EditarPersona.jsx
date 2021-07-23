@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import { useParams, } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 
 const apiUrl = 'http://localhost:4200/persona/'
 
@@ -28,6 +28,7 @@ export default function EditarPersona() {
             if(respuesta.status === 200){
                 alert("Se modificaron los datos de la persona");
                 e.preventDefault();
+                <Redirect to="/listadoPersona" />
             } 
 
         } catch (err) {
