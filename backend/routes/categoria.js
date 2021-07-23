@@ -30,7 +30,7 @@ const categoriaPost = async (req, res) => {
     }
     catch(e){
         console.error(e.message);
-        res.status(413).send({message: e.message});
+        res.status(413).send({'tenemos un error': e.message});
     }
 };
 

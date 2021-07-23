@@ -3,20 +3,13 @@ import axios from 'axios';
 import './formCss.css'
 
 export default function CategoriaForm() {
-    const [categoria, setCategoria] = useState([]); 
-    const [genero, setGenero] = useState([]);
-    const [data, setData] = useState([]);
+
 
     return (
         <div className='form-container'> 
             <Titulo />
             <Form 
-                categoria={categoria}
-                setCategoria={setCategoria}
-                genero = {genero}
-                setGenero={setGenero}
-                data={data}
-                setData={setData}
+
             />                 
         </div>
     )
@@ -28,8 +21,12 @@ const Titulo = () => {
     )
 };
 
-const Form = ({categoria, setCategoria, genero, setGenero, data, setData}) => {
+const Form = () => {
+    const [categoria, setCategoria] = useState([]); 
+    const [genero, setGenero] = useState([]);
+    const [data, setData] = useState([]);
     
+
     const inputCategoriaHandler = (e) => { 
         setCategoria(e.target.value)
     }
