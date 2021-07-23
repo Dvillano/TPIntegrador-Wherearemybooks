@@ -22,15 +22,12 @@ const categoriaPost = async (req, res) => {
 
         const respuesta = await qy(query, [categoria]);
 
-        if(res.status(200)){
-            console.log('Se ha agregado correctamente la categoría',categoria)    
-        }
-        res.status(200).send({'Se ha agregado correctamente la categoría': categoria});
+        res.status(200).send({'Se ha agregado correctamente la categoría': genero});
         
     }
     catch(e){
         console.error(e.message);
-        res.status(413).send({'tenemos un error': e.message});
+        res.status(413).send({'Error': e.message});
     }
 };
 
