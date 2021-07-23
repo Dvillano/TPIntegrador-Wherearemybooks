@@ -16,6 +16,7 @@ const apiUrl = 'http://localhost:4200/persona/'
 // DELETE Persona
 const borrarPersona = async (idPersona) => {
     try {
+
         const respuesta = await axios.delete(apiUrl+idPersona);
         
         if(respuesta.status === 200){
@@ -69,7 +70,7 @@ export default function ListadoPersona() {
                             <p>{"Alias :" + el.alias}</p>
                             <p>{"Email :" + el.email}</p>
                             <i><Link to={"/ListaPersona/EditarPersona/" + el.ID}>{iconoModificar}</Link></i>
-                            <i onClick={() => borrarPersona(el.ID)}>{iconoBorrar}</i>
+                            <i onClick={() => { if (window.confirm("Estas seguro que deseas borrar a esta persona?"))  borrarPersona(el.ID)}}>{iconoBorrar}</i>
                             <button><Link to={"/ListaPersona/ListaPersonaLibro/" + el.ID}>Mostrar libros prestados</Link></button> 
                         </li>
                     </ul>
