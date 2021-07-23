@@ -4,7 +4,7 @@ import axios from 'axios';
 const apiUrl = 'http://localhost:4200/persona'
 
 
-//Formulario para ingresar nueva persona
+//Formulario para ingresar nueva persona (POST)
 export default function IngresarPersona() {
 
     const [nombre, setNombre] = useState('');

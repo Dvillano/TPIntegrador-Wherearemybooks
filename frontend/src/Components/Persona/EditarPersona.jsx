@@ -4,7 +4,7 @@ import { useParams, } from 'react-router-dom';
 
 const apiUrl = 'http://localhost:4200/persona/'
 
-
+// Formulario para editar persona (PUT)
 export default function EditarPersona() {
 
     const param = useParams();
