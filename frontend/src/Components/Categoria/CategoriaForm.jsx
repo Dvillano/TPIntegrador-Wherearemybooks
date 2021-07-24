@@ -19,9 +19,9 @@ export default function CategoriaForm() {
                 genero:categoria
             }
         ]);
-        setCategoria('') 
+        setCategoria([]) 
     }
-    const postPersonaUrl = 'http://localhost:4200/categoria' 
+    const postPersonaUrl = 'http://localhost:4200/categoria'
 
     useEffect( async () => {        
         const response = await axios.post(postPersonaUrl, genero[0])
@@ -47,10 +47,10 @@ export default function CategoriaForm() {
                 type='submit'>
                     Agregar
             </button>
-            <p data={data}  >
+        </form>
+        <p data={data}  >
                {data.Respuesta}
-            </p>
-        </form>                
+            </p>                
         </div>
     )
 }

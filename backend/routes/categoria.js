@@ -22,10 +22,8 @@ const categoriaPost = async (req, res) => {
 
         const respuesta = await qy(query, [categoria]);
 
-        const response = 'se agregó la categoría ' + categoria + ' con ID: ' + respuesta.insertId;
-
-        res.status(200).send({'Respuesta' : response});
-        console.log(response)
+        res.status(200).send({'Respuesta': respuesta.insertId});
+        console.log(respuesta)
     }
     catch(e){
         console.error(e.message);

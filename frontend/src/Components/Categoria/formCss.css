@@ -47,7 +47,7 @@ button:active {
 
 p {
     margin: 20px;
-    display: inline-flex;
+    display: block;
     color: #DCBE87;
     font-size: 20px;
 }
