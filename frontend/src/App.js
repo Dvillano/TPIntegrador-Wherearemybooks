@@ -10,6 +10,9 @@ import CategoriaList from './Components/Categoria/CategoriaList';
 
 
 
+import IngresarPersona from './Components/Persona/IngresarPersona/IngresarPersona';
+import ListadoPersona from './Components/Persona/ListadoPersona/ListadoPersona';
+
 function App() {
   return (
     <Router>
@@ -19,6 +22,9 @@ function App() {
      <Route path="/editarLibro" component={EditarLibro}/>
      <Route path="/ingresarGenero" component={CategoriaForm}/>
      <Route path="/listadoGenero" component={CategoriaList}/>
+     <Route path="/ingresarPersona" component={IngresarPersona} />
+     <Route exact path="/ListadoPersona" component={ListadoPersona} />
+
     </div>
     </Router>
   );
