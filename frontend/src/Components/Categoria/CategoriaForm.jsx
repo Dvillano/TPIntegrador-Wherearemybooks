@@ -4,34 +4,37 @@ import  Titulo  from "./ComponentsForm/Titulo";
 import './formCss.css'
 
 export default function CategoriaForm() {
-    const [categoria, setCategoria] = useState([]); 
-    const [genero, setGenero] = useState([]);
-    const [data, setData] = useState([]);
+    const [categoria, setCategoria] = useState(''); 
+    const [data, setData] = useState('');
+    const [error, setError] = useState('');
     
     const inputCategoriaHandler = (e) => { 
-        setCategoria(e.target.value)
+        setCategoria(e.target.value);
     }
 
-    function submitHandler(e) { 
+    const submitHandler = async(e) => { 
         e.preventDefault(); 
-        setGenero([             
-                {                  
-                genero:categoria
+        const postPersonaUrl = 'http://localhost:4200/categoria';
+        
+        const genero = {
+            genero:categoria
+        }
+
+        try{
+            const respuesta = await axios.post(postPersonaUrl, genero);
+            if(respuesta.status === 200){
+                setData(respuesta.data)
             }
-        ]);
-        setCategoria([]) 
+        }
+        catch (error){  
+           console.log(error.response.data, typeof error.response.data)
+           
+           setData(error.response.data)
+        }
+
+        setCategoria('') 
     }
-    const postPersonaUrl = 'http://localhost:4200/categoria'
-
-    useEffect( async () => {        
-        const response = await axios.post(postPersonaUrl, genero[0])
-            setData(response.data)
-    }, [genero]);
-
-    //console.log(genero[0], typeof genero[0]);
-    //console.log(data, typeof data)
-
-
+    
     return (
         <div className='form-container'> 
             <Titulo />
@@ -48,8 +51,9 @@ export default function CategoriaForm() {
                     Agregar
             </button>
         </form>
-        <p data={data}  >
-               {data.Respuesta}
+        <p data={data} >
+               {data.Respuesta}{data.Error}
+               
             </p>                
         </div>
     )
