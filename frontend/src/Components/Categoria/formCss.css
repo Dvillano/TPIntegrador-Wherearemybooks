@@ -44,3 +44,10 @@ button:active {
   background-color: #d8a953;
   transform: translateY(2px);
 }
+
+p {
+    margin: 20px;
+    display: inline-flex;
+    color: #DCBE87;
+    font-size: 20px;
+}

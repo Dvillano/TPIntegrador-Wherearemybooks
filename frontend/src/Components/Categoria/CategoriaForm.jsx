@@ -6,7 +6,7 @@ import './formCss.css'
 export default function CategoriaForm() {
     const [categoria, setCategoria] = useState([]); 
     const [genero, setGenero] = useState([]);
-    const [data, setData] = useState('');
+    const [data, setData] = useState([]);
     
     const inputCategoriaHandler = (e) => { 
         setCategoria(e.target.value)
@@ -29,7 +29,7 @@ export default function CategoriaForm() {
     }, [genero]);
 
     //console.log(genero[0], typeof genero[0]);
-    //console.log(data)
+    //console.log(data, typeof data)
 
 
     return (
@@ -47,8 +47,8 @@ export default function CategoriaForm() {
                 type='submit'>
                     Agregar
             </button>
-            <p data={data}>
-               {data.respuesta}
+            <p data={data}  >
+               {data.Respuesta}
             </p>
         </form>                
         </div>
