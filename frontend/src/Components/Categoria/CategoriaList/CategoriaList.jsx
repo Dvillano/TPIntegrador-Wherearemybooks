@@ -6,16 +6,22 @@ export default function CategoriaList() {
 
     const [ listado, setListado ] = useState([])
     const [ borrado, setBorrado  ] = useState(false)
+    const [ genero, setGenero ] = useState({id:'', genero:''})
 
-    
     useEffect(() => {
         try {
              const myFetch = async () => {
                 const url = 'http://localhost:4200/categoria/'
                 const result = await axios.get(url);
+                console.log(result.data.respuesta[0].ID, typeof result.data.respuesta[0].ID )
                 if (result.status === 200) {
                     setListado(result.data.respuesta)
-                    console.log(listado)
+                    /*
+                    setGenero({
+                        id: result.data.respuesta[i].id,
+                        genero: result.data.respuesta[i].genero
+                    })
+                    */
                 }
             }
             myFetch()
@@ -26,10 +32,10 @@ export default function CategoriaList() {
         }
     }, [])
     
-    const categoriaUrl = 'http://localhost:4200/categoria/'
+    //console.log(genero)
+    //console.log(genero.genero)
+    //console.log(listado)
     
-    
-
     const borrarCategoria = async () => {
 
         try {
@@ -45,7 +51,10 @@ export default function CategoriaList() {
         }
     }
 
+    const categoriaUrl = 'http://localhost:4200/categoria/'
+
     const ListaCategorias = () => {
+
 
         return (
             <ul>
@@ -54,12 +63,12 @@ export default function CategoriaList() {
                         <li key={item.ID} className="item">
                             {item.genero}
                         </li>                        
-                        <button key={item.ID} onClick={borrarCategoria(item.ID)}>Borrar</button>
+                        <button onClick={borrarCategoria}>Borrar</button>
                     </div>
                 )}
             </ul>
-                            
-        )}
+        )
+    }
         
     return (
         <div className="list-container">
