@@ -5,8 +5,8 @@ import {Route, BrowserRouter as Router} from 'react-router-dom'
 import EditarLibro from './Components/Libro/EditarLibro/EditarLibro';
 import Navbar from './Components/PaginaInicio/Navbar'
 import PrestarLibro from './Components/Libro/PrestarLibro/PrestarLibro';
-import CategoriaForm from './Components/Categoria/CategoriaForm';
-import CategoriaList from './Components/Categoria/CategoriaList';
+import CategoriaForm from './Components/Categoria/CategoriaForm/CategoriaForm';
+import CategoriaList from './Components/Categoria/CategoriaList/CategoriaList';
 
 
 
