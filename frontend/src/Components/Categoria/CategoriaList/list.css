@@ -1,0 +1,39 @@
+.list-container {
+    margin: 10px;
+    text-align: center;   
+}
+
+h3 {
+    font-size: 2rem;
+    margin: 20px;
+    display: block;
+    color: #DCBE87;
+    margin-top: 0px;
+}
+
+.li-btn{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #DCBE87;
+    vertical-align: middle;
+}
+.list {
+    font-size: 1em;
+    text-decoration: none;
+    color:#517174;
+}
+
+.item {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    padding: 0px;
+    color: #DCBE87;
+    display: flex;
+}
+button{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    display: flex;
+}
+
+.item:hover {background-color: #d8a953}

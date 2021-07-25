@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import  Titulo  from "./ComponentsForm/Titulo";
 import RespuestaForm from "./ComponentsForm/RespuestaForm";
-import FormAdd from "./ComponentsForm/FormAdd"
+import FormAdd from "./FormAdd"
 import './formCss.css'
 
 export default function CategoriaForm () {

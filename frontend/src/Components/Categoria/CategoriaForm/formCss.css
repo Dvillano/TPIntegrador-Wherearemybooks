@@ -24,10 +24,8 @@ input{
     font-size: 18px;
 }
 
-button{
-    
+.btn-form{
     padding: 5px;
-    padding-bottom: 5px;
     display: inline-block;
     margin-bottom: 20px;
     border: none;
@@ -36,6 +34,20 @@ button{
     background-color: #DCBE87;
     font-size: 18px;
     border-radius: 8px;
+
+}
+
+button {
+    padding: 5px;
+    display: inline-block;
+    margin-bottom: 20px;
+    border: none;
+    text-align: center;
+    color:#517174;
+    background-color: #DCBE87;
+    font-size: 18px;
+    border-radius: 8px;   
+
 }
 
 button:hover {background-color: #d8a953}

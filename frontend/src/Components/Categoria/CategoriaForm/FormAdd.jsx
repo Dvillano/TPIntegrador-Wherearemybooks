@@ -42,7 +42,7 @@ const FormAdd = ({setData, categoria, setCategoria}) =>{
             placeholder='Nueva categoría...'
             >   
             </input>
-            <button onClick={submitHandler} type='submit'>
+            <button onClick={submitHandler} type='submit' className='btn-form'>
                 Agregar
             </button>
         </form>
