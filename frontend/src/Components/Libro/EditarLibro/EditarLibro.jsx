@@ -11,7 +11,9 @@ import Titulo from "./Titulo"
 import axios from "axios"
 
 function EditarLibro(props){
-const id = props.id
+    //como pasar libro id aca
+    //conditional rendering en listado de libro por ahora
+const id = props.libro_id
 const [editado,setEditado] = useState(false)
 const [libroData,setLibroData] = useState({})
 const [message,setMessage] = useState("")
@@ -24,31 +26,19 @@ const onSubmit=async (e)=>{
     try{
         const response = await axios.put(editarUrl,{descripcion:descripcion})
         if(response.status == 200){
-            setEditado(true)
             setMessage("El libro fue editado de forma exitosa")
             setLibroData(response.data[0])
+            setEditado(true)
           }
     }catch(error){
         setError(true);
         setMessage("Error inesperado:" +error.response.data.mensaje)
         console.error(error)
     }
-
-    /*axios.put(editarUrl,{descripcion:descripcion}).then((response)=>{
-  if(response.status == 200){
-     setEditado(true)
-     setMessage("El libro fue editado de forma exitosa")
-     setLibroData(response.data[0])
-   }
-   }).catch(error=>{
-       setError(true);
-       setMessage("Error inesperado")
-       console.error(error)
-   })*/
 }
 //Try redux here with libro editado to avoid passing too many props
 if(error){
-    return(<Message message={message}/>)
+    return(<Message message={message} onclick={props.onclickvolver}/>)
 }
 else if(!editado){
  return(<div className="containerEditarLibro">

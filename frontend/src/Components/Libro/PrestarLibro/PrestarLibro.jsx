@@ -9,6 +9,8 @@ import axios from 'axios'
 
 function PrestarLibro(props){
   const personaurl = "http://localhost:4200/persona"
+  //libro id a prestar en redux
+  //onclick de link set libroid actual al que esta en el boton¿¿¿¿
   const libroId=props.id
 
   const [data,setData] = useState([]);
@@ -31,16 +33,7 @@ function PrestarLibro(props){
       setMensaje("Error inesperado:" +error.response.data.mensaje )
       console.error(error)
     }
-    /*.then(response=>{
-     if(response.status == 200){
-      setPrestado(true);
-      setMensaje(response.data.mensaje)
-     }
-    }).catch(error=>{
-      setError(true)
-      setMensaje("Error inesperado")
-      console.error(error)
-    })*/ 
+
    }
 
 const mostrarPersona = data.map(element=>{

@@ -13,8 +13,6 @@ function Navbar(){
    <Link to="/listadoLibro" className="link left">Listado de libros</Link>
    <Link to="/listadoPersona" className="link middle">Listado de personas</Link>
    <Link to="/listadoGenero" className="link right">Listado de generos</Link>  
-   <Link to="/prestarLibro" className="link">Prestar Libro(prueba)</Link>
-   <Link to="/editarLibro" className="link">Editar Libro(prueba)</Link>
    </div>
     </div>)
 }

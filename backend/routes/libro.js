@@ -83,7 +83,6 @@ const libroPutId = async function (req, res) {
   const nombre = req.body.nombre;
   var persona_id = parseInt(req.body.persona_id);
   const genero_id = parseInt(req.body.genero_id);
-
   const id = req.params.id;
   const descripcion = req.body.descripcion;
 
@@ -101,17 +100,23 @@ const libroPutId = async function (req, res) {
     }
 
     //solo se puede modificar la descripcion del libro
-    if (nombre !== response[0].titulo ||persona_id !== response[0].persona_id ||genero_id !== response[0].genero_id
-    ) res.status(413).send({ mensaje: "Solo se puede modificar la descripcion del libro" });
+  /*  if(nombre ==undefined  &&persona_id == null &&genero_id ==NaN 
+      || nombre ==response[0].titulo && genero_id == response[0].genero_id && persona_id == response[0].persona_id){*/
+  //solo se envio la descripcion
+  //Update libro
+  const updateQuery = 'UPDATE libro SET descripcion=? WHERE ID=?';
+  response = await query(updateQuery,[descripcion,id]);
+
+  const selectUpdatedBook = 'SELECT * FROM libro WHERE ID=?';
+  response = await query(selectUpdatedBook,[id]);
+  res.status(200).send(response);
+    /*}
+    else{
+      res.status(413).send({ mensaje: "Solo se puede modificar la descripcion del libro" });
+    }*/
     
 
-    //Update libro
-    const updateQuery = 'UPDATE libro SET descripcion=? WHERE ID=?';
-    response = await query(updateQuery,[descripcion,id]);
-
-    const selectUpdatedBook = 'SELECT * FROM libro WHERE ID=?';
-    response = await query(selectUpdatedBook,[id]);
-    res.status(200).send(response);
+  
   } catch (error) {
     res.status(413).send({
       mensaje: error.message,
