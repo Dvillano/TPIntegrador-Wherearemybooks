@@ -17,7 +17,7 @@ const ListadeGeneros = () =>{
         catch(error){
            console.log(error)
         }
-    },   [])
+    },   [genero])
 
     const handleDelete = async (e) =>{
         const generoid = e.target.attributes[0].value;

@@ -8,7 +8,7 @@ const Respuesta = ({data}) =>{
     }
     if(dataRes.id > 0) {
         return(
-        <p>Se ha cargado la categoría {dataRes.categoria} y  su ID es : {dataRes.id}</p>
+        <p className='p-form-res'>Se ha cargado la categoría {dataRes.categoria} y  su ID es : {dataRes.id}</p>
         )
     }
     else {

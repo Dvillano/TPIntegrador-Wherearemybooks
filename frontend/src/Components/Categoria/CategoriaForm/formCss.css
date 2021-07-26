@@ -57,7 +57,7 @@ button:active {
   transform: translateY(2px);
 }
 
-p {
+.p-form-resp {
     margin: 20px;
     display: block;
     color: #DCBE87;
