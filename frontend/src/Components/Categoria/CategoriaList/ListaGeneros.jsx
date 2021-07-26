@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import axios from 'axios';
 
-const ListadeGeneros = () =>{
+const ListaDeGeneros = () =>{
 
     const [ genero, setGenero ] = useState([])
     const url = 'http://localhost:4200/categoria/';
@@ -51,4 +51,4 @@ const ListadeGeneros = () =>{
     )
 }
 
-export default ListadeGeneros;
+export default ListaDeGeneros;
