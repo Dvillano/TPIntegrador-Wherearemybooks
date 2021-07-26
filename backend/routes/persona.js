@@ -28,6 +28,7 @@ const postPersona = async (req, res) => {
     // Validar estructura del email
     if (validateEmail(email) == false) {
       res.status(413).send("Mail invalido");
+      return;
     }
 
     let query = "SELECT id FROM persona WHERE email = ?";
@@ -35,7 +36,7 @@ const postPersona = async (req, res) => {
 
     // Validar email repetido
     if (respuesta.length > 0) {
-      throw new Error("Ese email ya esta registrado");
+      res.status(413).send("Ese email ya esta registrado");
     }
 
     //Guardo nueva persona
@@ -85,35 +86,35 @@ const getPersonaById = async (req, res) => {
 
 const putPersonaById = async function (req, res) {
   try {
-    const consulta = await qy("SELECT * FROM persona WHERE id=?", [
+    const respuesta = await qy("SELECT * FROM persona WHERE id=?", [
       req.params.id,
     ]);
 
-    if (consulta.length == 1) {
+    if (respuesta.length == 1) {
       if (!req.body.nombre || !req.body.apellido || !req.body.alias) {
-        throw new Error("Todos los campos son requeridos.");
+        res.status(413).send("Todos los campos son requeridos.");
       }
-      let newEmail = await qy("SELECT email FROM persona WHERE id = ?", [
-        req.params.id,
-      ]);
+      // let newEmail = await qy("SELECT email FROM persona WHERE id = ?", [
+      //   req.params.id,
+      // ]);
 
-      const email = req.body.email.toUpperCase().trim();
+      // const email = req.body.email.toUpperCase().trim();
 
-      if (email != newEmail[0].email) {
-        throw new Error("No se puede modificar el e-mail.");
-      }
+      // if (email != newEmail[0].email) {
+      //   res.status(413).send("No se puede modificar el e-mail.");
+      // }
 
       const nombre = req.body.nombre.toUpperCase().trim();
       const apellido = req.body.apellido.toUpperCase().trim();
       const alias = req.body.alias.toUpperCase().trim();
 
       await qy(
-        "UPDATE persona SET nombre=?, apellido=?, alias=?, email=? WHERE id=?",
-        [nombre, apellido, alias, email, req.params.id]
+        "UPDATE persona SET nombre=?, apellido=?, alias=? WHERE id=?",
+        [nombre, apellido, alias, req.params.id]
       );
-      const respuesta = await qy("SELECT * FROM persona WHERE id=?", [
-        req.params.id,
-      ]);
+      // const respuesta = await qy("SELECT * FROM persona WHERE id=?", [
+      //   req.params.id,
+      // ]);
       res.send(respuesta[0]);
     } else {
       throw new Error(

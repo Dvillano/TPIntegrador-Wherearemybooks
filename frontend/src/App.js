@@ -10,8 +10,10 @@ import CategoriaList from './Components/Categoria/CategoriaList/CategoriaList';
 
 
 
-import IngresarPersona from './Components/Persona/IngresarPersona/IngresarPersona';
-import ListadoPersona from './Components/Persona/ListadoPersona/ListadoPersona';
+import IngresarPersona from './Components/Persona/IngresarPersona';
+import ListadoPersona from './Components/Persona/ListadoPersona';
+import EditarPersona from './Components/Persona/EditarPersona';
+import ListaPersonaLibro from './Components/Persona/ListaPersonaLibro';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
      <Route path="/listadoGenero" component={CategoriaList}/>
      <Route path="/ingresarPersona" component={IngresarPersona} />
      <Route exact path="/ListadoPersona" component={ListadoPersona} />
+     <Route path="/ListaPersona/editarPersona/:id" component={EditarPersona} />
+     <Route path="/ListaPersona/listaPersonaLibro" component={ListaPersonaLibro} />
 
     </div>
     </Router>
