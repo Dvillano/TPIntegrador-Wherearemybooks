@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import './ListadoPersona.css';
 
 
 // Iconos
@@ -60,29 +61,26 @@ export default function ListadoPersona() {
 
     const listaPersona = listado.map( el => {
         return (
-
-            <div key={el.ID}>
-                <div >
-                    <ul>
-                        <li>
-                            <p>{"Nombre: " + el.nombre}</p>
-                            <p>{"Apellido :" + el.apellido}</p>
-                            <p>{"Alias :" + el.alias}</p>
-                            <p>{"Email :" + el.email}</p>
-                            <i><Link to={"/ListaPersona/EditarPersona/" + el.ID}>{iconoModificar}</Link></i>
-                            <i onClick={() => { if (window.confirm("Estas seguro que deseas borrar a esta persona?"))  borrarPersona(el.ID)}}>{iconoBorrar}</i>
-                            <button><Link to={"/ListaPersona/ListaPersonaLibro/" + el.ID}>Mostrar libros prestados</Link></button> 
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <ul key={el.ID}>
+                <li className="list-item">
+                    <p><span>Nombre: </span>{el.nombre}</p>
+                    <p><span>Apellido: </span>{el.apellido}</p>
+                    <p><span>Alias: </span>{el.alias}</p>
+                    <p><span>Email: </span>{el.email}</p>
+                    <div className="icon-container">
+                        <i className="icon-btn-modificar"><Link to={"/ListaPersona/EditarPersona/" + el.ID}>{iconoModificar}</Link></i>
+                        <i className="icon-btn-borrar" onClick={() => { if (window.confirm("Estas seguro que deseas borrar a esta persona?"))  borrarPersona(el.ID)}}>{iconoBorrar}</i>
+                    </div>
+                    <button className="btn-mostrar"><Link to={"/ListaPersona/ListaPersonaLibro/" + el.ID}>Mostrar libros prestados</Link></button> 
+                </li>
+            </ul>
         )
     })
 
     return(
-        <>
+        <div className="list-container">
             {listaPersona}
-        </>
+        </div >
     )
 }
 

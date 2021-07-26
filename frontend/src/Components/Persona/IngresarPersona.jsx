@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from 'axios';  
+import './IngresarPersona.css';    
+import Message from './MessagePersona';
 
 const apiUrl = 'http://localhost:4200/persona'
 
@@ -37,23 +39,27 @@ export default function IngresarPersona() {
     }
 
     return (
-        <>
-            <h3>Ingresar nueva persona</h3> 
+        <div className='form-container'>
+            <h3 className= 'categoriaformtitulo'>Ingresar nueva persona</h3> 
             <form>
                 <label>Nombre</label>
-                <input required type="text" id="nombre" value={nombre} onChange={e => setNombre(e.target.value)} />
+                <input  className="categoriaforminput" required type="text" id="nombre" value={nombre} onChange={e => setNombre(e.target.value)} />
 
                 <label>Apellido</label>
-                <input required type="text" id="apellido" value={apellido} onChange={e => setApellido(e.target.value)} />
+                <input  className="categoriaforminput" required type="text" id="apellido" value={apellido} onChange={e => setApellido(e.target.value)} />
 
                 <label>Alias</label>
-                <input required type="text" id="alias" value={alias} onChange={e => setAlias(e.target.value)} />
+                <input className="categoriaforminput"  required type="text" id="alias" value={alias} onChange={e => setAlias(e.target.value)} />
 
                 <label>Email</label>
-                <input required type="email" id="email" value={email} onChange={e => setEmail(e.target.value)} />
+                <input  className="categoriaforminput" required type="email" id="email" value={email} onChange={e => setEmail(e.target.value)} />
 
-                <button type="submit" onClick={handleSubmit}>Enviar</button>
+                <button className="agregarbtn"  type="submit" onClick={handleSubmit}>Enviar</button>
+
             </form>
-        </>
+            <br />
+            <Message />
+        </div >
     );
 }
+
