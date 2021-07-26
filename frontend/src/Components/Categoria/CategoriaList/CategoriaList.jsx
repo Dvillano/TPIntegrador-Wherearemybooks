@@ -1,6 +1,6 @@
 import React from 'react';
 import GenerosTitulo from './Titulo';
-import ListadeGeneros from './ListaGeneros';
+import ListaDeGeneros from './ListaGeneros';
 import './list.css';
 
 export default function CategoriaList() {
@@ -9,7 +9,7 @@ export default function CategoriaList() {
         <div className="list-container">
             <GenerosTitulo />
             <div className="list">
-                <ListadeGeneros />    
+                <ListaDeGeneros />    
             </div>
         </div>
     
