@@ -86,7 +86,7 @@ const categoriaDeleteById = async (req, res) => {
         
         query =  'DELETE FROM categoria WHERE id = ?'; 
         respuesta = await qy (query, [req.params.id]) ;
-        res.send({respuesta: 'Se ha borrado correctamente la categoria'});
+        res.status(200).send({'respuesta': respuesta.affectedRows});
     }
     catch(e) {
         console.error(e.message);
