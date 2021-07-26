@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import GenerosTitulo from './Titulo';
 import './list.css';
 
 export default function CategoriaList() {
@@ -73,7 +74,7 @@ export default function CategoriaList() {
         
     return (
         <div className="list-container">
-            <h3>Géneros</h3>
+            <GenerosTitulo />
             <div className="list">
                 <ListaCategorias />    
             </div>
