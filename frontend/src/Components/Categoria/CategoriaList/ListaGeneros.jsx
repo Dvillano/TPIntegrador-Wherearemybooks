@@ -4,7 +4,6 @@ import axios from 'axios';
 const ListadeGeneros = () =>{
 
     const [ genero, setGenero ] = useState([])
-    const [ categoria, setCategoria] = useState('')
     const url = 'http://localhost:4200/categoria/';
 
     useEffect( async () => {
@@ -25,13 +24,12 @@ const ListadeGeneros = () =>{
          try{
              const borrarGenero = await axios.delete(url + generoid)
              if(borrarGenero.status === 200){
-                 console.log(borrarGenero)
-             }
-             
-         }
-         catch(error){
-             console.log(error)
-         }
+                console.log(borrarGenero)
+             }     
+        }
+        catch(error){
+            console.log(error)
+        }
     };
     
     return(
