@@ -24,15 +24,12 @@ try {
 },[])
 
 const devolverLibro = async()=>{
-    //devolver
     if(props.libro_id !==null){
     try {
         const response = await axios.put(libroUrl + "/devolver/"+ props.libro_id )
         if(response.status == 200){
+            setPersona(null)
             alert(response.data.mensaje)
-            //Action set libro
-            //actualizar persona id de libro 
-            //buscar array de libro en store buscar item especifico modificar mediante action
         }
     } catch (error) {
         console.error(error)

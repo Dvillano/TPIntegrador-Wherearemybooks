@@ -15,10 +15,7 @@ function App() {
   return (
     <Router>
     <div className="App">
-    <Navbar/>
-     <Route path="/prestarLibro" component={PrestarLibro}/>
-     <Route path="/editarLibro" component={EditarLibro}/>
-     
+    <Navbar/>   
      <Route path="/ingresarGenero" component={CategoriaForm}/>
      
      <Route path="/ingresarPersona" component={IngresarPersona} />

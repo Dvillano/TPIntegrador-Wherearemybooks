@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios'; 
 import PrestarBtn from './PrestarBtn';
 import EditarBtn from './EditarBtn';
-import EditarLibro from '../EditarLibro/EditarLibro';
 
 
 //persona se usa en listado de libros y boton prestar para mostrar alas e indicar si prestar o no
@@ -10,10 +9,6 @@ import EditarLibro from '../EditarLibro/EditarLibro';
 function ListadoDeLibros (){
 
 const [libro, setlibro] = useState([])
-const [editarLibroId,setEditarLibroId] = useState(null);
-
-const [editando,setEditando] = useState(false);
-
 const apiUrl = 'http://localhost:4200/libro'
 useEffect(async()=>{
     try{
@@ -37,13 +32,6 @@ useEffect(async()=>{
         console.log (error)
     }
     }
-
-    const onClickEditar = (e)=>{
-       const libro_id = e.target.attributes.editarlibroid.value;
-       setEditarLibroId(libro_id)
-       setEditando(true)
-    }
-
 
     return(
         <div>
