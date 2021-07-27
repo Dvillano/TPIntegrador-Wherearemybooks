@@ -5,7 +5,7 @@ const ListaDeGeneros = () =>{
 
     const [ genero, setGenero ] = useState([])
     const [ libros, setLibros ] = useState([])
-    const [ librosfiltrado, setLibrosFiltrados ] = useState([])
+
     const urlLibros = 'http://localhost:4200/libro/';
     const url = 'http://localhost:4200/categoria/';
 
@@ -27,6 +27,7 @@ const ListaDeGeneros = () =>{
          try{
              const borrarGenero = await axios.delete(url + genero_id)
              if(borrarGenero.status === 200){
+                console.log(borrarGenero)
              }     
         }
         catch(error){
@@ -47,13 +48,26 @@ const ListaDeGeneros = () =>{
         }
     }, [])
 
-    const Bookslist = () => libros.map((book) =>(
-        <li key={book.ID}className='book-list'>
-               Título: {book.titulo} ID:{book.ID}
-        </li>
-    ))
 
-    
+    const Bookslist = ({generoid}) => {
+        const booksFiltered = libros.filter((books) => books.genero_id == generoid)
+
+        if(booksFiltered.length == 0){
+            return(
+                <p>Esta categoría no tiene libros asociados</p>
+            )
+        }
+        else{
+            return(
+                libros.map((book) =>(
+                    <li key={book.ID} className='book-list'>
+                        Título: {book.titulo} ID:{book.ID}
+                    </li>
+                )) 
+            )
+        }
+    }
+
 
     const GeneroList = () => genero.map((item) =>(
         <li key={item.ID} value={item.id} className='li-list'>
@@ -62,7 +76,7 @@ const ListaDeGeneros = () =>{
                 Borrar
             </button>
             <ul>
-            <Bookslist />
+            <Bookslist generoid={item.ID} value={item.ID}/>
             </ul>
         </li> 
     ))
