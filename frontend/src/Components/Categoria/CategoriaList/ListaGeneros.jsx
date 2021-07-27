@@ -47,11 +47,10 @@ const ListaDeGeneros = () =>{
             console.log(error)
         }
     }, [])
-
-
+    
     const Bookslist = ({generoid}) => {
         const booksFiltered = libros.filter((books) => books.genero_id == generoid)
-
+        
         if(booksFiltered.length == 0){
             return(
                 <p>Esta categoría no tiene libros asociados</p>
@@ -66,25 +65,23 @@ const ListaDeGeneros = () =>{
                 )) 
             )
         }
-    }
-
-
-    const GeneroList = () => genero.map((item) =>(
-        <li key={item.ID} value={item.id} className='li-list'>
-                {item.genero}
-            <button generoid={item.ID} onClick={handleDelete} className='btn-borrar'>
-                Borrar
-            </button>
-            <ul>
-            <Bookslist generoid={item.ID} value={item.ID}/>
-            </ul>
-        </li> 
-    ))
+    } 
     
     return(
         <div className='conteinerList'>
             <ul className='ul-list'>
-                <GeneroList />
+                {genero.map((item) =>(
+                        <li key={item.ID} value={item.id} className='li-list'>
+                                {item.genero}
+                            <button genero_id={item.ID} value={item.ID} onClick={handleDelete} className='btn-borrar'>
+                                Borrar
+                            </button>
+                            <ul>
+                                <Bookslist generoid={item.ID}/>
+                            </ul>
+                        </li> 
+                    ))
+                }   
             </ul>
         </div>
     )
