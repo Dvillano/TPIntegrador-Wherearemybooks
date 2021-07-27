@@ -9,11 +9,12 @@ import LibroEditado from './LibroEditado/LibroEditado'
 import Message from '../Common/Message'
 import Titulo from "./Titulo"
 import axios from "axios"
+import { useParams } from 'react-router'
 
 function EditarLibro(props){
-    //como pasar libro id aca
-    //conditional rendering en listado de libro por ahora
-const id = props.libro_id
+console.log(Object.keys(useParams()))
+console.log(Object.values(useParams()))
+const {id} = useParams()
 const [editado,setEditado] = useState(false)
 const [libroData,setLibroData] = useState({})
 const [message,setMessage] = useState("")

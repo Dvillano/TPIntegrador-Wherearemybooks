@@ -1,6 +1,9 @@
+import { Link } from "react-router-dom"
+
 function EditarBtn(props){
+ const libro_id=props.editarlibroid
   return(<div>
-      <button onClick={props.onClick} editarlibroid={props.editarlibroid}>Editar</button>
+      <Link to={"/editarLibro/" + libro_id} className="link">Editar</Link>
   </div>)
 }
 

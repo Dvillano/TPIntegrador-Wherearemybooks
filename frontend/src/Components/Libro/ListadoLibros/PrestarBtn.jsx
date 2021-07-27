@@ -7,6 +7,7 @@ const libroUrl = "http://localhost:4200/libro"
 
 function PrestarBtn(props){
 const persona_id = props.persona_id
+const libro_id =props.libro_id
 const [persona,setPersona] = useState(null)
 
 useEffect(async ()=>{
@@ -40,8 +41,7 @@ const devolverLibro = async()=>{
 }
 
 if(persona==null){
-    //como pasar persona id a prestar libro
-    return(<div><Link to="/prestarLibro">Prestar</Link></div>)
+    return(<div><Link to={"/prestarLibro/"+libro_id} className="link">Prestar</Link></div>)
 }else{
     return(<div>
   <button onClick={devolverLibro}>Devolver</button>

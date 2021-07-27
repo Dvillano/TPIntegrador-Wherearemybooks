@@ -6,22 +6,20 @@ import Message from '../Common/Message'
 import PersonaCard from './PersonaCard'
 import Titulo from './Titulo'
 import axios from 'axios'
+import { useParams } from 'react-router'
 
 function PrestarLibro(props){
   const personaurl = "http://localhost:4200/persona"
-  //libro id a prestar en redux
-  //onclick de link set libroid actual al que esta en el boton¿¿¿¿
-  const libroId=props.id
-
+  const { id } = useParams()
   const [data,setData] = useState([]);
   const [prestado,setPrestado] = useState(false)
   const [mensaje,setMensaje] = useState("")
   const [error,setError] = useState(false)
 
+
   const onClick =async (e)=>{
-    const prestarUrl = "http://localhost:4200/libro/prestar" + "/" +libroId
-    const personaId=e.target.attributes[0].value
-  
+    const personaId=e.target.attributes.personaid.value
+    const prestarUrl = "http://localhost:4200/libro/prestar" + "/" +id
     try{
       const respuesta= await axios.put(prestarUrl,{persona_id:personaId})
       if(respuesta.status==200){
@@ -50,12 +48,10 @@ const mostrarPersona = data.map(element=>{
       }
      } catch (error) {
        console.error(error)
-       setData([]);
      }
     }
   }, [])
-
-  if(prestado ===true || error===true){
+ if(prestado ===true || error===true){
     return(<Message message={mensaje}/>)
   }
  else if(prestado===false){

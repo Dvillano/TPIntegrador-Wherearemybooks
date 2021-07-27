@@ -38,20 +38,13 @@ useEffect(async()=>{
     }
     }
 
-    const onClickVolver =()=>{
-        setEditando(false)
-    }
     const onClickEditar = (e)=>{
        const libro_id = e.target.attributes.editarlibroid.value;
        setEditarLibroId(libro_id)
        setEditando(true)
     }
 
-    if(editando){
-        return(
-     <EditarLibro libro_id={editarLibroId} onclickvolver={onClickVolver}/>)
-    }
-    else{
+
     return(
         <div>
             {libro.map((el)=>{
@@ -61,11 +54,11 @@ useEffect(async()=>{
                     <p>{el.descripcion}</p>
                     <button libro_id={el.ID}onClick={onClickBorrar}>borrar</button>
                     <PrestarBtn persona_id={el.persona_id} libro_id={el.ID}/>
-                    <EditarBtn onClick={onClickEditar} editarlibroid={el.ID}/>
+                    <EditarBtn editarlibroid={el.ID}/>
                 </div>)
             })}
         </div>
     )      
     }
-}
+
 export default ListadoDeLibros

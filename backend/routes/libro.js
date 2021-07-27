@@ -193,8 +193,8 @@ const libroPutDevolver = async function (req, res) {
              res.status(413).send({mensaje: "No se encontro la persona a la que se quiere prestar el libro"});
          }
          else {
-             const prestar = `UPDATE libro SET PERSONA_ID =? WHERE ID=?`;
-             response = await query(prestar,[persona_id][id]);
+             const prestar = `UPDATE libro SET PERSONA_ID=? WHERE ID=?`;
+             response = await query(prestar,[persona_id,id]);
              res.status(200).send({mensaje: "Se presto correctamente"});
          }
      } catch (error){

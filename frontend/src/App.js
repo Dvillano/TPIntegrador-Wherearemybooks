@@ -23,9 +23,11 @@ function App() {
      
      <Route path="/ingresarPersona" component={IngresarPersona} />
      <Route exact path="/ListadoPersona" component={ListadoPersona} />
+
      <Route path="/ingresarLibro" component={NuevoLibro} />
      <Route path="/listadoLibro" component={ListadoDeLibros} />
-
+     <Route path="/prestarLibro/:id" component={PrestarLibro}/>
+     <Route path="/editarLibro/:id" component={EditarLibro}/>
     </div>
     </Router>
   );
