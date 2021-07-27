@@ -3,13 +3,10 @@ import axios from 'axios';
 import PrestarBtn from './PrestarBtn';
 import EditarBtn from './EditarBtn';
 
-
-//persona se usa en listado de libros y boton prestar para mostrar alas e indicar si prestar o no
-//
 function ListadoDeLibros (){
-
 const [libro, setlibro] = useState([])
 const apiUrl = 'http://localhost:4200/libro'
+
 useEffect(async()=>{
     try{
         const respuesta=await axios.get(apiUrl)
