@@ -25,10 +25,11 @@ const ListaDeGeneros = () =>{
              const borrarGenero = await axios.delete(url + genero_id)
              if(borrarGenero.status === 200){
                 console.log(borrarGenero)
+                alert("El género se borro con éxito")
              }     
         }
         catch(error){
-            console.log(error)
+            alert("No se pudo borrar el género por tener libros asociados")
         }
     };
     
