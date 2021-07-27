@@ -23,10 +23,9 @@ const ListaDeGeneros = () =>{
     },   [genero])
 
     const handleDelete = async (e) =>{
-        const generoid = e.target.attributes[0].value;
-        console.log(genero)
+        const genero_id = e.target.attributes[0].value;
          try{
-             const borrarGenero = await axios.delete(url + generoid)
+             const borrarGenero = await axios.delete(url + genero_id)
              if(borrarGenero.status === 200){
              }     
         }
@@ -73,7 +72,6 @@ const ListaDeGeneros = () =>{
             <ul className='ul-list'>
                 {generoList}
             </ul>
-            
         </div>
     )
 }
