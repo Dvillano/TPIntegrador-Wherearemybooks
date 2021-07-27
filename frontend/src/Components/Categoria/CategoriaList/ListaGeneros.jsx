@@ -47,22 +47,22 @@ const ListaDeGeneros = () =>{
         }
     }, [])
 
-    const bookslist = libros.map((book) =>(
-        <li className='book-list'>
+    const Bookslist = () => libros.map((book) =>(
+        <li key={book.ID}className='book-list'>
                Título: {book.titulo} ID:{book.ID}
         </li>
     ))
 
     
 
-    const generoList = genero.map((item) =>(
-        <li key={item.genero} value={item.id} className='li-list'>
+    const GeneroList = () => genero.map((item) =>(
+        <li key={item.ID} value={item.id} className='li-list'>
                 {item.genero}
             <button generoid={item.ID} onClick={handleDelete} className='btn-borrar'>
                 Borrar
             </button>
             <ul>
-            {bookslist}
+            <Bookslist />
             </ul>
         </li> 
     ))
@@ -70,7 +70,7 @@ const ListaDeGeneros = () =>{
     return(
         <div className='conteinerList'>
             <ul className='ul-list'>
-                {generoList}
+                <GeneroList />
             </ul>
         </div>
     )
