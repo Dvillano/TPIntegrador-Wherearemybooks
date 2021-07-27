@@ -20,9 +20,9 @@ const ListaDeGeneros = () =>{
     },   [genero])
 
     const handleDelete = async (e) =>{
-        const generoid = e.target.attributes[0].value;
+        const genero_id = e.target.attributes[0].value;
          try{
-             const borrarGenero = await axios.delete(url + generoid)
+             const borrarGenero = await axios.delete(url + genero_id)
              if(borrarGenero.status === 200){
                 console.log(borrarGenero)
              }     
@@ -40,7 +40,7 @@ const ListaDeGeneros = () =>{
                         <button id={item.genero} className='btn-list-genero'>
                             {item.genero} {item.ID}
                         </button>
-                        <button generoid={item.ID} onClick={handleDelete} className='btn-borrar'>
+                        <button genero_id={item.ID} onClick={handleDelete} className='btn-borrar'>
                             Borrar
                         </button>
                     </li>
