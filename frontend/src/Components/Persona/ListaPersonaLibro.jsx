@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { useParams, } from 'react-router-dom';
+import './ListaPersonaLibro.css'
 
 const libroUrl = 'http://localhost:4200/libro'
 const personaUrl = "http://localhost:4200/persona"
@@ -47,21 +48,27 @@ export default function ListaPersonaLibro() {
 
     const Persona = () => {
         return(<div>
-            <h3>Alias</h3>
-            <p>{persona.alias}</p>
+            <h1>Alias</h1>
+            <h2> {persona.alias}</h2>
             </div>)
     }
 
     const Libro = (props) => {
         return(<div>
-            <h3>{props.titulo}</h3>
-            <p>{props.descripcion}</p>
+            <ul>
+                <li>
+                    <p>Titulo: {props.titulo}</p>
+                    <p>Descripcion: {props.descripcion}</p>
+                </li>
+            </ul>
+            
         </div>)
     }
 
     return(
-        <div>
+        <div className="container">
        <Persona/>
+       <h1>Libros prestados: </h1>
        {libros.filter(element=>persona.ID === element.persona_id).map(element=>{
            return(
            <Libro titulo={element.titulo} descripcion={element.descripcion}/>)
