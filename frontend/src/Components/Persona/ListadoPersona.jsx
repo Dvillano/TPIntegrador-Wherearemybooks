@@ -24,8 +24,10 @@ const borrarPersona = async (idPersona) => {
             alert("Persona Borrada");
         }
 
+
     } catch (err) {
         console.log('Error', err.message);
+        alert(err.response.data);
     }
 }
 

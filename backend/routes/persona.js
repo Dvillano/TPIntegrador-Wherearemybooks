@@ -143,9 +143,7 @@ const deletePersonaById = async function (req, res) {
         await qy("DELETE FROM persona WHERE id=?", [req.params.id]);
         res.json({ message: "se borro correctamente" });
       } else {
-        throw new Error(
-          "La persona que intenta eliminar tiene uno o más libros asociados."
-        );
+        res.status(413).send("No puede borrar una persona con libros prestados");
       }
     } else {
       throw new Error(

@@ -11,40 +11,48 @@ export default function ListaPersonaLibro() {
     const [libros,setLibro] = useState([])
     const [persona,setPersona] = useState({})
 
-    useEffect(async()=>{
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(()=>{
      //buscar todos los libros para filtrar luego
-     try{
-     const libros = await axios.get(libroUrl);
-     if(libros.status == 200){
-        setLibro(libros.data.response)
+     
+     const fetchData = async () => {
+        try{
+            const libros = await axios.get(libroUrl);
+            if(libros.status === 200){
+               setLibro(libros.data.response)
+            }
+           }catch(error){
+              console.log(typeof error)
+              console.error(error)
+           }
+       
+             //buscar persona especifica
+       
+             try{
+             const persona = await axios.get(personaUrl + "/" + id)
+             if(persona.status === 200){
+                 setPersona(persona.data.respuesta[0])
+             }
+           }catch(error){
+           console.log(typeof error)
+            console.error(error)
+           }
+
+           
      }
-      }catch(error){
-       console.log(typeof error)
-       console.error(error)
-      }
+     
+     fetchData();
 
-      //buscar persona especifica
+    }, [id])
 
-      try{
-      const persona = await axios.get(personaUrl + "/" + id)
-      if(persona.status ==200){
-          setPersona(persona.data.respuesta[0])
-      }
-    }catch(error){
-    console.log(typeof error)
-     console.error(error)
-    }
-
-    },[])
-
-    const Persona = ()=>{
+    const Persona = () => {
         return(<div>
             <h3>Alias</h3>
             <p>{persona.alias}</p>
             </div>)
     }
 
-    const Libro = (props)=>{
+    const Libro = (props) => {
         return(<div>
             <h3>{props.titulo}</h3>
             <p>{props.descripcion}</p>
@@ -54,7 +62,7 @@ export default function ListaPersonaLibro() {
     return(
         <div>
        <Persona/>
-       {libros.filter(element=>persona.ID == element.persona_id).map(element=>{
+       {libros.filter(element=>persona.ID === element.persona_id).map(element=>{
            return(
            <Libro titulo={element.titulo} descripcion={element.descripcion}/>)
        })}
