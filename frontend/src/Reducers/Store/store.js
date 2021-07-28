@@ -1,9 +1,11 @@
 import {createStore} from "redux"
+import axios from "axios"
 
 //Actions
-//Cambiar libro splice en array de libros con index y datos en action
-//SetLibros datos de libros en action 
 
+//TODO:
+//modificando estado directamente
+const librosUrl = "http://localhost:4200/libro"
 
 const initialState={
  libros:[],
@@ -11,8 +13,15 @@ const initialState={
 
 function reducer(state =initialState,action){
     switch(action.type){
-
-      default:{return state}
+      case "SET_LIBROS":{
+        return{
+          libros:action.libros
+        }
+      }
+      
+      default:
+        return state
+      
     }
 }
 
