@@ -22,7 +22,7 @@ function App() {
      <Route path="/ingresarPersona" component={IngresarPersona} />
      <Route exact path="/ListadoPersona" component={ListadoPersona} />
      <Route path="/ListaPersona/editarPersona/:id" component={EditarPersona} />
-     <Route path="/ListaPersona/listaPersonaLibro" component={ListaPersonaLibro} />
+     <Route path="/ListaPersona/listaPersonaLibro/:id" component={ListaPersonaLibro} />
 
     </div>
     </Router>
