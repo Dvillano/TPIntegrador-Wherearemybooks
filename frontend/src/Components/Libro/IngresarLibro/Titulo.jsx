@@ -1,7 +1,9 @@
+import './ingresarLibro.css'
+
 function Titulo () {
     return(
         <div className="tituloIngresarLibro">
-            <h1>Ingresar nueva libro</h1>
+            <h3>Ingresar nuevo libro</h3>
         </div>)
 }
 export default Titulo
