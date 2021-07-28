@@ -46,7 +46,7 @@ p {
 .icon-btn-modificar:hover {
     cursor: pointer;
     font-size:1.5em;
-    transition: 0.5s ease-out;
+    transition: 0.1s ease-out;
 }
 
 .icon-btn-borrar{
@@ -56,7 +56,7 @@ p {
 .icon-btn-borrar :hover{
     cursor: pointer;
     font-size:1.5em;
-    transition: 0.5s ease-out;
+    transition: 0.1s ease-out;
 }
 
  a, a:hover, a:focus, a:active {

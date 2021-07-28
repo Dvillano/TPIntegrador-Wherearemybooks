@@ -1,22 +1,22 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-import { Redirect, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import './EditarPersona.css';
+import Message from './MessagePersona';
 
 const apiUrl = 'http://localhost:4200/persona/'
+
 
 // Formulario para editar persona (PUT)
 export default function EditarPersona() {
 
     const param = useParams();
-
     const [nombre, setNombre] = useState('');
     const [apellido, setApellido] = useState('');
     const [alias, setAlias] = useState('');  
 
     const handleEdit = async (e) => {
 
-        
         const form = {
             nombre: nombre,
             apellido: apellido,
@@ -36,6 +36,7 @@ export default function EditarPersona() {
             console.log('Error: ', err.message);
         }
 
+
     }
 
     return(
@@ -53,7 +54,8 @@ export default function EditarPersona() {
 
                 <button className="agregarbtn"  type="submit" onClick={() => { if (window.confirm("¿Estas seguro que deseas modificar los datos de esta persona?"))  {handleEdit()} }}>Enviar</button>
             </form>
-
+            <Message />
         </div>
+        
     )
 }
