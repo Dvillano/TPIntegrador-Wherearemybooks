@@ -38,9 +38,13 @@ const devolverLibro = async()=>{
 }
 
 if(persona==null){
-    return(<div><Link to={"/prestarLibro/"+libro_id} className="link">Prestar</Link></div>)
+    return(<div>
+        <p>Este libro no esta prestado</p>
+        <Link to={"/prestarLibro/"+libro_id} className="link">Prestar</Link>
+        </div>)
 }else{
     return(<div>
+        <p>{persona[0].alias}</p>
   <button onClick={devolverLibro}>Devolver</button>
         </div>)
 }
