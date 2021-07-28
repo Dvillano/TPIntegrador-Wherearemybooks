@@ -1,0 +1,32 @@
+.container-lista {
+    display: block;
+    align-items: center;
+    text-align: start;
+}
+
+.tituloGeneros {
+    margin-left:40vw;
+    color:#DCBE87;;
+}
+
+.item-lista {
+    font-size: 1em;
+    margin-bottom: 20px;
+    text-decoration: none;
+    text-align: center;
+    align-items: center;
+    color: #d8a953;
+    display: block;
+}
+
+.book-list {
+    font-style: italic;
+    color:#DCBE87;;
+}
+
+.btn-borrar {
+    background-color: #DCBE87;
+    margin-left: 20px;
+}
+
+.item.hover {background-color: #d8a953}
