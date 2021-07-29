@@ -5,7 +5,8 @@ import {Route, BrowserRouter as Router} from 'react-router-dom'
 import EditarLibro from './Components/Libro/EditarLibro/EditarLibro';
 import Navbar from './Components/PaginaInicio/Navbar'
 import PrestarLibro from './Components/Libro/PrestarLibro/PrestarLibro';
-
+import CategoriaForm from './Components/Categoria/AgregarCategoria/CategoriaForm';
+import ListadoCategoria from './Components/Categoria/ListarCategoria/ListadoCategoria';
 import IngresarPersona from './Components/Persona/IngresarPersona';
 import ListadoPersona from './Components/Persona/ListadoPersona';
 import EditarPersona from './Components/Persona/EditarPersona';
@@ -18,7 +19,8 @@ function App() {
     <Navbar/>
      <Route path="/prestarLibro" component={PrestarLibro}/>
      <Route path="/editarLibro" component={EditarLibro}/>
-
+     <Route path="/ingresarGenero" component={CategoriaForm}/>
+     <Route path="/listadoGenero" component={ListadoCategoria}/>
      <Route path="/ingresarPersona" component={IngresarPersona} />
      <Route exact path="/ListadoPersona" component={ListadoPersona} />
      <Route path="/ListaPersona/editarPersona/:id" component={EditarPersona} />
