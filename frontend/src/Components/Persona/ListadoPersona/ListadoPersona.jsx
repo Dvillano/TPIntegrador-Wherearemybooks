@@ -2,10 +2,10 @@ import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 
 // Iconos para modificar y borrar datos
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt, faEdit} from '@fortawesome/free-solid-svg-icons'
-const iconoModificar = <FontAwesomeIcon icon={faEdit} />
-const iconoBorrar = <FontAwesomeIcon icon={faTrashAlt} />
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+//import { faTrashAlt, faEdit} from '@fortawesome/free-solid-svg-icons'
+//const iconoModificar = <FontAwesomeIcon icon={faEdit} />
+//const iconoBorrar = <FontAwesomeIcon icon={faTrashAlt} />
 
 const apiUrl = 'http://localhost:4200/persona/'
 
@@ -65,8 +65,10 @@ export default function ListadoPersona() {
                             <p>{"Apellido :" + el.apellido}</p>
                             <p>{"Alias :" + el.alias}</p>
                             <p>{"Email :" + el.email}</p>
+                            {/*
                             <button>{iconoModificar}</button>
                             <button onClick={() => BorrarPersona(el.ID)}>{iconoBorrar}</button>
+                            */}
                             <button>Ver libros prestados</button> 
                         </li>
                     </ul>

@@ -1,5 +1,6 @@
 const {connection} = require('../app');
 const util = require('util');
+const e = require('express');
 
 const qy = util.promisify(connection.query).bind(connection);
 
@@ -9,7 +10,9 @@ const categoriaPost = async (req, res) => {
             throw new Error ('Falta enviar el genero');
         }
 
-        let consulta = await  qy ('SELECT id FROM categoria WHERE genero = ?',[req.body.genero.toUpperCase()]);
+        const categoria = req.body.genero.toUpperCase();
+
+        let consulta = await  qy ('SELECT id FROM categoria WHERE genero = ?',[categoria]);
 
             if (consulta.length > 0 ) {
                 throw new Error ('¡Esa categoria ya existe!');
@@ -17,14 +20,14 @@ const categoriaPost = async (req, res) => {
 
         const query = 'INSERT INTO categoria (genero) VALUE (?)';
 
-        const respuesta = await qy(query, [req.body.genero.toUpperCase()]);
+        const respuesta = await qy(query, [categoria]);
 
-        res.status(200).send(respuesta.insertedId);
-        
+        res.status(200).send({'Respuesta': respuesta.insertId});
+        console.log(respuesta)
     }
     catch(e){
         console.error(e.message);
-        res.status(413).send({message: e.message});
+        res.status(413).send({'Error': e.message});
     }
 };
 
@@ -83,7 +86,7 @@ const categoriaDeleteById = async (req, res) => {
         
         query =  'DELETE FROM categoria WHERE id = ?'; 
         respuesta = await qy (query, [req.params.id]) ;
-        res.send({respuesta: 'Se ha borrado correctamente la categoria'});
+        res.status(200).send({'respuesta': respuesta.affectedRows});
     }
     catch(e) {
         console.error(e.message);

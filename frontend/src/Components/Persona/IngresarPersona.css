@@ -1,0 +1,53 @@
+.form-container {
+    margin-top: 0px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.categoriaformtitulo {
+    margin: 20px;
+    display: inline-flex;
+    color: #DCBE87;
+    margin-top: 0px;
+    
+}
+
+.categoriaforminput{
+    color: whitesmoke;
+    outline: none;
+    background-color: #325453;
+    border: none;
+    border-bottom: 2px solid  #DCBE87;
+    margin: 20px;
+    font-size: 18px;
+}
+
+.agregarbtn{
+    padding: 5px;
+    padding-bottom: 5px;
+    display: inline-block;
+    margin-bottom: 20px;
+    border: none;
+    text-align: center;
+    color:#517174;
+    background-color: #DCBE87;
+    font-size: 18px;
+    border-radius: 8px;
+}
+
+<<<<<<< HEAD:frontend/src/Components/Categoria/formCss.css
+.agregarbtn:hover {background-color: #d8a953}
+=======
+.agregarbtn:hover {
+    background-color: #d8a953;
+    cursor: pointer;
+}
+>>>>>>> 3fd4238af1d192037602079b934987f29509e857:frontend/src/Components/Persona/IngresarPersona.css
+
+.agregarbtn:active {
+  background-color: #d8a953;
+  transform: translateY(2px);
+}
