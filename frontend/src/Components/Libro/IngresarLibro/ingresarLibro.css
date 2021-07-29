@@ -1,0 +1,12 @@
+
+
+.form-container{
+    margin-top: 0px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    color: #DCBE87;
+
+}

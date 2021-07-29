@@ -18,7 +18,6 @@ function reducer(state =initialState,action){
           libros:action.libros
         }
       }
-      
       default:
         return state
       
