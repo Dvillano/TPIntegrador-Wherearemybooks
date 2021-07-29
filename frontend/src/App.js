@@ -31,8 +31,8 @@ function App() {
 
      <Route path="/ingresarPersona" component={IngresarPersona} />
      <Route exact path="/listadoPersona" component={ListadoPersona} />
-     <Route path="/ListaPersona/editarPersona/:id" component={EditarPersona} />
-     <Route path="/ListaPersona/listaPersonaLibro" component={ListaPersonaLibro} />
+     <Route path="/listadoPersona/editarPersona/:id" component={EditarPersona} />
+     <Route path="/listadoPersona/listaPersonaLibro/:id" component={ListaPersonaLibro} />
 
     </div>
     </Router>

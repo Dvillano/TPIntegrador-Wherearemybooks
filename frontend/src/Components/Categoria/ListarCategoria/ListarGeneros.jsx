@@ -66,7 +66,7 @@ export default function ListarGeneros() {
             return(
                 librosFiltrados.map((book) =>(
                     <li key={book.ID} className='book-list'>
-                        Título: {book.titulo} 
+                       <p>Título: {book.titulo}</p>
                     </li>
                 )) 
             )

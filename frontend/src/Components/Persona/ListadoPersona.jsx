@@ -68,10 +68,10 @@ export default function ListadoPersona() {
                     <p><span>Alias: </span>{el.alias}</p>
                     <p><span>Email: </span>{el.email}</p>
                     <div className="icon-container">
-                        <i className="icon-btn-modificar"><Link to={"/ListaPersona/EditarPersona/" + el.ID}>{iconoModificar}</Link></i>
+                        <i className="icon-btn-modificar"><Link to={"/listadoPersona/EditarPersona/" + el.ID}>{iconoModificar}</Link></i>
                         <i className="icon-btn-borrar" onClick={() => { if (window.confirm("Estas seguro que deseas borrar a esta persona?"))  borrarPersona(el.ID)}}>{iconoBorrar}</i>
                     </div>
-                    <button className="btn-mostrar"><Link to={"/ListaPersona/ListaPersonaLibro/" + el.ID}>Mostrar libros prestados</Link></button> 
+                    <button className="btn-mostrar"><Link to={"/listadoPersona/ListaPersonaLibro/" + el.ID}>Mostrar libros prestados</Link></button> 
                 </li>
             </ul>
         )
