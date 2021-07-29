@@ -2,49 +2,55 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import { useParams, } from 'react-router-dom';
 import './ListaPersonaLibro.css'
+import { useDispatch, useSelector } from 'react-redux';
+
+//todo
 
 const libroUrl = 'http://localhost:4200/libro'
 const personaUrl = "http://localhost:4200/persona"
 
 export default function ListaPersonaLibro() {
-
+    const libros = useSelector(state=>state.libros)
+    const personas = useSelector(state=>state.personas)
+    const dispatch = useDispatch()
     const {id} = useParams();
-    const [libros,setLibro] = useState([])
     const [persona,setPersona] = useState({})
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(()=>{
      //buscar todos los libros para filtrar luego
-     
-     const fetchData = async () => {
-        try{
-            const libros = await axios.get(libroUrl);
-            if(libros.status === 200){
-               setLibro(libros.data.response)
+        const fetchData = async () => {
+            if(libros.length ==0){
+            try{
+                const libros = await axios.get(libroUrl);
+                if(libros.status === 200){
+                    dispatch({type:"SET_LIBROS",libros:libros.data.response})
+                }
+               }catch(error){
+                  console.log(typeof error)
+                  console.error(error)
+               }
+            }   
+            if(personas.length==0)    {
+                //buscar persona especifica   
+                  try{
+                    const persona = await axios.get(personaUrl)
+                    if(persona.status === 200){
+                        dispatch({type:"SET_PERSONAS",personas:persona.data.Respuesta})
+                        var index = personas.indexOf(personas.find(element=>element.ID==parseInt(id)))
+                        setPersona(personas[index])
+                    }
+                  }catch(error){
+                  console.log(typeof error)
+                   console.error(error)
+                  }
             }
-           }catch(error){
-              console.log(typeof error)
-              console.error(error)
-           }
-       
-             //buscar persona especifica
-       
-             try{
-             const persona = await axios.get(personaUrl + "/" + id)
-             if(persona.status === 200){
-                 setPersona(persona.data.respuesta[0])
-             }
-           }catch(error){
-           console.log(typeof error)
-            console.error(error)
-           }
-
-           
+            
+         
      }
-     
+   
      fetchData();
 
-    }, [id])
+    }, [])
 
     const Persona = () => {
         return(<div>

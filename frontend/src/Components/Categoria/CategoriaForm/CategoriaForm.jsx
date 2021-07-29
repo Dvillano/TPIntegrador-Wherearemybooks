@@ -8,8 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 export default function CategoriaForm () {
-    const [categoria, setCategoria] = useState('');
-    const [data, setData] = useState('');
     const generos = useSelector(state=>state.generos)
     const categoria_url = "http://localhost:4200/categoria"
     const dispatch = useDispatch()
@@ -33,8 +31,8 @@ export default function CategoriaForm () {
     return (
         <div className='form-container'>
             <Titulo />
-            <FormAdd  setData={setData} categoria={categoria} setCategoria={setCategoria} />
-            <RespuestaForm value={data} data={data}/>
+            <FormAdd/>
+         {/*   <RespuestaForm value={data} data={data}/>*/ }
         </div>
     )
 }

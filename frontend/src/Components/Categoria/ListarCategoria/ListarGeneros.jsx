@@ -5,42 +5,52 @@ import './style.css';
 
 export default function ListarGeneros() {
 
-    const [ genero, setGenero ] = useState([])
     const generos = useSelector(state=>state.generos)
     const libros = useSelector(state=>state.libros)
-   // const [ libros, setLibros ] = useState([])
-    const [ borrado, setBorrado ] = useState(false)
     const dispatch = useDispatch()
 
     const url = 'http://localhost:4200/categoria/';
 
     useEffect(() => {
-        if(generos.length== 0){
+
+        if(libros.length == 0){
             try{
-                const fetchData=async()=>{
-                const consulta = await axios.get(url);
-                if (consulta.status == 200){
-                    console.log(consulta.data.respuesta)
-                    dispatch({type:"SET_GENEROS",generos:consulta.data.respuesta})
-                    //setGenero(consulta.data.respuesta)
+                const fetchLibros = async()=>{
+                const todosLosLibros = await axios.get('http://localhost:4200/libro/');
+                if(todosLosLibros.status === 200){
+                    dispatch({type:"SET_LIBROS",libros:todosLosLibros.data.response})
                     }
                 }
-                fetchData()
+             fetchLibros()
+            }
+            catch(error){
+                console.log(error)
+            }
+        }
+
+        if(generos.length== 0){
+            try{
+                const fetchGeneros=async()=>{
+                const consulta = await axios.get(url);
+                if (consulta.status == 200){
+                    dispatch({type:"SET_GENEROS",generos:consulta.data.respuesta})
+                    }
+                }
+                fetchGeneros()
             }
             catch(error){
                console.log(error)
                 }
             }
-        }, [/*borrado*/])
+        }, [])
 
     const handleDelete = async (e) =>{
         const genero_id = e.target.attributes[0].value;
          try{
              const borrarGenero = await axios.delete(url + genero_id)
              if(borrarGenero.status === 200){
-            //borrar genero en store
-                 dispatch({type:"SET_GENEROS",generos:generos.filter(el=>el.ID !== parseInt(genero_id))})
-            //setBorrado(true)
+                //borrar genero en store
+                dispatch({type:"SET_GENEROS",generos:generos.filter(el=>el.ID !== parseInt(genero_id))})
                 alert("Se borro el género")
              }     
         }
@@ -49,23 +59,6 @@ export default function ListarGeneros() {
             alert("No se pudo borrar el género por tener libros asociados")
         }
     };
-
-    useEffect( async () =>{
-        
-        if(libros.length == 0){
-            try{
-                const todosLosLibros = await axios.get('http://localhost:4200/libro/');
-                if(todosLosLibros.status === 200){
-                  dispatch({type:"SET_LIBROS",libros:todosLosLibros.data.response})
-                    //  setLibros(todosLosLibros.data.response)
-                }
-            }
-            catch(error){
-                console.log(error)
-            }
-        }
-       
-    }, [])
     
     const ListaLibros = ({genero_id}) => {
         const librosFiltrados = libros.filter((books) => books.genero_id == genero_id)

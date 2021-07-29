@@ -16,7 +16,6 @@ function EditarLibro(props){
 
  const {id} = useParams()
  const [editado,setEditado] = useState(false)
- //const [libroData,setLibroData] = useState({})
  const [message,setMessage] = useState("")
  const [error,setError] = useState(false)
  const libros = useSelector(state=>state.libros)
@@ -34,7 +33,6 @@ const onSubmit=async (e)=>{
             libros.splice(index,1,response.data[0])
             dispatch({type:"SET_LIBROS",libros:libros})
             setMessage("El libro fue editado de forma exitosa")
-           // setLibroData(response.data[0])
             setEditado(true)
           }
     }catch(error){

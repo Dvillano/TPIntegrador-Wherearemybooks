@@ -1,6 +1,6 @@
 //Buscar genero
 
-import React,{useEffect, useState} from "react";
+import React,{useEffect} from "react";
 import { useSelector,useDispatch} from "react-redux";
 
 import axios from "axios";
@@ -10,7 +10,6 @@ function Genero(props){
   const generos = useSelector(state=>state.generos)
   const genero =generos.find(element=>element.ID == parseInt(genero_id))
   const dispatch= useDispatch()
-//  const [genero,setGenero] = useState("");
   const generoUrl = "http://localhost:4200/categoria"
 
   useEffect(async ()=>{

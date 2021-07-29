@@ -31,6 +31,7 @@ export default function ListadoPersona() {
 
             if (respuesta.status === 200 ){
                 // setListado(respuesta.data.Respuesta);
+                console.log(respuesta.data.Respuesta)
                 dispatch({type:"SET_PERSONAS",personas :respuesta.data.Respuesta})
             }
         }
