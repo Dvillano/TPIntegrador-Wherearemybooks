@@ -9,13 +9,15 @@ function reducer(state =initialState,action){
     switch(action.type){
       case "SET_LIBROS":{
         return{
-          libros:action.libros
+          libros:action.libros,
+          personas:state.personas
         }
       }
 
       case "SET_PERSONAS":{
           return {
-              personas:action.personas
+              personas:action.personas,
+              libros:state.libros
           }
       }
       
