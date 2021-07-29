@@ -15,7 +15,7 @@ export default function IngresarPersona() {
     const [alias, setAlias] = useState('');   
 
     const handleSubmit = async (e) => {
-        
+
         const form = {
             nombre: nombre,
             apellido: apellido,
@@ -25,10 +25,11 @@ export default function IngresarPersona() {
 
         try {
             const respuesta = await axios.post(apiUrl, form);
+
             
             if(respuesta.status === 200){
                 alert("Persona creada");
-                e.preventDefault();
+                e.preventDefault(); 
             }
 
         } catch (err) {

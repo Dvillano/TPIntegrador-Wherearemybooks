@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import './ListadoPersona.css';
+import {useDispatch,useSelector} from "react-redux"
 
 
 // Iconos
@@ -13,53 +14,60 @@ const iconoBorrar = <FontAwesomeIcon icon={faTrashAlt} />
 
 const apiUrl = 'http://localhost:4200/persona/'
 
-
-// DELETE Persona
-const borrarPersona = async (idPersona) => {
-    try {
-
-        const respuesta = await axios.delete(apiUrl+idPersona);
-        
-        if(respuesta.status === 200){
-            alert("Persona Borrada");
-        }
-
-    } catch (err) {
-        console.log('Error', err.message);
-    }
-}
-
 // GET Lista Persona
 export default function ListadoPersona() {
 
-    const [listado, setListado] = useState([]);
+    // const [listado, setListado] = useState([]);
+    const dispatch = useDispatch()
+    const personas =useSelector((state)=>state.personas)
 
     useEffect(() => {
 
-        let isMounted = true;
+        //let isMounted = true;
+ if(personas.length ==0){
+    try{
+        const fetchData = async () => {
+            const respuesta = await axios.get(apiUrl);
 
-        try{
-            const fetchData = async () => {
-                const respuesta = await axios.get(apiUrl);
+            if (respuesta.status === 200 ){
+                // setListado(respuesta.data.Respuesta);
+                dispatch({type:"SET_PERSONAS",personas :respuesta.data.Respuesta})
+            }
+        }
 
-                if (respuesta.status === 200 && isMounted){
-                    setListado(respuesta.data.Respuesta);
-                }
+        fetchData();
+    }
+    catch (err) {
+        console.log('Error', err.message);
+        alert(err.response.data);
+    }
+ }
+       // return () => { isMounted = false }
+    }, [])
+
+    // DELETE Persona
+    const borrarPersona = async (personaId) => {
+        const persona_id = personaId
+
+        try {
+
+            const respuesta = await axios.delete(apiUrl+persona_id);
+            
+            if(respuesta.status === 200){
+                alert("Persona Borrada");
+                const nuevaLista = personas.filter(element=>element.ID !== parseInt(persona_id))
+                dispatch({type:"SET_PERSONAS",personas:nuevaLista})
             }
 
-            fetchData();
-        }
-        catch (err) {
+
+        } catch (err) {
             console.log('Error', err.message);
             alert(err.response.data);
         }
-
-        return () => { isMounted = false }
-
-    }, [listado])
+    }
 
 
-    const listaPersona = listado.map( el => {
+    const listaPersona = personas.map( el => {
         return (
             <ul key={el.ID}>
                 <li className="list-item">

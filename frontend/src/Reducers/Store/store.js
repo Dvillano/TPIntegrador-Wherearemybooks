@@ -1,14 +1,8 @@
 import {createStore} from "redux"
-import axios from "axios"
-
-//Actions
-
-//TODO:
-//modificando estado directamente
-const librosUrl = "http://localhost:4200/libro"
 
 const initialState={
  libros:[],
+ personas:[]
 }
 
 function reducer(state =initialState,action){
@@ -18,6 +12,13 @@ function reducer(state =initialState,action){
           libros:action.libros
         }
       }
+
+      case "SET_PERSONAS":{
+          return {
+              personas:action.personas
+          }
+      }
+      
       default:
         return state
       
