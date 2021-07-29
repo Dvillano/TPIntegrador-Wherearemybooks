@@ -2,7 +2,8 @@ import {createStore} from "redux"
 
 const initialState={
  libros:[],
- personas:[]
+ personas:[],
+ generos:[]
 }
 
 function reducer(state =initialState,action){
@@ -10,15 +11,25 @@ function reducer(state =initialState,action){
       case "SET_LIBROS":{
         return{
           libros:action.libros,
-          personas:state.personas
+          personas:state.personas,
+          generos:state.generos
         }
       }
 
       case "SET_PERSONAS":{
           return {
               personas:action.personas,
-              libros:state.libros
+              libros:state.libros,
+              generos:state.generos
           }
+      }
+
+      case "SET_GENEROS":{
+        return{
+          personas:state.personas,
+          libros:state.libros,
+          generos:action.generos
+        }
       }
       
       default:

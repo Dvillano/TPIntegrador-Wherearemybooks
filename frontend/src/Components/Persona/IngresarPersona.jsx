@@ -2,20 +2,22 @@ import React, { useState } from 'react';
 import axios from 'axios';  
 import './IngresarPersona.css';    
 import Message from './MessagePersona';
+import { useSelector,useDispatch } from 'react-redux';
 
 const apiUrl = 'http://localhost:4200/persona'
 
 
 //Formulario para ingresar nueva persona (POST)
 export default function IngresarPersona() {
-
+    const dispatch=useDispatch()
+    const personas=useSelector(state=>state.personas)
     const [nombre, setNombre] = useState('');
     const [apellido, setApellido] = useState('');
     const [email, setEmail] = useState('');
     const [alias, setAlias] = useState('');   
 
     const handleSubmit = async (e) => {
-
+        
         const form = {
             nombre: nombre,
             apellido: apellido,
@@ -26,8 +28,9 @@ export default function IngresarPersona() {
         try {
             const respuesta = await axios.post(apiUrl, form);
 
-            
             if(respuesta.status === 200){
+                personas.push({ID:respuesta.data.Respuesta,...form})
+                dispatch({type:"SET_PERSONAS",personas:personas})
                 alert("Persona creada");
                 e.preventDefault(); 
             }

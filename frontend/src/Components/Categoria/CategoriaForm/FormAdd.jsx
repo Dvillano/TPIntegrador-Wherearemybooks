@@ -1,7 +1,10 @@
 import React from "react";
 import axios from "axios";
+import { useSelector,useDispatch } from "react-redux";
 
 const FormAdd = ({setData, categoria, setCategoria}) =>{
+    const generos = useSelector(state=>state.generos)
+    const dispatch = useDispatch()
     
     const inputCategoriaHandler = (e) => {
         setCategoria(e.target.value);
@@ -19,11 +22,13 @@ const FormAdd = ({setData, categoria, setCategoria}) =>{
         
         try{
             const respuesta = await axios.post(postPersonaUrl, genero);
-            if(respuesta.status === 200){
-                setData({
+            if(respuesta.status == 200){
+                generos.push({ID:respuesta.data.Respuesta,genero:categoria})
+                dispatch({type:"SET_GENEROS",generos:generos})
+             /*   setData({
                     categoria : categoria,
                     id :respuesta.data.Respuesta
-                })
+                })*/
             }            
         }
         catch (error){  

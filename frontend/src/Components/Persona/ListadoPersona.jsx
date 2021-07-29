@@ -54,9 +54,9 @@ export default function ListadoPersona() {
             const respuesta = await axios.delete(apiUrl+persona_id);
             
             if(respuesta.status === 200){
-                alert("Persona Borrada");
                 const nuevaLista = personas.filter(element=>element.ID !== parseInt(persona_id))
                 dispatch({type:"SET_PERSONAS",personas:nuevaLista})
+                alert("Persona Borrada");
             }
 
 
