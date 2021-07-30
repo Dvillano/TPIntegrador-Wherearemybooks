@@ -1,0 +1,30 @@
+.list-container{
+    background-color: #DCBE87;
+    display: grid;
+    margin-left: 540px;
+    grid-template-columns: (2,20%);
+    width: 20%;
+    align-items: center;
+}
+
+
+.titulo{
+    margin-left: center;
+    color: #325453;
+
+}
+.genero{
+    text-align: center;
+    color: #325453;
+}
+.descripcion{
+    align-self: center;
+    color: #325453;
+}
+.borrarbtn{
+    align-self: center;
+    background-color: magenta;
+    color: #DCBE87;
+  
+}
+

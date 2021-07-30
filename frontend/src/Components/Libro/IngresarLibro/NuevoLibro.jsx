@@ -43,17 +43,17 @@ catch (error) {
  
 
 return(
-    <div className= 'form-container'>
+    <div className= 'list-container'>
         <Titulo/>
         <form onSubmit = {handleSubmit}>
-            <label>Nombre</label>
-            <input type="text" id="Nombre" name="Nombre" />
+            <label for="Nombre">Nombre</label>
+            <input className="listaforminput" type="text" id="Nombre" name="Nombre" />
         
-            <label>Descripcion</label>
-            <input type="text" id="Descripcion" name="Descripcion" />
+            <label for="Descripcion">Descripcion</label>
+            <input className="listaforminput" type="text" id="Descripcion" name="Descripcion" />
             
-            <label>Categoria</label>
-           <select name= "categoria">
+            <label for="Categoria">Categoria</label>
+           <select id="Categoria" className="listaforminput" name= "categoria">
                {categoria.map(el=>{return(<option value={el.ID} key ={ el.ID } >{el.genero}</option>)})}
                
            </select>
