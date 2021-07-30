@@ -4,7 +4,6 @@ import { useParams, } from 'react-router-dom';
 import './ListaPersonaLibro.css'
 import { useDispatch, useSelector } from 'react-redux';
 
-//todo
 const libroUrl = 'http://localhost:4200/libro'
 
 export default function ListaPersonaLibro() {

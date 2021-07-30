@@ -29,7 +29,6 @@ function Persona(props){
      fetchData()
      }
      if(Number.isInteger(persona_id)){
-      console.log("persona id no es null")
       setPersona(personas.find(element=>element.ID == parseInt(persona_id)))
     }
    },[])

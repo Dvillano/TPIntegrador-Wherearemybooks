@@ -28,7 +28,6 @@ export default function ListadoPersona() {
             const respuesta = await axios.get(apiUrl);
 
             if (respuesta.status === 200 ){
-                console.log(respuesta.data.Respuesta)
                 dispatch({type:"SET_PERSONAS",personas :respuesta.data.Respuesta})
             }
         }
