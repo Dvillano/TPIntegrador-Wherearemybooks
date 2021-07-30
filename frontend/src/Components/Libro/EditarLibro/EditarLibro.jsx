@@ -29,7 +29,7 @@ const onSubmit=async (e)=>{
     try{
         const response = await axios.put(editarUrl,{descripcion:descripcion})
         if(response.status == 200){
-            var index = libros.indexOf(response.data[0])
+            var index = libros.indexOf(libros.find(element=>element.ID ==response.data[0].ID))
             libros.splice(index,1,response.data[0])
             dispatch({type:"SET_LIBROS",libros:libros})
             setMessage("El libro fue editado de forma exitosa")

@@ -37,7 +37,7 @@ function Persona(props){
    if(persona == ""){
     return(<div>Este libro no esta prestado</div>)
    } else{
-    return(<div>{persona.alias}</div>)
+    return(<div>{console.log(personas)}{persona.alias}</div>)
    }
 
 }

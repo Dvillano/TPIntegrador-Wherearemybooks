@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {useSelector,useDispatch} from "react-redux"
 import axios from 'axios';
 import './style.css';
@@ -71,9 +71,11 @@ export default function ListarGeneros() {
         else{
             return(
                 librosFiltrados.map((book) =>(
+                    <ul key={genero_id}>
                     <li key={book.ID} className='book-list'>
                        <p>Título: {book.titulo}</p>
                     </li>
+                    </ul>
                 )) 
             )
         }
@@ -83,15 +85,16 @@ export default function ListarGeneros() {
         <div className='lista-container'>
             <ul className='ul-list'>
                 {generos.map((item) =>(
+                    <div key={item.ID}>
                         <li key={item.ID} value={item.id} className='item-lista'>
                                 {item.genero}
                             <button genero_id={item.ID} value={item.ID} onClick={handleDelete} className='btn-borrar'>
                                 Borrar
                             </button>
-                            <ul>
-                                <ListaLibros genero_id={item.ID}/>
-                            </ul>
+                            
                         </li> 
+                        <ListaLibros genero_id={item.ID}/>
+                        </div>
                     ))
                 }   
             </ul>
