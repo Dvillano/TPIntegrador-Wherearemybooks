@@ -20,15 +20,16 @@ function Persona(props){
         if(response.status==200){
           dispatch({type:"SET_PERSONAS",personas:response.data.Respuesta})
       }
+     
     } catch (error) {
       alert("Error inesperado")
       console.error(error)
     } 
      } 
      if(personas.length ==0){
-     fetchData()
+      fetchData()
      }
-     if(Number.isInteger(persona_id)){
+     if(persona_id!==null){
       setPersona(personas.find(element=>element.ID == parseInt(persona_id)))
     }
    },[])
@@ -37,7 +38,7 @@ function Persona(props){
    if(persona == ""){
     return(<div>Este libro no esta prestado</div>)
    } else{
-    return(<div>{console.log(personas)}{persona.alias}</div>)
+    return(<div>{persona.alias}</div>)
    }
 
 }

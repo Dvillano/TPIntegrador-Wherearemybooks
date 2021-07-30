@@ -13,7 +13,7 @@ function Genero(props){
   const generoUrl = "http://localhost:4200/categoria"
 
   useEffect(()=>{
-     const fetchData=async()=>{
+    const fetchData=async()=>{
       try{
         const response = await  axios.get(generoUrl)
         if(response.status==200){
@@ -25,12 +25,13 @@ function Genero(props){
           console.error(error)
      }
      }
+
     if(generos.length==0){
-     fetchData()
+      fetchData()
     }
     setGenero(generos.find(element=>element.ID == parseInt(genero_id)))   
   },[])
 
-    return(<div>{console.log(generos)}{genero.genero}</div>)
+    return(<div>{genero.genero}</div>)
 }
 export default Genero

@@ -31,7 +31,6 @@ export default function ListadoPersona() {
                 dispatch({type:"SET_PERSONAS",personas :respuesta.data.Respuesta})
             }
         }
-
         fetchData();
     }
     catch (err) {
