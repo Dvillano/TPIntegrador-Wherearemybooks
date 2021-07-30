@@ -1,12 +1,40 @@
-
-
-.form-container{
-    margin-top: 0px;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
+.list-container{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
     color: #DCBE87;
+}
 
+.listaforminput{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    object-position: center;
+    background-color: lightslategray;
+    border: none;
+    border-bottom: 2px solid #DCBE87;
+    margin: 20px;
+}
+
+label{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #325453;
+}
+
+.tituloIngresarLibro{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #325453;
+}
+
+.aceptarbtn input{
+display: flex;
+flex-direction: row;
+align-items: center;
+    color: #DCBE87;
+    background-color: lightslategray;
 }

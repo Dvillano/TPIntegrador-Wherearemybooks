@@ -1,0 +1,30 @@
+.list-container{
+    display:flex
+}
+
+.list-item{
+    background-color: #DCBE87;
+    width:20%;
+}
+.Prestar-btn p{
+    color:#325453
+}
+.titulo{
+    margin-left: center;
+    color: #325453;
+}
+.genero{
+    text-align: center;
+    color: #325453;
+}
+.descripcion{
+   margin: auto;
+   color: #325453;
+}
+.borrarbtn{
+    align-self: center;
+    background-color: magenta;
+    color: #DCBE87;
+  
+}
+

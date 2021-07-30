@@ -3,6 +3,7 @@ import {useDispatch,useSelector} from "react-redux"
 import axios from 'axios'; 
 import PrestarBtn from './PrestarBtn';
 import EditarBtn from './EditarBtn';
+import './listadolibros.css'
 
 function ListadoDeLibros (){
 const libros =useSelector((state)=>state.libros)
@@ -39,13 +40,13 @@ useEffect(async()=>{
     }
 
     return(
-        <div>
+        <div className="list-container">
             {libros.map((el)=>{
-                return(<div key={el.ID}>
-                    <p>{el.titulo}</p>
-                    <p>{el.genero}</p>
-                    <p>{el.descripcion}</p>
-                    <button libro_id={el.ID}onClick={onClickBorrar}>borrar</button>
+                return(<div className="list-item">
+                    <p className="titulo">{el.titulo}</p>
+                    <p className="genero"> {el.genero}</p>
+                    <p className="descripcion">{el.descripcion}</p>
+                    <button className="borrarbtn" libro_id={el.ID}onClick={onClickBorrar}>borrar</button>
                     <PrestarBtn persona_id={el.persona_id} libro_id={el.ID}/>
                     <EditarBtn editarlibroid={el.ID}/>
                 </div>)
