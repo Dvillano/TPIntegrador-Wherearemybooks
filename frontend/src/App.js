@@ -8,7 +8,7 @@ import PrestarLibro from './Components/Libro/PrestarLibro/PrestarLibro';
 import NuevoLibro from './Components/Libro/IngresarLibro/NuevoLibro';
 import ListadoDeLibros from './Components/Libro/ListadoLibros/ListadoDeLibros';
 
-import CategoriaForm from './Components/Categoria/CategoriaForm/CategoriaForm';
+import CategoriaForm from './Components/Categoria/AgregarCategoria/CategoriaForm';
 import ListadoCategoria from './Components/Categoria/ListarCategoria/ListadoCategoria';
 
 import IngresarPersona from './Components/Persona/IngresarPersona';
