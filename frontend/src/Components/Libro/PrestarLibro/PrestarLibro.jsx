@@ -44,8 +44,9 @@ function PrestarLibro(props){
         //modificar libro en store
        const libro = libros.find(element=>element.ID == parseInt(id))
        var index=libros.indexOf(libro)
-       libro.persona_id = personaId;
+       libro.persona_id = parseInt(personaId);
        libros.splice(index,1,libro)
+       dispatch({type:"SET_LIBROS",libros:libros})
         setPrestado(true);
         setMensaje(respuesta.data.mensaje)
       }

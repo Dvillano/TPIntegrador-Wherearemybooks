@@ -37,7 +37,7 @@ const onSubmit=async (e)=>{
           }
     }catch(error){
         setError(true);
-        setMessage("Error inesperado:" +error.response.data.mensaje)
+        setMessage("Error inesperado:" +error.response/*.data.mensaje*/)
         console.error(error)
     }
 }

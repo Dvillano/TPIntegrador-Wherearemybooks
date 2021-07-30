@@ -1,6 +1,6 @@
 //Buscar genero
 
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
 import { useSelector,useDispatch} from "react-redux";
 
 import axios from "axios";
@@ -8,7 +8,7 @@ import axios from "axios";
 function Genero(props){
   const genero_id = props.genero_id
   const generos = useSelector(state=>state.generos)
-  const genero =generos.find(element=>element.ID == parseInt(genero_id))
+  const [genero,setGenero] =useState({})
   const dispatch= useDispatch()
   const generoUrl = "http://localhost:4200/categoria"
 
@@ -19,12 +19,14 @@ function Genero(props){
         if(response.status==200){
           dispatch({type:"SET_GENEROS",generos:response.data.respuesta})
       }
-      }catch(error){
+      }
+      catch(error){
           //Manejo de error
           alert("Error inesperado")
           console.error(error)
      }
     }
+    setGenero(generos.find(element=>element.ID == parseInt(genero_id)))   
   },[])
 
     return(<div>{genero.genero}</div>)

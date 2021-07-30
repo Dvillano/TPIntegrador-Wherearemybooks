@@ -12,8 +12,9 @@ function Persona(props){
    const [persona,setPersona] = useState("");
    const dispatch =useDispatch()
 
-   useEffect(async()=>{
-     if(personas.length ==0){
+
+   useEffect(()=>{
+    const fetchData = async()=>{
       try {
         const response = await axios.get(personaUrl)
         if(response.status==200){
@@ -23,11 +24,14 @@ function Persona(props){
       alert("Error inesperado")
       console.error(error)
     } 
-    if(persona_id !== null){
-      setPersona(personas.find(element=>element.ID == parseInt(persona_id)))
-
-    }
+     } 
+     if(personas.length ==0){
+     fetchData()
      }
+     if(Number.isInteger(persona_id)){
+      console.log("persona id no es null")
+      setPersona(personas.find(element=>element.ID == parseInt(persona_id)))
+    }
    },[])
    
     //Buscar persona si no existe libro no esta prestado

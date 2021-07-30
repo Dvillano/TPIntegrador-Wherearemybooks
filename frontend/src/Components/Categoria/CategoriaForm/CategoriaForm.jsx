@@ -1,6 +1,5 @@
 import React, {useState,useEffect} from "react";
 import  Titulo  from "./ComponentsForm/Titulo";
-import RespuestaForm from "./ComponentsForm/RespuestaForm";
 import FormAdd from "./FormAdd"
 import './formCss.css'
 import axios from "axios"
@@ -24,6 +23,7 @@ export default function CategoriaForm () {
             fetchData()
         } catch (error) {
             console.error(error)
+            
         }
       }
     },[])
@@ -32,7 +32,7 @@ export default function CategoriaForm () {
         <div className='form-container'>
             <Titulo />
             <FormAdd/>
-         {/*   <RespuestaForm value={data} data={data}/>*/ }
+         {/*<RespuestaForm data={data}/>*/}
         </div>
     )
 }

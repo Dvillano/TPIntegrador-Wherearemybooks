@@ -5,9 +5,7 @@ import './ListaPersonaLibro.css'
 import { useDispatch, useSelector } from 'react-redux';
 
 //todo
-
 const libroUrl = 'http://localhost:4200/libro'
-const personaUrl = "http://localhost:4200/persona"
 
 export default function ListaPersonaLibro() {
     const libros = useSelector(state=>state.libros)
@@ -29,33 +27,18 @@ export default function ListaPersonaLibro() {
                   console.log(typeof error)
                   console.error(error)
                }
-            }   
-            if(personas.length==0)    {
-                //buscar persona especifica   
-                  try{
-                    const persona = await axios.get(personaUrl)
-                    if(persona.status === 200){
-                        dispatch({type:"SET_PERSONAS",personas:persona.data.Respuesta})
-                        var index = personas.indexOf(personas.find(element=>element.ID==parseInt(id)))
-                        setPersona(personas[index])
-                    }
-                  }catch(error){
-                  console.log(typeof error)
-                   console.error(error)
-                  }
             }
-            
-         
+            var index = personas.indexOf(personas.find(element=>element.ID==parseInt(id)))
+            setPersona(personas[index])       
      }
-   
      fetchData();
-
     }, [])
 
     const Persona = () => {
+        console.log(persona)
         return(<div>
             <h1>Alias</h1>
-            <h2> {persona.alias}</h2>
+            <h2>{persona.alias}</h2>
             </div>)
     }
 
