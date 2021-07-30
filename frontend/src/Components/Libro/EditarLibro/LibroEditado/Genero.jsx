@@ -21,7 +21,6 @@ function Genero(props){
       }
       }
       catch(error){
-          //Manejo de error
           alert("Error inesperado")
           console.error(error)
      }

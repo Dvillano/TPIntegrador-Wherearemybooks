@@ -37,12 +37,12 @@ const onSubmit=async (e)=>{
           }
     }catch(error){
         setError(true);
-        setMessage("Error inesperado:" +error.response/*.data.mensaje*/)
+        setMessage("Error inesperado:" +error.response)
         console.error(error)
     }
 }
 if(error){
-    return(<Message message={message} onclick={props.onclickvolver}/>)
+    return(<Message message={message}/>)
 }
 else if(!editado){
  return(<div className="containerEditarLibro">

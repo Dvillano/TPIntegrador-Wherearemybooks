@@ -21,6 +21,7 @@ try {
         setPersona(response.data.respuesta)
     }
 } catch (error) {
+    alert(error.response.data)
     console.error(error)
 }
 }

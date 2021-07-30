@@ -11,7 +11,6 @@ function NuevoLibro () {
     const dispatch=useDispatch()
     const libros = useSelector(state=>state.libros)
     const generos = useSelector(state=>state.generos)
-    //const [categoria, setCategoria] = useState([])
 
     useEffect(async()=>{
         if(generos.length == 0){
@@ -19,7 +18,6 @@ function NuevoLibro () {
                 const respuesta = await axios.get(UrlCategoria)
                 if (respuesta.status == 200){
                     dispatch({type:"SET_GENEROS",generos:respuesta.data.respuesta})
-                   // setCategoria(respuesta.data.respuesta)
                 }
             }
             catch(error){
@@ -63,8 +61,6 @@ return(
                {generos.map(el=>{return(<option value={el.ID} key ={ el.ID } >{el.genero}</option>)})}              
            </select>
            
-           
-        
            <AceptarBtn/>
            
         </form>

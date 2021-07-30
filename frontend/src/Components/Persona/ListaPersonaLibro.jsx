@@ -24,7 +24,7 @@ export default function ListaPersonaLibro() {
                     dispatch({type:"SET_LIBROS",libros:libros.data.response})
                 }
                }catch(error){
-                  console.log(typeof error)
+                  console.log(error.response.data)
                   console.error(error)
                }
             }

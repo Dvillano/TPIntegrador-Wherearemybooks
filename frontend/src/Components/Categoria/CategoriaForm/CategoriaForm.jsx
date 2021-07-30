@@ -32,7 +32,6 @@ export default function CategoriaForm () {
         <div className='form-container'>
             <Titulo />
             <FormAdd/>
-         {/*<RespuestaForm data={data}/>*/}
         </div>
     )
 }

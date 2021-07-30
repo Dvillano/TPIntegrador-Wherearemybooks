@@ -15,11 +15,11 @@ useEffect(async()=>{
             const respuesta=await axios.get(apiUrl)
             if (respuesta.status == 200){ 
                 dispatch({type:"SET_LIBROS",libros:respuesta.data.response})
-                console.log(respuesta.data.response)
             }  
         } 
         catch(error){
-            console.log (error)
+            alert(error.response.data)
+            console.log(error)
         }
     }
 } ,[]) 

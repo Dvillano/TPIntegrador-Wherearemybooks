@@ -17,20 +17,17 @@ const apiUrl = 'http://localhost:4200/persona/'
 // GET Lista Persona
 export default function ListadoPersona() {
 
-    // const [listado, setListado] = useState([]);
     const dispatch = useDispatch()
     const personas =useSelector((state)=>state.personas)
 
     useEffect(() => {
 
-        //let isMounted = true;
  if(personas.length ==0){
     try{
         const fetchData = async () => {
             const respuesta = await axios.get(apiUrl);
 
             if (respuesta.status === 200 ){
-                // setListado(respuesta.data.Respuesta);
                 console.log(respuesta.data.Respuesta)
                 dispatch({type:"SET_PERSONAS",personas :respuesta.data.Respuesta})
             }
@@ -43,7 +40,6 @@ export default function ListadoPersona() {
         alert(err.response.data);
     }
  }
-       // return () => { isMounted = false }
     }, [])
 
     // DELETE Persona
