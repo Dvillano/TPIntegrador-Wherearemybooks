@@ -44,8 +44,7 @@ const postPersona = async (req, res) => {
       "INSERT INTO persona (nombre, alias, apellido, email) VALUE (?, ?, ?, ?)";
     respuesta = await qy(query, [nombre, alias, apellido, email]);
 
-    console.log(respuesta);
-    res.status(200).send({"Respuesta": respuesta.insertId });
+    res.status(200).send({"id": respuesta.insertId, "nombre": nombre, "apellido": apellido, "alias": alias, "email": email });
   } catch (error) {
     console.error(error.message);
     res.status(413).send({ Error: error.message });
