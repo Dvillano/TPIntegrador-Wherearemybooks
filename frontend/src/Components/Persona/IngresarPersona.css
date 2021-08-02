@@ -38,14 +38,10 @@
     border-radius: 8px;
 }
 
-<<<<<<< HEAD:frontend/src/Components/Categoria/formCss.css
-.agregarbtn:hover {background-color: #d8a953}
-=======
 .agregarbtn:hover {
     background-color: #d8a953;
     cursor: pointer;
 }
->>>>>>> 3fd4238af1d192037602079b934987f29509e857:frontend/src/Components/Persona/IngresarPersona.css
 
 .agregarbtn:active {
   background-color: #d8a953;

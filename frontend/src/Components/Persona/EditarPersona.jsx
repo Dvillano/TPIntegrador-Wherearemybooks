@@ -27,9 +27,9 @@ export default function EditarPersona() {
 
         try {
             const respuesta = await axios.put(apiUrl+param.id, form);
-            if(respuesta.status == 200){
+            if(respuesta.status === 200){
                 //modificar en store
-                const persona =personas.find(element=>element.ID == parseInt(param.id))
+                const persona =personas.find(element=>element.ID === parseInt(param.id))
                 const index = personas.indexOf(persona)
                 dispatch({type:"SET_PERSONAS",personas:personas.splice(index,1,{...form,ID:persona.ID,email:persona.email})})
                 alert("Se modificaron los datos de la persona");
