@@ -64,7 +64,7 @@ const categoriaDeleteById = async (req, res) => {
         let consultaGeneroID = await qy('SELECT * FROM categoria WHERE id = ?', [req.params.id]);
         
         if(consultaGeneroID.length == 0){
-            throw new Error ('No existe genero con el ID indicado')
+            throw new Error ('No existe categoria con el ID indicado')
         }
         let query = 'SELECT * FROM libro WHERE genero_id = ?';
         let respuesta = await qy (query, [req.params.id]);
