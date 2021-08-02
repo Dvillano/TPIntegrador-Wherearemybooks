@@ -79,48 +79,64 @@ const libroGetId = async function (req, res) {
   }
 };
 
+/*
+PUT '/libro/:id' y {id: numero, nombre:string, descripcion:string, categoria_id:numero, persona_id:numero/null}
+devuelve status 200 y {id: numero, nombre:string, descripcion:string, categoria_id:numero, persona_id:numero/null} 
+modificado o bien status 413,
+{mensaje: <descripcion del error>} "error inesperado",  "solo se puede modificar la descripcion del libro*/
+
 const libroPutId = async function (req, res) {
-  const nombre = req.body.nombre;
-  var persona_id = parseInt(req.body.persona_id);
-  const genero_id = parseInt(req.body.genero_id);
-  const id = req.params.id;
-  const descripcion = req.body.descripcion;
 
-  try {
-    //Validacion de libro
-    const libroquery = 'SELECT * FROM libro WHERE ID=?';
-    var response = await query(libroquery,[id]);
-    if (response.length == 0) {
-      res
-        .status(413)
-        .send({ mensaje: "El libro que intenta actualizar no existe" });
-    }
-    if (Number.isNaN(persona_id) || persona_id == "") {
+  //chequear que datos existen
+  if(req.body.descripcion){
+    const id = req.params.id;
+    const descripcion = req.body.descripcion;
+    var nombre,persona_id,genero_id
+    if(req.body.nombre && req.body.persona_id && req.body.genero_id){
+      nombre = req.body.nombre;
+      persona_id = parseInt(req.body.persona_id);
+      genero_id = parseInt(req.body.genero_id);
+    }else{
+      nombre = null;
       persona_id = null;
+      genero_id = null
     }
-
-    //solo se puede modificar la descripcion del libro
-  /*  if(nombre ==undefined  &&persona_id == null &&genero_id ==NaN 
-      || nombre ==response[0].titulo && genero_id == response[0].genero_id && persona_id == response[0].persona_id){*/
-  //solo se envio la descripcion
-  //Update libro
-  const updateQuery = 'UPDATE libro SET descripcion=? WHERE ID=?';
-  response = await query(updateQuery,[descripcion,id]);
-
-  const selectUpdatedBook = 'SELECT * FROM libro WHERE ID=?';
-  response = await query(selectUpdatedBook,[id]);
-  res.status(200).send(response);
-    /*}
-    else{
-      res.status(413).send({ mensaje: "Solo se puede modificar la descripcion del libro" });
-    }*/
-    
-
+    try {
+      //Validacion de libro
+      const libroquery = 'SELECT * FROM libro WHERE ID=?';
+      var response = await query(libroquery,[id]);
+      if (response.length == 0) {
+        res
+          .status(413)
+          .send({ mensaje: "El libro que intenta actualizar no existe" });
+      }
+      if (Number.isNaN(persona_id) || persona_id == "") {
+        persona_id = null;
+      }
   
-  } catch (error) {
-    res.status(413).send({
-      mensaje: error.message,
-    });
+      //solo se puede modificar la descripcion del libro
+     if(nombre ==null  &&persona_id == null &&genero_id ==null
+        || nombre ==response[0].titulo && genero_id == response[0].genero_id && persona_id == response[0].persona_id){
+    //solo se envio la descripcion
+    //Update libro
+    const updateQuery = 'UPDATE libro SET descripcion=? WHERE ID=?';
+    response = await query(updateQuery,[descripcion,id]);
+  
+    const selectUpdatedBook = 'SELECT * FROM libro WHERE ID=?';
+    response = await query(selectUpdatedBook,[id]);
+    res.status(200).send(response);
+      }
+      else{
+        res.status(413).send({ mensaje: "Solo se puede modificar la descripcion del libro" });
+      }
+      
+    } catch (error) {
+      res.status(413).send({
+        mensaje: error.message,
+      });
+    } 
+  }else{
+    res.status(413).send({mensaje:"Descripcion es un dato obligatorio"})
   }
 };
 

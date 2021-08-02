@@ -1,6 +1,5 @@
 const {connection} = require('../app');
 const util = require('util');
-const e = require('express');
 
 const qy = util.promisify(connection.query).bind(connection);
 
