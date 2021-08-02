@@ -94,15 +94,6 @@ const putPersonaById = async function (req, res) {
       if (!req.body.nombre || !req.body.apellido || !req.body.alias) {
         res.status(413).send("Todos los campos son requeridos.");
       }
-      // let newEmail = await qy("SELECT email FROM persona WHERE id = ?", [
-      //   req.params.id,
-      // ]);
-
-      // const email = req.body.email.toUpperCase().trim();
-
-      // if (email != newEmail[0].email) {
-      //   res.status(413).send("No se puede modificar el e-mail.");
-      // }
 
       const nombre = req.body.nombre.toUpperCase().trim();
       const apellido = req.body.apellido.toUpperCase().trim();
@@ -112,9 +103,7 @@ const putPersonaById = async function (req, res) {
         "UPDATE persona SET nombre=?, apellido=?, alias=? WHERE id=?",
         [nombre, apellido, alias, req.params.id]
       );
-      // const respuesta = await qy("SELECT * FROM persona WHERE id=?", [
-      //   req.params.id,
-      // ]);
+
       res.send(respuesta[0]);
     } else {
       throw new Error(
